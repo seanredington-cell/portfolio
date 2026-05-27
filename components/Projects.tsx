@@ -229,7 +229,9 @@ function MobileLayeredImage({ project }: { project: typeof projectData[0] }) {
   if (project.image) {
     return (
       <div className="relative w-full h-full">
-        <Image src={project.image} alt={project.name} fill className="object-contain" sizes="(max-width: 1024px) 100vw" />
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={project.image} alt={project.name} loading="lazy" decoding="async"
+          className="w-full h-full object-contain" />
       </div>
     );
   }

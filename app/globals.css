@@ -281,28 +281,27 @@ body {
   transform: translateY(0);
 }
 
-/* Mobile performance: disable expensive continuous animations and reduce backdrop blur */
+/* Mobile: strip every expensive GPU operation */
 @media (max-width: 1023px) {
-  /* Stop all infinite Framer Motion animations from running on mobile */
+  /* No box-shadow on images — each one creates a compositing layer */
+  .markdown-content img {
+    box-shadow: none;
+  }
+
+  /* No will-change — prevents unnecessary GPU layer promotion */
+  .fade-in-element {
+    will-change: auto;
+  }
+
+  /* Kill any remaining backdrop-blur entirely — not reduce, remove */
+  * {
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+
+  /* No infinite Framer Motion animations */
   .project-orb {
     animation: none !important;
     transform: none !important;
-  }
-
-  /* Reduce backdrop-blur cost on mobile Safari — it's extremely expensive */
-  .backdrop-blur-xl {
-    -webkit-backdrop-filter: blur(8px) !important;
-    backdrop-filter: blur(8px) !important;
-  }
-
-  .backdrop-blur-sm {
-    -webkit-backdrop-filter: blur(4px) !important;
-    backdrop-filter: blur(4px) !important;
-  }
-
-  /* Promote composited layers to GPU to prevent repaints */
-  .sticky {
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0);
   }
 }

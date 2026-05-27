@@ -37,6 +37,13 @@ export async function getProjectBySlug(slug: string) {
     return `<h2 id="${id}">`;
   });
 
+  // Add lazy loading + async decode to every image — baked in at build time
+  // so it's present before any JS runs, preventing simultaneous decode on fast scroll
+  contentHtml = contentHtml.replace(
+    /<img(?![^>]*loading=)([^>]*?)>/g,
+    '<img loading="lazy" decoding="async"$1>'
+  );
+
   // Add class to specific images to remove styling
   contentHtml = contentHtml.replace(
     /<img src="\/projects\/bua\/competitor-analysis\.png"/g,
