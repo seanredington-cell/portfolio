@@ -288,7 +288,7 @@ function MobileProjectsList({ isDark }: { isDark: boolean }) {
         >
 
           {/* Image */}
-          <div className="relative z-10 w-full max-w-md mx-auto aspect-video">
+          <div className="relative z-10 w-full aspect-square">
             <MobileLayeredImage project={project} index={index} />
           </div>
 
