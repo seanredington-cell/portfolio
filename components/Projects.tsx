@@ -100,14 +100,16 @@ function HeroSection() {
     <section className="w-full flex items-center justify-center px-4 sm:px-6 lg:px-16 pt-20 pb-4 sm:py-12 lg:py-20 min-h-0 lg:min-h-screen">
 
       {/* Mobile layout — no card, centre aligned */}
-      <div className="lg:hidden w-full flex flex-col items-center gap-0 text-center">
-        {/* Image */}
+      <div className="lg:hidden w-full flex flex-col items-center gap-6 text-center">
+        {/* Single flat composited image on mobile — no layered GPU composition */}
         <div className="w-full max-w-[200px] mx-auto px-4 pt-2">
-          {p.heroLayers && <HeroImageComposition heroLayers={p.heroLayers} name={p.name} groupFloat />}
+          <div className="relative w-full aspect-square">
+            <Image src="/about-hero/hero-top.webp" alt={p.name} fill className="object-contain" />
+          </div>
         </div>
         {/* Text */}
-        <div className="px-2 pb-6 space-y-3 w-full">
-          <div className="flex flex-col items-center gap-1">
+        <div className="px-2 pb-6 space-y-5 w-full">
+          <div className="flex flex-col items-center gap-2">
             <p className="text-xs font-medium tracking-widest uppercase text-gray-400 dark:text-gray-400">{p.name}</p>
             <div className="flex items-center justify-center gap-1.5">
               <span className="relative flex h-2 w-2 flex-shrink-0">
@@ -128,7 +130,7 @@ function HeroSection() {
           {p.tags && <HeroTags tags={p.tags} center />}
           {/* Currently shelf — full width on mobile */}
           <div
-            className="rounded-2xl px-3 py-3 backdrop-blur-sm bg-white/50 dark:bg-gray-800/50 border border-white/70 dark:border-gray-700/60"
+            className="rounded-2xl px-3 py-4 bg-white/80 dark:bg-gray-800/80 border border-white/70 dark:border-gray-700/60"
             style={{ boxShadow: '0 2px 12px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.7)' }}
           >
             <CurrentlyShelf fillWidth />
@@ -327,12 +329,11 @@ function MobileProjectsList({ isDark }: { isDark: boolean }) {
       {projectData.map((project) => (
         <div key={project.id} className="relative rounded-3xl overflow-hidden border border-white/50 dark:border-gray-700/60"
           style={{
-            backdropFilter: 'blur(20px)',
             boxShadow: '0 8px 48px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.8)',
           }}
         >
-          {/* Card background */}
-          <div className="absolute inset-0 bg-white/55 dark:bg-gray-900/80 pointer-events-none" />
+          {/* Card background — solid fill, no backdrop-blur (too expensive on mobile Safari) */}
+          <div className="absolute inset-0 bg-white/90 dark:bg-gray-900/95 pointer-events-none" />
 
           {/* Accent glow */}
           <div
