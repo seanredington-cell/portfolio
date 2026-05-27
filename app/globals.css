@@ -280,3 +280,29 @@ body {
   opacity: 1 !important;
   transform: translateY(0);
 }
+
+/* Mobile performance: disable expensive continuous animations and reduce backdrop blur */
+@media (max-width: 1023px) {
+  /* Stop all infinite Framer Motion animations from running on mobile */
+  .project-orb {
+    animation: none !important;
+    transform: none !important;
+  }
+
+  /* Reduce backdrop-blur cost on mobile Safari — it's extremely expensive */
+  .backdrop-blur-xl {
+    -webkit-backdrop-filter: blur(8px) !important;
+    backdrop-filter: blur(8px) !important;
+  }
+
+  .backdrop-blur-sm {
+    -webkit-backdrop-filter: blur(4px) !important;
+    backdrop-filter: blur(4px) !important;
+  }
+
+  /* Promote composited layers to GPU to prevent repaints */
+  .sticky {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+  }
+}

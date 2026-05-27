@@ -2,7 +2,7 @@
 
 import React, { useRef } from "react";
 import { createPortal } from "react-dom";
-import { motion, useScroll, useTransform, useVelocity, useSpring } from "framer-motion";
+import { motion, useScroll, useTransform, useVelocity, useSpring, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { projectData, heroData } from "@/data/projects";
@@ -221,7 +221,14 @@ export default function Projects() {
   const [hoverIndex, setHoverIndex] = React.useState<number | null>(null);
   const [isCarouselHovered, setIsCarouselHovered] = React.useState(false);
   const [isMounted, setIsMounted] = React.useState(false);
+  const [isMobile, setIsMobile] = React.useState(false);
   React.useEffect(() => { setIsMounted(true); }, []);
+  React.useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 1024);
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, []);
 
   // Dark mode detection — updates reactively when theme is toggled
   const [isDark, setIsDark] = React.useState(false);
@@ -278,6 +285,7 @@ export default function Projects() {
                 scrollVelocity={smoothVelocity}
                 containerProgress={containerProgress}
                 isDark={isDark}
+                isMobileDevice={isMobile}
               />
             ))}
           </div>
@@ -539,6 +547,7 @@ function ProjectCard({
   scrollVelocity,
   containerProgress,
   isDark,
+  isMobileDevice,
 }: {
   project: typeof projectData[0];
   index: number;
@@ -546,11 +555,15 @@ function ProjectCard({
   scrollVelocity: any;
   containerProgress: any;
   isDark: boolean;
+  isMobileDevice: boolean;
 }) {
   const bc = (hex: string | undefined) => {
     const color = hex || "#1a1a1a";
     return isDark ? lightenForDark(color) : color;
   };
+
+  const prefersReducedMotion = useReducedMotion();
+  const shouldReduceMotion = prefersReducedMotion || isMobileDevice;
 
   const cardRef = useRef<HTMLDivElement>(null);
   const [mousePosition, setMousePosition] = React.useState({ x: 0, y: 0 });
@@ -717,8 +730,9 @@ function ProjectCard({
     return unsubscribe;
   }, [cardOpacity]);
 
-  // Enhanced scale based on velocity for dramatic effect
+  // Enhanced scale based on velocity for dramatic effect (desktop only)
   const velocityScale = useTransform(scrollVelocity, (velocity: number) => {
+    if (shouldReduceMotion) return 1;
     const scale = 1 + Math.min(Math.abs(velocity) / 5000, 0.02);
     return scale;
   });
@@ -752,56 +766,31 @@ function ProjectCard({
       {!project.isHero ? (
         <a href={`/projects/${project.id}`} className="lg:hidden flex flex-col gap-4 w-full max-w-2xl px-4 cursor-pointer group relative">
           {/* Background orbs for mobile - behind everything */}
-          {project.layeredImages && project.accentColor && (
+          {project.layeredImages && project.accentColor && !shouldReduceMotion && (
             <>
               <motion.div
                 className="absolute top-0 left-4 w-32 h-32 rounded-full pointer-events-none -z-10"
                 style={{
                   background: `radial-gradient(circle, rgba(${project.accentColor}, 0.08), transparent)`,
                 }}
-                animate={{
-                  y: [0, -25, 0],
-                  x: [0, 15, 0],
-                  scale: [1, 1.2, 1],
-                }}
-                transition={{
-                  duration: 8,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
+                animate={{ y: [0, -25, 0], x: [0, 15, 0], scale: [1, 1.2, 1] }}
+                transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
               />
               <motion.div
                 className="absolute bottom-20 right-8 w-24 h-24 rounded-full pointer-events-none -z-10"
                 style={{
                   background: `radial-gradient(circle, rgba(${project.accentColor}, 0.06), transparent)`,
                 }}
-                animate={{
-                  y: [0, 20, 0],
-                  x: [0, -12, 0],
-                  scale: [1, 1.15, 1],
-                }}
-                transition={{
-                  duration: 7,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                  delay: 0.5,
-                }}
+                animate={{ y: [0, 20, 0], x: [0, -12, 0], scale: [1, 1.15, 1] }}
+                transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
               />
               <motion.div
                 className="absolute top-1/3 right-2 w-20 h-20 rounded-full pointer-events-none -z-10"
                 style={{
                   background: `radial-gradient(circle, rgba(${project.accentColor}, 0.05), transparent)`,
                 }}
-                animate={{
-                  y: [0, -18, 0],
-                  scale: [1, 1.25, 1],
-                }}
-                transition={{
-                  duration: 9,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                  delay: 1,
-                }}
+                animate={{ y: [0, -18, 0], scale: [1, 1.25, 1] }}
+                transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", delay: 1 }}
               />
             </>
           )}
@@ -815,8 +804,8 @@ function ProjectCard({
           >
             {project.layeredImages ? (
               <div className="w-full h-full relative flex items-center justify-center">
-                {/* Decorative background elements */}
-                {project.layeredImages && project.accentColor && (
+                {/* Decorative background elements — desktop only */}
+                {project.layeredImages && project.accentColor && !shouldReduceMotion && (
                   <>
                     {project.id === 'workday-help' && (
                       <>
@@ -2238,8 +2227,8 @@ function ProjectCard({
             >
               {project.layeredImages ? (
                 <div className="w-full h-full relative flex items-center justify-center">
-                  {/* Decorative background elements */}
-                  {project.layeredImages && project.accentColor && (
+                  {/* Decorative background elements — desktop only */}
+                  {project.layeredImages && project.accentColor && !shouldReduceMotion && (
                     <>
                       {project.id === 'workday-help' && (
                         <>
