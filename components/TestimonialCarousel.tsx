@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useEffect, useRef, useCallback } from "react";
-import { motion } from "framer-motion";
+import { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const testimonials = [
   {
@@ -51,207 +51,126 @@ const testimonials = [
   },
 ];
 
-const CARD_GAP = 16;
-const AUTO_SCROLL_SPEED = 0.4; // px per frame
+const AUTO_ADVANCE_MS = 10000;
 
-function getCardWidth() {
-  if (typeof window === 'undefined') return 480;
-  if (window.innerWidth < 640) return window.innerWidth - 48;
-  if (window.innerWidth < 1024) return 360;
-  return 480;
+function CardInner({ t }: { t: typeof testimonials[0] }) {
+  return (
+    <div
+      className="rounded-2xl px-6 py-5 border border-white/50 dark:border-gray-700/50 bg-white/90 dark:bg-gray-800/90 h-full flex flex-col"
+      style={{ boxShadow: '0 4px 24px rgba(0,0,0,0.07), inset 0 1px 0 rgba(255,255,255,0.6)' }}
+    >
+      {/* Quote — vertically centred in remaining space */}
+      <div className="flex-1 flex flex-col justify-center">
+        <p className="text-base sm:text-lg leading-relaxed text-gray-700 dark:text-gray-200">{t.quote}</p>
+      </div>
+
+      {/* Person — always at the bottom */}
+      <div className="flex items-center gap-3 mt-6">
+        <div className="w-10 h-10 rounded-full flex items-center justify-center text-white text-sm font-bold flex-shrink-0" style={{ background: t.color }}>
+          {t.initials}
+        </div>
+        <div>
+          <div className="text-sm font-semibold text-gray-900 dark:text-gray-100 leading-tight">{t.name}</div>
+          <div className="text-xs text-gray-500 dark:text-gray-400 leading-tight">{t.role} · {t.company}</div>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default function TestimonialCarousel() {
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [index, setIndex] = useState(0);
+  const [direction, setDirection] = useState(1);
   const [isPaused, setIsPaused] = useState(false);
-  const [cardWidth, setCardWidth] = useState(0);
-  const [offset, setOffset] = useState(0);
-  const rafRef = useRef<number | null>(null);
-  const offsetRef = useRef(0);
-  const stepRef = useRef(CARD_GAP);
-  const trackRef = useRef<HTMLDivElement>(null);
   const touchStartXRef = useRef<number | null>(null);
-  const touchStartOffsetRef = useRef(0);
-  const isDraggingRef = useRef(false);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const step = cardWidth + CARD_GAP;
-  stepRef.current = step;
-
-  // Duplicate testimonials for seamless loop
-  const items = [...testimonials, ...testimonials, ...testimonials];
-  const totalWidth = testimonials.length * step;
-
-  // Set card width on mount and on resize
-  useEffect(() => {
-    setCardWidth(getCardWidth());
-    const onResize = () => setCardWidth(getCardWidth());
-    window.addEventListener('resize', onResize);
-    return () => window.removeEventListener('resize', onResize);
-  }, []);
-
-  const tick = useCallback(() => {
-    if (!isPaused) {
-      offsetRef.current += AUTO_SCROLL_SPEED;
-      // Seamless loop: when we've scrolled one full set, reset
-      if (offsetRef.current >= totalWidth) {
-        offsetRef.current -= totalWidth;
-      }
-      setOffset(offsetRef.current);
-    }
-    rafRef.current = requestAnimationFrame(tick);
-  }, [isPaused, totalWidth]);
-
-  useEffect(() => {
-    rafRef.current = requestAnimationFrame(tick);
-    return () => {
-      if (rafRef.current) cancelAnimationFrame(rafRef.current);
-    };
-  }, [tick]);
-
-  const goTo = (dir: 1 | -1) => {
-    offsetRef.current += dir * stepRef.current;
-    if (offsetRef.current < 0) offsetRef.current += totalWidth;
-    if (offsetRef.current >= totalWidth * 2) offsetRef.current -= totalWidth;
-    setOffset(offsetRef.current);
-    setActiveIndex((prev) => (prev + dir + testimonials.length) % testimonials.length);
+  const goTo = (next: number, dir: number) => {
+    setDirection(dir);
+    setIndex((next + testimonials.length) % testimonials.length);
   };
 
-  // Touch handlers — hold to pause, swipe to scroll
+  const prev = () => goTo(index - 1, -1);
+  const next = () => goTo(index + 1, 1);
+
+  useEffect(() => {
+    if (timerRef.current) clearTimeout(timerRef.current);
+    if (!isPaused) {
+      timerRef.current = setTimeout(() => goTo(index + 1, 1), AUTO_ADVANCE_MS);
+    }
+    return () => { if (timerRef.current) clearTimeout(timerRef.current); };
+  }, [index, isPaused]);
+
   const handleTouchStart = (e: React.TouchEvent) => {
     touchStartXRef.current = e.touches[0].clientX;
-    touchStartOffsetRef.current = offsetRef.current;
-    isDraggingRef.current = false;
     setIsPaused(true);
   };
 
-  const handleTouchMove = (e: React.TouchEvent) => {
-    if (touchStartXRef.current === null) return;
-    const delta = touchStartXRef.current - e.touches[0].clientX;
-    if (Math.abs(delta) > 5) isDraggingRef.current = true;
-    let next = touchStartOffsetRef.current + delta;
-    // Keep within looping bounds
-    if (next < 0) next += totalWidth;
-    if (next >= totalWidth * 2) next -= totalWidth;
-    offsetRef.current = next;
-    setOffset(next);
-  };
-
   const handleTouchEnd = (e: React.TouchEvent) => {
-    if (isDraggingRef.current) {
-      // Snap to nearest card
-      const nearest = Math.round(offsetRef.current / stepRef.current) * stepRef.current;
-      offsetRef.current = nearest;
-      setOffset(nearest);
-    }
+    if (touchStartXRef.current === null) return;
+    const delta = touchStartXRef.current - e.changedTouches[0].clientX;
+    if (Math.abs(delta) > 40) delta > 0 ? next() : prev();
     touchStartXRef.current = null;
-    isDraggingRef.current = false;
     setIsPaused(false);
   };
 
+  const variants = {
+    enter: (dir: number) => ({ opacity: 0, x: dir > 0 ? 60 : -60 }),
+    center: { opacity: 1, x: 0 },
+    exit: (dir: number) => ({ opacity: 0, x: dir > 0 ? -60 : 60 }),
+  };
+
   return (
-    <div className="w-full">
-      {/* Track wrapper — clips the overflow */}
-      <div
-        className="relative w-full overflow-hidden cursor-grab active:cursor-grabbing"
-        onMouseEnter={() => setIsPaused(true)}
-        onMouseLeave={() => setIsPaused(false)}
-        onTouchStart={handleTouchStart}
-        onTouchMove={handleTouchMove}
-        onTouchEnd={handleTouchEnd}
-        onTouchCancel={handleTouchEnd}
-      >
-        {/* Fade edges — narrow on mobile, wide on desktop */}
-        <div className="pointer-events-none absolute inset-y-0 left-0 w-8 sm:w-20 lg:w-32 z-10 bg-gradient-to-r from-white dark:from-gray-900 to-transparent" />
-        <div className="pointer-events-none absolute inset-y-0 right-0 w-8 sm:w-20 lg:w-32 z-10 bg-gradient-to-l from-white dark:from-gray-900 to-transparent" />
+    <div
+      className="w-full max-w-2xl mx-auto px-4 sm:px-6"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+    >
+      {/* Container: all cards absolutely stacked, only tallest sets height via invisible in-flow card */}
+      <div className="relative">
+        {/* Single invisible in-flow card — the longest one — sets container height */}
+        <div className="invisible pointer-events-none" aria-hidden="true">
+          <CardInner t={testimonials[2]} />
+        </div>
 
-        {/* Scrolling track */}
-        <div
-          ref={trackRef}
-          style={{ transform: `translateX(-${offset}px)`, display: 'flex', alignItems: 'stretch', gap: `${CARD_GAP}px`, willChange: 'transform' }}
-        >
-          {items.map((t, i) => (
-            <div
-              key={`${t.id}-${i}`}
-              style={{ width: cardWidth, flexShrink: 0 }}
-              className="py-1 flex"
+        {/* Active animated card — absolutely covers the container */}
+        <div className="absolute inset-0 overflow-hidden">
+          <AnimatePresence custom={direction} mode="wait">
+            <motion.div
+              key={index}
+              custom={direction}
+              variants={variants}
+              initial="enter"
+              animate="center"
+              exit="exit"
+              transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+              className="absolute inset-0"
             >
-              <div
-                className="relative rounded-2xl px-4 pt-3 pb-3 border border-white/50 dark:border-gray-700/50 shadow-lg bg-white/90 dark:bg-gray-800/90 flex flex-col w-full"
-                style={{
-                  boxShadow: '0 4px 24px rgba(0,0,0,0.07), inset 0 1px 0 rgba(255,255,255,0.6)',
-                }}
-              >
-
-                <div className="relative z-10">
-                  {/* Quote mark */}
-                  <div className="text-2xl font-serif leading-none mb-1 opacity-20 dark:opacity-30 select-none"
-                    style={{ color: t.color }}>"</div>
-
-                  {/* Quote text */}
-                  <p className="text-base leading-snug text-gray-700 dark:text-gray-200 mb-3 flex-1">
-                    {t.quote}
-                  </p>
-
-                  {/* Person */}
-                  <div className="flex items-center gap-3 mt-auto">
-                    {/* Avatar */}
-                    <div
-                      className="w-9 h-9 rounded-full flex items-center justify-center text-white text-xs font-bold flex-shrink-0 overflow-hidden"
-                      style={{ background: t.color }}
-                    >
-                      {t.initials}
-                    </div>
-                    <div>
-                      <div className="text-base font-semibold text-gray-900 dark:text-gray-100 leading-tight">{t.name}</div>
-                      <div className="text-xs text-gray-500 dark:text-gray-400 leading-tight">{t.role} · {t.company}</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
+              <CardInner t={testimonials[index]} />
+            </motion.div>
+          </AnimatePresence>
         </div>
       </div>
 
       {/* Controls */}
-      <div className="flex items-center justify-center gap-3 mt-3">
-        <button
-          onClick={() => goTo(-1)}
-          className="w-7 h-7 rounded-full flex items-center justify-center bg-white/90 dark:bg-gray-800/90 border border-white/50 dark:border-gray-700 shadow-sm hover:scale-110 transition-transform"
-          aria-label="Previous testimonial"
-        >
+      <div className="flex items-center justify-center gap-3 mt-4">
+        <button onClick={prev} className="w-7 h-7 rounded-full flex items-center justify-center bg-white/90 dark:bg-gray-800/90 border border-white/50 dark:border-gray-700 shadow-sm hover:scale-110 transition-transform" aria-label="Previous">
           <svg className="w-3 h-3 text-gray-600 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
           </svg>
         </button>
-
-        {/* Dots */}
         <div className="flex items-center gap-1.5">
           {testimonials.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => {
-                const diff = i - (Math.floor(offsetRef.current / stepRef.current) % testimonials.length);
-                offsetRef.current += diff * stepRef.current;
-                setOffset(offsetRef.current);
-                setActiveIndex(i);
-              }}
+            <button key={i} onClick={() => goTo(i, i > index ? 1 : -1)}
               className="rounded-full transition-all duration-300"
-              style={{
-                width: activeIndex === i ? 16 : 6,
-                height: 6,
-                background: activeIndex === i ? '#6B7280' : '#D1D5DB',
-              }}
+              style={{ width: index === i ? 16 : 6, height: 6, background: index === i ? '#6B7280' : '#D1D5DB' }}
               aria-label={`Go to testimonial ${i + 1}`}
             />
           ))}
         </div>
-
-        <button
-          onClick={() => goTo(1)}
-          className="w-7 h-7 rounded-full flex items-center justify-center bg-white/90 dark:bg-gray-800/90 border border-white/50 dark:border-gray-700 shadow-sm hover:scale-110 transition-transform"
-          aria-label="Next testimonial"
-        >
+        <button onClick={next} className="w-7 h-7 rounded-full flex items-center justify-center bg-white/90 dark:bg-gray-800/90 border border-white/50 dark:border-gray-700 shadow-sm hover:scale-110 transition-transform" aria-label="Next">
           <svg className="w-3 h-3 text-gray-600 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
           </svg>

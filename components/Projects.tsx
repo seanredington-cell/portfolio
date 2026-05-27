@@ -103,7 +103,7 @@ function HeroSection() {
       <div className="lg:hidden w-full flex flex-col items-center gap-6 text-center">
         {/* Single flat composited image on mobile — gentle float, no drop-shadow */}
         <motion.div
-          className="w-full max-w-[200px] mx-auto px-4 pt-2"
+          className="w-full max-w-[200px] sm:max-w-[160px] mx-auto px-4 pt-2"
           animate={{ y: [0, -10, 0] }}
           transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
         >
@@ -288,7 +288,7 @@ function MobileProjectsList({ isDark }: { isDark: boolean }) {
         >
 
           {/* Image */}
-          <div className="relative z-10 w-full aspect-square">
+          <div className="relative z-10 mx-auto" style={{ width: 240, height: 240 }}>
             <MobileLayeredImage project={project} index={index} />
           </div>
 
