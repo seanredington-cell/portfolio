@@ -116,7 +116,7 @@ function HeroSection() {
           </div>
           {/* Text */}
           <div className="px-6 pb-6 space-y-3">
-            <div className="flex items-center gap-3">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
               <p className="text-xs font-medium tracking-widest uppercase text-gray-400 dark:text-gray-400">{p.name}</p>
               <div className="flex items-center gap-1.5">
                 <span className="relative flex h-2 w-2 flex-shrink-0">

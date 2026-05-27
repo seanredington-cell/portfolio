@@ -11,13 +11,18 @@ import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion"
 export default function Home() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [activeColor, setActiveColor] = useState(projectData[0].accentColor || "99, 102, 241");
-  const [isLoading, setIsLoading] = useState(false);
-
-  useEffect(() => {
+  const [isLoading, setIsLoading] = useState(() => {
+    if (typeof window === 'undefined') return false;
     const hasVisited = localStorage.getItem('hasVisited');
     if (!hasVisited) {
-      setIsLoading(true);
       localStorage.setItem('hasVisited', 'true');
+      return true;
+    }
+    return false;
+  });
+
+  useEffect(() => {
+    if (isLoading) {
       const timer = setTimeout(() => {
         setIsLoading(false);
       }, 400);

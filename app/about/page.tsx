@@ -36,7 +36,7 @@ export default function About() {
       />
 
       {/* Cards Container */}
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
 
         {/* Bio Card */}
         <motion.div
@@ -46,35 +46,35 @@ export default function About() {
           className="backdrop-blur-xl bg-white/70 dark:bg-gray-800/70 rounded-3xl shadow-2xl border border-white/40 dark:border-gray-700 p-8 sm:p-12"
           style={{ boxShadow: '0 20px 60px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.8)' }}
         >
-          <div className="flex flex-col sm:flex-row gap-8 sm:gap-10">
-            {/* Profile Image */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-              className="flex-shrink-0"
-            >
-              <div className="w-28 h-28 sm:w-36 sm:h-36 rounded-2xl overflow-hidden">
-                <Image
-                  src="/about-hero/headshot-image.png"
-                  alt="Seán Redington"
-                  width={144}
-                  height={144}
-                  className="object-cover w-full h-full"
-                />
-              </div>
-            </motion.div>
+          <div className="space-y-4">
+            {/* Name + Image inline */}
+            <div className="flex items-center gap-3">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+                className="flex-shrink-0"
+              >
+                <div className="w-10 h-10 rounded-full overflow-hidden">
+                  <Image
+                    src="/about-hero/headshot-image.png"
+                    alt="Seán Redington"
+                    width={40}
+                    height={40}
+                    className="object-cover w-full h-full"
+                  />
+                </div>
+              </motion.div>
+              <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Seán Redington</h1>
+            </div>
 
             {/* Bio Text */}
-            <div className="flex-1 space-y-4">
-              <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Seán Redington</h1>
-              <div className="space-y-3 text-base text-gray-700 dark:text-gray-300 leading-relaxed">
+            <div className="space-y-3 text-base text-gray-700 dark:text-gray-300 leading-relaxed">
                 <p>I'm Seán, a designer who's spent over six years building digital products across Fortune 500 companies and startups. My most recent role was as Head of Product & Design at Getmee AI, an AI-powered platform helping migrants and non-English speakers build the skills they need to get hired.</p>
                 <p>Having studied Industrial Design in university, I was fortunate enough to get a UX internship at Workday. This introduced me to some incredible people and opened my eyes to the world of UX design. After returning to Workday as a grad and earning a promotion, I moved to CYGNVS, a cybersecurity startup. There, I led design work across web and native mobile apps.</p>
                 <p>I moved to Australia in 2024, and freelanced as a web designer within the charity space before accepting an offer for a full-time role at Getmee AI, a startup with a genuine mission, and the space to shape both the product and the team. At Getmee, I led product strategy, and built the systems that scaled the platform from 20,000 to 40,000 users across 15+ white-label apps.</p>
                 <p>I work best when I'm close to the problem, talking to users, sitting with the engineering team, or challenging assumptions with stakeholders.</p>
                 <p>I'm looking for my next role in a product team that's passionate about solving user problems and doesn't view design as a silo that churns out screens, but instead as a core backbone to a successful product and team.</p>
-              </div>
             </div>
           </div>
 
@@ -111,147 +111,112 @@ export default function About() {
 
             <div className="space-y-12">
               {/* Getmee AI */}
-              <div className="space-y-5 pb-8 border-b border-gray-200/60 dark:border-gray-700/60 last:border-0">
-                  <div className="flex items-start gap-4">
-                    <div className="flex-1 min-w-0">
-                      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 mb-3">
-                        <div>
-                          <div className="flex items-center gap-2 mb-1">
-                            <div className="w-5 h-5 rounded-sm overflow-hidden flex-shrink-0">
-                              <Image src="/about-hero/logo-getmee.png" alt="Getmee AI" width={20} height={20} className="object-contain w-full h-full" />
-                            </div>
-                            <p className="text-xs font-medium tracking-widest uppercase text-gray-400 dark:text-gray-400">Getmee AI, Melbourne</p>
-                          </div>
-                          <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100">Head of Product & Design</h3>
-                        </div>
-                        <div className="flex items-center gap-2 flex-shrink-0">
-                          <span className="text-xs font-semibold backdrop-blur-sm px-3 py-1.5 rounded-md shadow-sm bg-blue-100 text-blue-800">
-                            CONTRACT
-                          </span>
-                          <span className="text-sm text-gray-500 dark:text-gray-400 whitespace-nowrap">May 2025 - Aug 2026</span>
-                        </div>
-                      </div>
-
-                      <p className="text-base text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-                        Led the product strategy and design across 15+ white-label apps, doubling the userbase to 40,000 users as the sole-designer with a 12-person engineering team.
-                      </p>
-
-                      <ul className="space-y-3.5 text-base text-gray-600 dark:text-gray-400">
-                        <li className="flex items-start gap-3">
-                          <span className="text-blue-500 mt-1.5 flex-shrink-0">•</span>
-                          <span>Applied systems thinking to deliver AI-powered learning experiences, validated through pilots in varying geographies, with 89% of 1,100+ students wanting it to continue in their curriculum.</span>
-                        </li>
-                        <li className="flex items-start gap-3">
-                          <span className="text-blue-500 mt-1.5 flex-shrink-0">•</span>
-                          <span>Built a scalable design system and white-label infrastructure that cut new app deployment from weeks to 2 hours, enabling simultaneous feature releases across all apps.</span>
-                        </li>
-                        <li className="flex items-start gap-3">
-                          <span className="text-blue-500 mt-1.5 flex-shrink-0">•</span>
-                          <span>Introduced product processes including a Product Council, UX office hours and Notion documentation that shifted the team from reactive to roadmap-driven, growing the userbase from 20,000 to 40,000.</span>
-                        </li>
-                      </ul>
-                    </div>
+              <div className="space-y-4 pb-10 border-b border-gray-200/60 dark:border-gray-700/60 last:border-0">
+                <div className="flex items-center gap-2 mb-1">
+                  <div className="w-5 h-5 rounded-sm overflow-hidden flex-shrink-0">
+                    <Image src="/about-hero/logo-getmee.png" alt="Getmee AI" width={20} height={20} className="object-contain w-full h-full" />
+                  </div>
+                  <p className="text-xs font-medium tracking-widest uppercase text-gray-500 dark:text-gray-400">Getmee AI, Melbourne</p>
+                </div>
+                <div className="flex items-center justify-between gap-4">
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100">Head of Product & Design</h3>
+                  <div className="flex items-center gap-2 flex-shrink-0">
+                    <span className="text-xs font-semibold px-3 py-1 rounded-md bg-blue-100 dark:bg-blue-900/40 text-blue-800 dark:text-blue-300">CONTRACT</span>
+                    <span className="text-sm text-gray-600 dark:text-gray-300 whitespace-nowrap">May 2025 – Aug 2026</span>
                   </div>
                 </div>
+                <p className="text-base text-gray-700 dark:text-gray-200 leading-relaxed">
+                  Led the product strategy and design across 15+ white-label apps, doubling the userbase to 40,000 users as the sole designer with a 12-person engineering team.
+                </p>
+                <ul className="space-y-3 text-base text-gray-600 dark:text-gray-300">
+                  <li className="flex items-start gap-3">
+                    <span className="text-blue-500 mt-1.5 flex-shrink-0">•</span>
+                    <span>Applied systems thinking to deliver AI-powered learning experiences, validated through pilots in varying geographies, with 89% of 1,100+ students wanting it to continue in their curriculum.</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="text-blue-500 mt-1.5 flex-shrink-0">•</span>
+                    <span>Built a scalable design system and white-label infrastructure that cut new app deployment from weeks to 2 hours, enabling simultaneous feature releases across all apps.</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="text-blue-500 mt-1.5 flex-shrink-0">•</span>
+                    <span>Introduced product processes including a Product Council, UX office hours and Notion documentation that shifted the team from reactive to roadmap-driven, growing the userbase from 20,000 to 40,000.</span>
+                  </li>
+                </ul>
+              </div>
 
               {/* Marlin Communications */}
-              <div className="space-y-5 pb-8 border-b border-gray-200/60 dark:border-gray-700/60 last:border-0">
-                  <div className="flex items-start gap-4">
-                    <div className="flex-1 min-w-0">
-                      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 mb-3">
-                        <div>
-                          <div className="flex items-center gap-2 mb-1">
-                            <div className="w-5 h-5 rounded-sm overflow-hidden flex-shrink-0">
-                              <Image src="/about-hero/logo-marlin.png" alt="Marlin Communications" width={20} height={20} className="object-contain w-full h-full" />
-                            </div>
-                            <p className="text-xs font-medium tracking-widest uppercase text-gray-400 dark:text-gray-400">Marlin Communications, Melbourne</p>
-                          </div>
-                          <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100">UX/UI Designer</h3>
-                        </div>
-                        <div className="flex items-center gap-2 flex-shrink-0">
-                          <span className="text-xs font-semibold backdrop-blur-sm px-3 py-1.5 rounded-md shadow-sm bg-blue-100 text-blue-800">
-                            CONTRACT
-                          </span>
-                          <span className="text-sm text-gray-500 dark:text-gray-400 whitespace-nowrap">Jan 2025 - Jun 2025</span>
-                        </div>
-                      </div>
-
-                      <p className="text-base text-gray-700 dark:text-gray-300 leading-relaxed">
-                        Led UX research and design of a number of high traffic websites within the charity space, ensuring user's goals were at the heart of all decision making.
-                      </p>
-                    </div>
+              <div className="space-y-4 pb-10 border-b border-gray-200/60 dark:border-gray-700/60 last:border-0">
+                <div className="flex items-center gap-2 mb-1">
+                  <div className="w-5 h-5 rounded-sm overflow-hidden flex-shrink-0">
+                    <Image src="/about-hero/logo-marlin.png" alt="Marlin Communications" width={20} height={20} className="object-contain w-full h-full" />
+                  </div>
+                  <p className="text-xs font-medium tracking-widest uppercase text-gray-500 dark:text-gray-400">Marlin Communications, Melbourne</p>
+                </div>
+                <div className="flex items-center justify-between gap-4">
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100">UX/UI Designer</h3>
+                  <div className="flex items-center gap-2 flex-shrink-0">
+                    <span className="text-xs font-semibold px-3 py-1 rounded-md bg-blue-100 dark:bg-blue-900/40 text-blue-800 dark:text-blue-300">CONTRACT</span>
+                    <span className="text-sm text-gray-600 dark:text-gray-300 whitespace-nowrap">Jan 2025 – Jun 2025</span>
                   </div>
                 </div>
+                <p className="text-base text-gray-700 dark:text-gray-200 leading-relaxed">
+                  Led UX research and design of a number of high traffic websites within the charity space, ensuring user goals were at the heart of all decision making.
+                </p>
+              </div>
 
               {/* CYGNVS */}
-              <div className="space-y-5 pb-8 border-b border-gray-200/60 dark:border-gray-700/60 last:border-0">
-                  <div className="flex items-start gap-4">
-                    <div className="flex-1 min-w-0">
-                      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 mb-3">
-                        <div>
-                          <div className="flex items-center gap-2 mb-1">
-                            <div className="w-5 h-5 rounded-sm overflow-hidden flex-shrink-0">
-                              <Image src="/about-hero/logo-cygnvs.png" alt="CYGNVS" width={20} height={20} className="object-contain w-full h-full" />
-                            </div>
-                            <p className="text-xs font-medium tracking-widest uppercase text-gray-400 dark:text-gray-400">CYGNVS, Dublin</p>
-                          </div>
-                          <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100">UX Designer</h3>
-                        </div>
-                        <span className="text-sm text-gray-500 dark:text-gray-400 whitespace-nowrap">Mar 2022 - May 2024</span>
-                      </div>
-
-                      <p className="text-base text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-                        As a Lead Designer across multiple teams I played a key role in growing the user base by over 300%, creating high quality, security conscious features in a start-up within the Cyber Security space.
-                      </p>
-
-                      <ul className="space-y-3.5 text-base text-gray-600 dark:text-gray-400">
-                        <li className="flex items-start gap-3">
-                          <span className="text-indigo-500 mt-1.5 flex-shrink-0">•</span>
-                          <span>Designed patented features that use large language models (LLMs) to solve core user problems.</span>
-                        </li>
-                        <li className="flex items-start gap-3">
-                          <span className="text-indigo-500 mt-1.5 flex-shrink-0">•</span>
-                          <span>Played a critical role in roadmap planning and execution for teams across multiple geographies and devices which expanded the user base by over 300%.</span>
-                        </li>
-                        <li className="flex items-start gap-3">
-                          <span className="text-indigo-500 mt-1.5 flex-shrink-0">•</span>
-                          <span>Involved in interviewing, hiring, onboarding and up-skilling a team of designers both on and off-site.</span>
-                        </li>
-                      </ul>
-                    </div>
+              <div className="space-y-4 pb-10 border-b border-gray-200/60 dark:border-gray-700/60 last:border-0">
+                <div className="flex items-center gap-2 mb-1">
+                  <div className="w-5 h-5 rounded-sm overflow-hidden flex-shrink-0">
+                    <Image src="/about-hero/logo-cygnvs.png" alt="CYGNVS" width={20} height={20} className="object-contain w-full h-full" />
                   </div>
+                  <p className="text-xs font-medium tracking-widest uppercase text-gray-500 dark:text-gray-400">CYGNVS, Dublin</p>
                 </div>
+                <div className="flex items-center justify-between gap-4">
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100">UX Designer</h3>
+                  <span className="text-sm text-gray-600 dark:text-gray-300 whitespace-nowrap flex-shrink-0">Mar 2022 – May 2024</span>
+                </div>
+                <p className="text-base text-gray-700 dark:text-gray-200 leading-relaxed">
+                  As a Lead Designer across multiple teams I played a key role in growing the user base by over 300%, creating high quality, security conscious features in a start-up within the Cyber Security space.
+                </p>
+                <ul className="space-y-3 text-base text-gray-600 dark:text-gray-300">
+                  <li className="flex items-start gap-3">
+                    <span className="text-indigo-500 mt-1.5 flex-shrink-0">•</span>
+                    <span>Designed patented features that use large language models (LLMs) to solve core user problems.</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="text-indigo-500 mt-1.5 flex-shrink-0">•</span>
+                    <span>Played a critical role in roadmap planning and execution for teams across multiple geographies and devices which expanded the user base by over 300%.</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="text-indigo-500 mt-1.5 flex-shrink-0">•</span>
+                    <span>Involved in interviewing, hiring, onboarding and up-skilling a team of designers both on and off-site.</span>
+                  </li>
+                </ul>
+              </div>
 
               {/* Workday */}
-              <div className="space-y-5 pb-8 border-b border-gray-200/60 dark:border-gray-700/60 last:border-0">
-                  <div className="flex items-start gap-4">
-                    <div className="flex-1 min-w-0">
-                      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 mb-3">
-                        <div>
-                          <div className="flex items-center gap-2 mb-1">
-                            <div className="w-5 h-5 rounded-sm overflow-hidden flex-shrink-0">
-                              <Image src="/about-hero/logo-workday.png" alt="Workday" width={20} height={20} className="object-contain w-full h-full" />
-                            </div>
-                            <p className="text-xs font-medium tracking-widest uppercase text-gray-400 dark:text-gray-400">Workday, Dublin</p>
-                          </div>
-                          <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100">Sr Associate UX Designer</h3>
-                        </div>
-                        <span className="text-sm text-gray-500 dark:text-gray-400 whitespace-nowrap">Jan 2019 - Aug 2019 | Sep 2020 - Mar 2022</span>
-                      </div>
-
-                      <p className="text-base text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-                        Hired as an intern, rehired as a graduate and then promoted to Senior Associate UX Designer. I led a scrum team across web and mobile on Workday's fastest selling product ever.
-                      </p>
-
-                      <ul className="space-y-3.5 text-base text-gray-600 dark:text-gray-400">
-                        <li className="flex items-start gap-3">
-                          <span className="text-orange-500 mt-1.5 flex-shrink-0">•</span>
-                          <span>Designed and carried out research studies, built wireframes, prototypes and high fidelity product features within scrum teams that worked in an agile way delivering quality features to users.</span>
-                        </li>
-                      </ul>
-                    </div>
+              <div className="space-y-4 pb-10 border-b border-gray-200/60 dark:border-gray-700/60 last:border-0">
+                <div className="flex items-center gap-2 mb-1">
+                  <div className="w-5 h-5 rounded-sm overflow-hidden flex-shrink-0">
+                    <Image src="/about-hero/logo-workday.png" alt="Workday" width={20} height={20} className="object-contain w-full h-full" />
                   </div>
+                  <p className="text-xs font-medium tracking-widest uppercase text-gray-500 dark:text-gray-400">Workday, Dublin</p>
                 </div>
+                <div className="flex items-center justify-between gap-4">
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100">Sr Associate UX Designer</h3>
+                  <span className="text-sm text-gray-600 dark:text-gray-300 whitespace-nowrap flex-shrink-0">2019 – 2022</span>
+                </div>
+                <p className="text-base text-gray-700 dark:text-gray-200 leading-relaxed">
+                  Hired as an intern, rehired as a graduate and then promoted to Senior Associate UX Designer. I led a scrum team across web and mobile on Workday's fastest selling product ever.
+                </p>
+                <ul className="space-y-3 text-base text-gray-600 dark:text-gray-300">
+                  <li className="flex items-start gap-3">
+                    <span className="text-orange-500 mt-1.5 flex-shrink-0">•</span>
+                    <span>Designed and carried out research studies, built wireframes, prototypes and high fidelity product features within scrum teams that worked in an agile way delivering quality features to users.</span>
+                  </li>
+                </ul>
+              </div>
             </div>
           </section>
 
@@ -260,16 +225,12 @@ export default function About() {
             <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-8">Education</h2>
 
             <div className="space-y-5">
-                <div className="flex items-start gap-4">
-                  <div className="flex-1 min-w-0">
-                    <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
-                      <div>
-                        <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100">BSc Product Design & Technology</h3>
-                        <p className="text-base text-gray-600 dark:text-gray-400">University of Limerick, Limerick</p>
-                      </div>
-                      <span className="text-sm text-gray-500 whitespace-nowrap">Sep 2016 - May 2020</span>
-                    </div>
+                <div className="flex items-center justify-between gap-4">
+                  <div>
+                    <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100">BSc Product Design & Technology</h3>
+                    <p className="text-base text-gray-600 dark:text-gray-300">University of Limerick, Limerick</p>
                   </div>
+                  <span className="text-sm text-gray-600 dark:text-gray-300 whitespace-nowrap flex-shrink-0">2016 – 2020</span>
                 </div>
             </div>
           </section>
