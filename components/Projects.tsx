@@ -1268,11 +1268,11 @@ function ProjectCard({
             </Callout>
             {project.readTime && (
               <div className="inline-flex items-center gap-1.5">
-                <svg className="w-3.5 h-3.5 text-gray-400 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-3.5 h-3.5 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <circle cx="12" cy="12" r="10" strokeWidth="2"/>
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6v6l4 2"/>
                 </svg>
-                <span className="text-sm text-gray-400 dark:text-gray-400">{project.readTime} min read</span>
+                <span className="text-sm text-gray-500 dark:text-gray-400">{project.readTime} min read</span>
               </div>
             )}
             <div className="w-full flex items-center justify-center gap-2 backdrop-blur-sm bg-white/10 dark:bg-gray-800/30 border border-white/60 dark:border-gray-700 text-gray-800 dark:text-gray-200 font-semibold px-6 py-3 rounded-full shadow-lg group-hover:shadow-xl group-hover:scale-105 group-hover:bg-white/20 dark:group-hover:bg-gray-800/50 transition-all duration-300 text-base">

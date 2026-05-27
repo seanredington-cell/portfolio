@@ -89,63 +89,65 @@ export default function About() {
           className="backdrop-blur-xl bg-white/70 dark:bg-gray-800/70 rounded-3xl shadow-2xl border border-white/40 dark:border-gray-700 p-8 sm:p-12"
           style={{ boxShadow: '0 20px 60px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.8)' }}
         >
-          {/* CV Header */}
-          <div className="flex items-center justify-between mb-12">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">CV</h2>
-            <motion.a
-              href="/SEAN_REDINGTON_CV_2026.pdf"
-              download
-              className="inline-flex items-center gap-2 backdrop-blur-sm bg-white/10 dark:bg-gray-800/30 border border-white/60 dark:border-gray-700 text-gray-800 dark:text-gray-200 font-semibold px-5 py-2.5 rounded-full shadow-lg hover:shadow-xl hover:scale-105 hover:bg-white/20 dark:hover:bg-gray-800/50 transition-all duration-300 text-sm"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              style={{ boxShadow: '0 8px 32px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.5)' }}
-            >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-              </svg>
-              <span>Download CV</span>
-            </motion.a>
-          </div>
-
-          <div className="space-y-16">
+          <div className="space-y-12 leading-relaxed">
           {/* Experience Section */}
           <section>
-            <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-12">Experience</h2>
+            <div className="flex items-center justify-between mb-12">
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Experience</h2>
+              <motion.a
+                href="/SEAN_REDINGTON_CV_2026.pdf"
+                download
+                className="inline-flex items-center gap-2 backdrop-blur-sm bg-white/10 dark:bg-gray-800/30 border border-white/60 dark:border-gray-700 text-gray-800 dark:text-gray-200 font-semibold px-5 py-2.5 rounded-full shadow-lg hover:shadow-xl hover:scale-105 hover:bg-white/20 dark:hover:bg-gray-800/50 transition-all duration-300 text-sm"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                style={{ boxShadow: '0 8px 32px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.5)' }}
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                <span>Download CV</span>
+              </motion.a>
+            </div>
 
-            <div className="space-y-8">
+            <div className="space-y-12">
               {/* Getmee AI */}
               <div className="space-y-5 pb-8 border-b border-gray-200/60 dark:border-gray-700/60 last:border-0">
                   <div className="flex items-start gap-4">
                     <div className="flex-1 min-w-0">
                       <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 mb-3">
                         <div>
-                          <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100">Head of Product Design</h3>
-                          <p className="text-base text-gray-600 dark:text-gray-400">Getmee AI, Melbourne</p>
+                          <div className="flex items-center gap-2 mb-1">
+                            <div className="w-5 h-5 rounded-sm overflow-hidden flex-shrink-0">
+                              <Image src="/about-hero/logo-getmee.png" alt="Getmee AI" width={20} height={20} className="object-contain w-full h-full" />
+                            </div>
+                            <p className="text-xs font-medium tracking-widest uppercase text-gray-400 dark:text-gray-400">Getmee AI, Melbourne</p>
+                          </div>
+                          <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100">Head of Product & Design</h3>
                         </div>
                         <div className="flex items-center gap-2 flex-shrink-0">
                           <span className="text-xs font-semibold backdrop-blur-sm px-3 py-1.5 rounded-md shadow-sm bg-blue-100 text-blue-800">
                             CONTRACT
                           </span>
-                          <span className="text-sm text-gray-500 dark:text-gray-400 whitespace-nowrap">May 2025 -</span>
+                          <span className="text-sm text-gray-500 dark:text-gray-400 whitespace-nowrap">May 2025 - Aug 2026</span>
                         </div>
                       </div>
 
                       <p className="text-base text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-                        Enabling 35,000+ migrants, refugees and jobseekers to gain the skills needed for employment through award winning AI-powered web and mobile white-labeled apps.
+                        Led the product strategy and design across 15+ white-label apps, doubling the userbase to 40,000 users as the sole-designer with a 12-person engineering team.
                       </p>
 
-                      <ul className="space-y-2.5 text-base text-gray-600 dark:text-gray-400">
+                      <ul className="space-y-3.5 text-base text-gray-600 dark:text-gray-400">
                         <li className="flex items-start gap-3">
                           <span className="text-blue-500 mt-1.5 flex-shrink-0">•</span>
-                          <span>Drove 64% user growth and 100% customer retention over 6 months through customer-centric product design and stakeholder engagement across universities and employment partners.</span>
+                          <span>Applied systems thinking to deliver AI-powered learning experiences, validated through pilots in varying geographies, with 89% of 1,100+ students wanting it to continue in their curriculum.</span>
                         </li>
                         <li className="flex items-start gap-3">
                           <span className="text-blue-500 mt-1.5 flex-shrink-0">•</span>
-                          <span>Lead product design and roadmap for 12 engineers across 20+ white-label apps on web and mobile.</span>
+                          <span>Built a scalable design system and white-label infrastructure that cut new app deployment from weeks to 2 hours, enabling simultaneous feature releases across all apps.</span>
                         </li>
                         <li className="flex items-start gap-3">
                           <span className="text-blue-500 mt-1.5 flex-shrink-0">•</span>
-                          <span>Designed AI-powered features for low-literacy users to build confidence through practice before real-world application.</span>
+                          <span>Introduced product processes including a Product Council, UX office hours and Notion documentation that shifted the team from reactive to roadmap-driven, growing the userbase from 20,000 to 40,000.</span>
                         </li>
                       </ul>
                     </div>
@@ -158,8 +160,13 @@ export default function About() {
                     <div className="flex-1 min-w-0">
                       <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 mb-3">
                         <div>
+                          <div className="flex items-center gap-2 mb-1">
+                            <div className="w-5 h-5 rounded-sm overflow-hidden flex-shrink-0">
+                              <Image src="/about-hero/logo-marlin.png" alt="Marlin Communications" width={20} height={20} className="object-contain w-full h-full" />
+                            </div>
+                            <p className="text-xs font-medium tracking-widest uppercase text-gray-400 dark:text-gray-400">Marlin Communications, Melbourne</p>
+                          </div>
                           <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100">UX/UI Designer</h3>
-                          <p className="text-base text-gray-600 dark:text-gray-400">Marlin Communications, Melbourne</p>
                         </div>
                         <div className="flex items-center gap-2 flex-shrink-0">
                           <span className="text-xs font-semibold backdrop-blur-sm px-3 py-1.5 rounded-md shadow-sm bg-blue-100 text-blue-800">
@@ -182,8 +189,13 @@ export default function About() {
                     <div className="flex-1 min-w-0">
                       <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 mb-3">
                         <div>
+                          <div className="flex items-center gap-2 mb-1">
+                            <div className="w-5 h-5 rounded-sm overflow-hidden flex-shrink-0">
+                              <Image src="/about-hero/logo-cygnvs.png" alt="CYGNVS" width={20} height={20} className="object-contain w-full h-full" />
+                            </div>
+                            <p className="text-xs font-medium tracking-widest uppercase text-gray-400 dark:text-gray-400">CYGNVS, Dublin</p>
+                          </div>
                           <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100">UX Designer</h3>
-                          <p className="text-base text-gray-600 dark:text-gray-400">CYGNVS, Dublin</p>
                         </div>
                         <span className="text-sm text-gray-500 dark:text-gray-400 whitespace-nowrap">Mar 2022 - May 2024</span>
                       </div>
@@ -192,7 +204,7 @@ export default function About() {
                         As a Lead Designer across multiple teams I played a key role in growing the user base by over 300%, creating high quality, security conscious features in a start-up within the Cyber Security space.
                       </p>
 
-                      <ul className="space-y-2.5 text-base text-gray-600 dark:text-gray-400">
+                      <ul className="space-y-3.5 text-base text-gray-600 dark:text-gray-400">
                         <li className="flex items-start gap-3">
                           <span className="text-indigo-500 mt-1.5 flex-shrink-0">•</span>
                           <span>Designed patented features that use large language models (LLMs) to solve core user problems.</span>
@@ -216,8 +228,13 @@ export default function About() {
                     <div className="flex-1 min-w-0">
                       <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 mb-3">
                         <div>
+                          <div className="flex items-center gap-2 mb-1">
+                            <div className="w-5 h-5 rounded-sm overflow-hidden flex-shrink-0">
+                              <Image src="/about-hero/logo-workday.png" alt="Workday" width={20} height={20} className="object-contain w-full h-full" />
+                            </div>
+                            <p className="text-xs font-medium tracking-widest uppercase text-gray-400 dark:text-gray-400">Workday, Dublin</p>
+                          </div>
                           <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100">Sr Associate UX Designer</h3>
-                          <p className="text-base text-gray-600 dark:text-gray-400">Workday, Dublin</p>
                         </div>
                         <span className="text-sm text-gray-500 dark:text-gray-400 whitespace-nowrap">Jan 2019 - Aug 2019 | Sep 2020 - Mar 2022</span>
                       </div>
@@ -226,7 +243,7 @@ export default function About() {
                         Hired as an intern, rehired as a graduate and then promoted to Senior Associate UX Designer. I led a scrum team across web and mobile on Workday's fastest selling product ever.
                       </p>
 
-                      <ul className="space-y-2.5 text-base text-gray-600 dark:text-gray-400">
+                      <ul className="space-y-3.5 text-base text-gray-600 dark:text-gray-400">
                         <li className="flex items-start gap-3">
                           <span className="text-orange-500 mt-1.5 flex-shrink-0">•</span>
                           <span>Designed and carried out research studies, built wireframes, prototypes and high fidelity product features within scrum teams that worked in an agile way delivering quality features to users.</span>
@@ -240,7 +257,7 @@ export default function About() {
 
           {/* Education Section */}
           <section>
-            <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-12">Education</h2>
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-8">Education</h2>
 
             <div className="space-y-5">
                 <div className="flex items-start gap-4">

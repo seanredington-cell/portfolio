@@ -20,7 +20,7 @@ export default function Home() {
       localStorage.setItem('hasVisited', 'true');
       const timer = setTimeout(() => {
         setIsLoading(false);
-      }, 800);
+      }, 400);
       return () => clearTimeout(timer);
     }
   }, []);
@@ -84,7 +84,7 @@ export default function Home() {
           <motion.div
             initial={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.6, ease: "easeInOut" }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
             className="fixed inset-0 z-[100] bg-white dark:bg-gray-900 flex items-center justify-center"
           >
             <motion.div

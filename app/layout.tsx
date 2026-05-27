@@ -49,12 +49,14 @@ export default function RootLayout({
               (function() {
                 try {
                   const darkMode = localStorage.getItem('darkMode');
-                  if (darkMode === 'true') {
+                  if (darkMode === null || darkMode === 'true') {
                     document.documentElement.classList.add('dark');
                   } else {
                     document.documentElement.classList.remove('dark');
                   }
-                } catch (e) {}
+                } catch (e) {
+                  document.documentElement.classList.add('dark');
+                }
               })();
             `,
           }}
