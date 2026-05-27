@@ -298,7 +298,7 @@ export default function ProjectDetailClient({ params, markdownContent, frontMatt
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.2, duration: 0.2 }}
                 onClick={() => setExpandedImage(null)}
-                className="absolute -top-2 -right-2 sm:top-4 sm:right-4 w-10 h-10 flex items-center justify-center rounded-full bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm border border-white/40 dark:border-gray-700 text-gray-800 dark:text-gray-200 hover:bg-white dark:hover:bg-gray-800 hover:scale-110 transition-all shadow-lg"
+                className="absolute -top-2 -right-2 sm:top-4 sm:right-4 w-10 h-10 flex items-center justify-center rounded-full bg-white dark:bg-gray-800 border border-white/40 dark:border-gray-700 text-gray-800 dark:text-gray-200 hover:bg-white dark:hover:bg-gray-800 hover:scale-110 transition-all shadow-lg"
                 aria-label="Close"
               >
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
@@ -603,7 +603,7 @@ export default function ProjectDetailClient({ params, markdownContent, frontMatt
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-              className="relative backdrop-blur-xl bg-white/70 dark:bg-gray-800/70 border border-white/40 dark:border-gray-700 rounded-2xl overflow-hidden"
+              className="relative bg-white/90 dark:bg-gray-800/90 border border-white/40 dark:border-gray-700 rounded-2xl overflow-hidden"
               style={{
                 boxShadow: '0 20px 60px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.8)',
               }}
@@ -738,7 +738,7 @@ export default function ProjectDetailClient({ params, markdownContent, frontMatt
         <div className="px-4 sm:px-8 lg:px-[168px] pb-24">
           <div className="max-w-2xl mx-auto">
             {frontMatter.quickRead ? (
-              <div className="backdrop-blur-sm bg-white/40 dark:bg-gray-800/40 border border-white/50 dark:border-gray-700/60 rounded-2xl p-8 space-y-6 shadow-sm">
+              <div className="bg-white/80 dark:bg-gray-800/80 border border-white/50 dark:border-gray-700/60 rounded-2xl p-8 space-y-6 shadow-sm">
                 {[
                   { label: 'My role', value: frontMatter.quickRead.role },
                   { label: 'The problem', value: frontMatter.quickRead.problem },
@@ -1131,7 +1131,7 @@ export default function ProjectDetailClient({ params, markdownContent, frontMatt
 
                 <Link href={`/projects/${nextProject.id}`} className="group block">
                   <motion.div
-                    className="backdrop-blur-sm bg-white/10 border border-white/60 rounded-2xl p-4 sm:p-6 shadow-lg hover:shadow-xl transition-all duration-300"
+                    className="bg-white/60 dark:bg-gray-800/60 border border-white/60 dark:border-gray-700/60 rounded-2xl p-4 sm:p-6 shadow-lg hover:shadow-xl transition-all duration-300"
                     style={{
                       boxShadow: '0 8px 32px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.5)',
                     }}

@@ -4,6 +4,7 @@ import React from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 import Background from "@/components/Background";
+import ContactCards from "@/components/ContactCards";
 
 /**
  * About Page
@@ -27,16 +28,6 @@ export default function About() {
         <Background />
       </motion.div>
 
-      {/* Light gradient overlay */}
-      <motion.div
-        className="fixed inset-0 -z-5 pointer-events-none opacity-10"
-        style={{
-          background: `
-            radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.8) 0%, rgba(99, 102, 241, 0.2) 50%, transparent 100%)
-          `,
-        }}
-      />
-
       {/* Cards Container */}
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
 
@@ -45,7 +36,7 @@ export default function About() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className="backdrop-blur-xl bg-white/70 dark:bg-gray-800/70 rounded-3xl shadow-2xl border border-white/40 dark:border-gray-700 p-6 sm:p-12"
+          className="bg-white/90 dark:bg-gray-800/90 rounded-3xl shadow-2xl border border-white/40 dark:border-gray-700 p-6 sm:p-12"
           style={{ boxShadow: '0 20px 60px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.8)' }}
         >
           <div className="space-y-4">
@@ -88,7 +79,7 @@ export default function About() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-          className="backdrop-blur-xl bg-white/70 dark:bg-gray-800/70 rounded-3xl shadow-2xl border border-white/40 dark:border-gray-700 p-6 sm:p-12"
+          className="bg-white/90 dark:bg-gray-800/90 rounded-3xl shadow-2xl border border-white/40 dark:border-gray-700 p-6 sm:p-12"
           style={{ boxShadow: '0 20px 60px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.8)' }}
         >
           <div className="space-y-12 leading-relaxed">
@@ -112,7 +103,7 @@ export default function About() {
               <motion.a
                 href="/SEAN_REDINGTON_CV_2026.pdf"
                 download
-                className="hidden sm:inline-flex items-center gap-2 backdrop-blur-sm bg-white/10 dark:bg-gray-800/30 border border-white/60 dark:border-gray-700 text-gray-800 dark:text-gray-200 font-semibold px-5 py-2.5 rounded-full shadow-lg hover:shadow-xl hover:scale-105 hover:bg-white/20 dark:hover:bg-gray-800/50 transition-all duration-300 text-sm"
+                className="hidden sm:inline-flex items-center gap-2 bg-white/10 dark:bg-gray-800/30 border border-white/60 dark:border-gray-700 text-gray-800 dark:text-gray-200 font-semibold px-5 py-2.5 rounded-full shadow-lg hover:shadow-xl hover:scale-105 hover:bg-white/20 dark:hover:bg-gray-800/50 transition-all duration-300 text-sm"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 style={{ boxShadow: '0 8px 32px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.5)' }}
@@ -256,7 +247,6 @@ export default function About() {
 
       {/* Contact Section */}
       <section className="relative py-16 sm:py-24 overflow-hidden px-4 sm:px-8">
-        {/* Background accent */}
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-accent-primary/5 to-accent-primary/10" />
 
         <div className="relative max-w-3xl mx-auto text-center">
@@ -271,66 +261,8 @@ export default function About() {
               <span className="text-gray-900 dark:text-gray-100">Get in touch</span>
             </h2>
 
-            <p className="text-base sm:text-lg text-gray-700 dark:text-gray-300 max-w-xl mx-auto">
-              I'm always interested in hearing about new projects and opportunities.
-            </p>
-
-            <div className="pt-2 grid gap-6 md:grid-cols-2 max-w-3xl mx-auto">
-              {/* Email Card */}
-              <motion.a
-                href="mailto:seanredington@gmail.com"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-                className="group backdrop-blur-xl bg-white/70 dark:bg-gray-800/70 rounded-2xl shadow-xl border border-white/40 dark:border-gray-700 p-6 hover:shadow-2xl hover:scale-[1.02] transition-all duration-300 flex items-center"
-                style={{
-                  boxShadow: '0 20px 60px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.8)',
-                }}
-              >
-                <div className="flex items-center gap-4 w-full">
-                  <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br from-accent-primary to-blue-600 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
-                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                    </svg>
-                  </div>
-                  <div className="flex-1 min-w-0 text-left">
-                    <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-1">Email</h3>
-                    <p className="text-base text-blue-600 dark:text-blue-400 font-medium group-hover:text-blue-700 dark:group-hover:text-blue-300 transition-colors break-words">
-                      seanredington@gmail.com
-                    </p>
-                  </div>
-                </div>
-              </motion.a>
-
-              {/* LinkedIn Card */}
-              <motion.a
-                href="https://www.linkedin.com/in/sean-redington"
-                target="_blank"
-                rel="noopener noreferrer"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-                className="group backdrop-blur-xl bg-white/70 dark:bg-gray-800/70 rounded-2xl shadow-xl border border-white/40 dark:border-gray-700 p-6 hover:shadow-2xl hover:scale-[1.02] transition-all duration-300 flex items-center"
-                style={{
-                  boxShadow: '0 20px 60px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.8)',
-                }}
-              >
-                <div className="flex items-center gap-4 w-full">
-                  <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-[#0A66C2] flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
-                    <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"/>
-                    </svg>
-                  </div>
-                  <div className="flex-1 min-w-0 text-left">
-                    <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-1">LinkedIn</h3>
-                    <p className="text-base text-blue-600 dark:text-blue-400 font-medium group-hover:text-blue-700 dark:group-hover:text-blue-300 transition-colors">
-                      Connect with me →
-                    </p>
-                  </div>
-                </div>
-              </motion.a>
+            <div className="pt-2">
+              <ContactCards />
             </div>
 
             {/* Copyright */}
@@ -344,20 +276,8 @@ export default function About() {
                 onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                 className="text-gray-700 dark:text-gray-300 hover:text-accent-primary transition-colors text-sm inline-flex items-center gap-2"
               >
-                <svg
-                  width="16"
-                  height="16"
-                  viewBox="0 0 16 16"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M8 12V4M8 4L4 8M8 4L12 8"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M8 12V4M8 4L4 8M8 4L12 8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
                 Back to top
               </button>
@@ -366,7 +286,7 @@ export default function About() {
         </div>
       </section>
 
-      {/* Floating scroll CTA — fixed bottom-centre, fades on scroll or click */}
+      {/* Floating scroll CTA */}
       <motion.div
         className="fixed bottom-8 left-1/2 -translate-x-1/2 z-[100]"
         animate={{ opacity: dismissed ? 0 : 1, pointerEvents: dismissed ? 'none' : 'auto' }}
@@ -381,7 +301,7 @@ export default function About() {
             const el = document.getElementById('cv-card');
             if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
           }}
-          className="backdrop-blur-sm bg-white/10 dark:bg-gray-800/30 border border-white/60 dark:border-gray-700 shadow-2xl px-6 py-3 rounded-full flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-white/20 dark:hover:bg-gray-800/50 transition-all duration-300 cursor-pointer whitespace-nowrap"
+          className="bg-white/80 dark:bg-gray-800/80 border border-white/60 dark:border-gray-700 shadow-2xl px-6 py-3 rounded-full flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-white/90 dark:hover:bg-gray-800/90 transition-all duration-300 cursor-pointer whitespace-nowrap"
           style={{ boxShadow: '0 8px 32px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.5)' }}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
