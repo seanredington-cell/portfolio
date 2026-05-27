@@ -16,6 +16,12 @@
   padding: 0;
   margin: 0;
   transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease, fill 0.4s ease, stroke 0.4s ease;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+}
+
+*::selection {
+  background: transparent;
 }
 
 html {
@@ -294,10 +300,11 @@ body {
   }
 
   /* Kill any remaining backdrop-blur entirely — not reduce, remove */
-  * {
+  *:not(.nav-pill):not(.nav-pill *):not(.dark-mode-toggle) {
     -webkit-backdrop-filter: none !important;
     backdrop-filter: none !important;
   }
+
 
   /* No infinite Framer Motion animations */
   .project-orb {

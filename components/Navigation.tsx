@@ -88,7 +88,7 @@ export default function Navigation() {
       >
         {/* Glassmorphic container - hugs content */}
         <div
-          className="relative backdrop-blur-sm bg-white/10 dark:bg-gray-800/30 border border-white/60 dark:border-gray-700 rounded-full px-2 sm:px-3 py-2"
+          className="nav-pill relative backdrop-blur-sm bg-white/10 dark:bg-gray-800/30 border border-white/60 dark:border-gray-700 rounded-full px-2 sm:px-3 py-2"
           style={{
             boxShadow: '0 4px 16px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.5)',
             willChange: 'transform',

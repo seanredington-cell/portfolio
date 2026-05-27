@@ -101,12 +101,16 @@ function HeroSection() {
 
       {/* Mobile layout — no card, centre aligned */}
       <div className="lg:hidden w-full flex flex-col items-center gap-6 text-center">
-        {/* Single flat composited image on mobile — no layered GPU composition */}
-        <div className="w-full max-w-[200px] mx-auto px-4 pt-2">
+        {/* Single flat composited image on mobile — gentle float, no drop-shadow */}
+        <motion.div
+          className="w-full max-w-[200px] mx-auto px-4 pt-2"
+          animate={{ y: [0, -10, 0] }}
+          transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
+        >
           <div className="relative w-full aspect-square">
             <Image src="/about-hero/hero-top.webp" alt={p.name} fill className="object-contain" />
           </div>
-        </div>
+        </motion.div>
         {/* Text */}
         <div className="px-2 pb-6 space-y-5 w-full">
           <div className="flex flex-col items-center gap-2">
@@ -130,7 +134,7 @@ function HeroSection() {
           {p.tags && <HeroTags tags={p.tags} center />}
           {/* Currently shelf — full width on mobile */}
           <div
-            className="rounded-2xl px-3 py-4 bg-white/80 dark:bg-gray-800/80 border border-white/70 dark:border-gray-700/60"
+            className="w-full text-left rounded-2xl px-3 py-4 bg-white/80 dark:bg-gray-800/80 border border-white/70 dark:border-gray-700/60"
             style={{ boxShadow: '0 2px 12px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.7)' }}
           >
             <CurrentlyShelf fillWidth />
@@ -223,15 +227,22 @@ function HeroSection() {
  * Static layered image composition for mobile list cards.
  * Same assets as desktop but no animations — keeps memory and CPU low.
  */
-function MobileLayeredImage({ project }: { project: typeof projectData[0] }) {
-  // Mobile: always use the single flat hero image — no layered compositions,
-  // no drop-shadows, no multiple GPU texture uploads.
+function MobileLayeredImage({ project, index }: { project: typeof projectData[0], index: number }) {
+  const yAnim = index % 2 === 0 ? [0, -8, 0] : [0, 8, 0];
+  const duration = 5 + (index % 3) * 0.7;
+
   if (project.image) {
     return (
-      <div className="relative w-full h-full">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={project.image} alt={project.name} loading="lazy" decoding="async"
-          className="w-full h-full object-contain" />
+      <div className="relative w-full h-full py-2">
+        <motion.div
+          className="relative w-full h-full"
+          animate={{ y: yAnim }}
+          transition={{ duration, repeat: Infinity, ease: "easeInOut", repeatType: "loop" }}
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={project.image} alt={project.name} loading="lazy" decoding="async"
+            className="w-full h-full object-contain" />
+        </motion.div>
       </div>
     );
   }
@@ -256,7 +267,7 @@ function MobileProjectsList({ isDark }: { isDark: boolean }) {
 
   return (
     <div className="flex flex-col gap-6 px-4 pb-8">
-      {projectData.map((project) => (
+      {projectData.map((project, index) => (
         <div key={project.id} className="relative rounded-3xl overflow-hidden border border-white/50 dark:border-gray-700/60"
           style={{
             boxShadow: '0 8px 48px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.8)',
@@ -278,7 +289,7 @@ function MobileProjectsList({ isDark }: { isDark: boolean }) {
 
           {/* Image */}
           <div className="relative z-10 w-full max-w-md mx-auto aspect-video">
-            <MobileLayeredImage project={project} />
+            <MobileLayeredImage project={project} index={index} />
           </div>
 
           {/* Text */}
