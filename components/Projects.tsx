@@ -402,7 +402,7 @@ function MobileProjectsList({ isDark }: { isDark: boolean }) {
 
             {/* CTA */}
             <div
-              className="w-full flex items-center justify-center gap-2 backdrop-blur-sm bg-white/10 dark:bg-gray-800/30 border border-white/60 dark:border-gray-700 text-gray-800 dark:text-gray-200 font-semibold px-6 py-2.5 rounded-full text-sm mt-1"
+              className="w-full flex items-center justify-center gap-2 bg-white/20 dark:bg-gray-800/40 border border-white/60 dark:border-gray-700 text-gray-800 dark:text-gray-200 font-semibold px-6 py-2.5 rounded-full text-sm mt-1"
               style={{ boxShadow: '0 8px 32px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.5)' }}
             >
               <span>Read more</span>

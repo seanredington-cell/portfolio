@@ -176,7 +176,7 @@ export default function TestimonialCarousel() {
               className="py-1 flex"
             >
               <div
-                className="relative rounded-2xl px-4 pt-3 pb-3 backdrop-blur-md border border-white/50 dark:border-gray-700/50 shadow-lg bg-white/60 dark:bg-gray-800/70 flex flex-col w-full"
+                className="relative rounded-2xl px-4 pt-3 pb-3 border border-white/50 dark:border-gray-700/50 shadow-lg bg-white/90 dark:bg-gray-800/90 flex flex-col w-full"
                 style={{
                   boxShadow: '0 4px 24px rgba(0,0,0,0.07), inset 0 1px 0 rgba(255,255,255,0.6)',
                 }}

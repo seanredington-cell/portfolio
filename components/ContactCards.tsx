@@ -16,7 +16,7 @@ export default function ContactCards() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-        className="group backdrop-blur-xl bg-white/70 dark:bg-gray-800/70 rounded-2xl shadow-xl border border-white/40 dark:border-gray-700 p-4 hover:shadow-2xl hover:scale-[1.02] transition-all duration-300 flex items-center"
+        className="group bg-white/90 dark:bg-gray-800/90 rounded-2xl shadow-xl border border-white/40 dark:border-gray-700 p-4 hover:shadow-2xl hover:scale-[1.02] transition-all duration-300 flex items-center"
         style={{ boxShadow: '0 20px 60px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.8)' }}
       >
         <div className="flex items-center gap-3 w-full">
@@ -43,7 +43,7 @@ export default function ContactCards() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-        className="group backdrop-blur-xl bg-white/70 dark:bg-gray-800/70 rounded-2xl shadow-xl border border-white/40 dark:border-gray-700 p-4 hover:shadow-2xl hover:scale-[1.02] transition-all duration-300 flex items-center"
+        className="group bg-white/90 dark:bg-gray-800/90 rounded-2xl shadow-xl border border-white/40 dark:border-gray-700 p-4 hover:shadow-2xl hover:scale-[1.02] transition-all duration-300 flex items-center"
         style={{ boxShadow: '0 20px 60px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.8)' }}
       >
         <div className="flex items-center gap-3 w-full">

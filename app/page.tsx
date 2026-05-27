@@ -5,12 +5,10 @@ import Footer from "@/components/Footer";
 import Background from "@/components/Background";
 import TestimonialCarousel from "@/components/TestimonialCarousel";
 import { useEffect, useState, useRef } from "react";
-import { projectData } from "@/data/projects";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function Home() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [activeColor, setActiveColor] = useState(projectData[0].accentColor || "99, 102, 241");
   const [isLoading, setIsLoading] = useState(() => {
     if (typeof window === 'undefined') return false;
     const hasVisited = localStorage.getItem('hasVisited');
@@ -36,50 +34,26 @@ export default function Home() {
     if (scrollToProject) {
       sessionStorage.removeItem('scrollToProject');
 
-      // Wait for page to load, then scroll to the project
       setTimeout(() => {
-        const projectIndex = projectData.findIndex(p => p.id === scrollToProject);
+        const { projectData } = require('@/data/projects');
+        const projectIndex = projectData.findIndex((p: any) => p.id === scrollToProject);
         if (projectIndex >= 0) {
-          // Calculate scroll position for this project
           const container = document.querySelector('[data-projects-container]');
           if (container) {
-            const scrollHeight = container.scrollHeight - window.innerHeight;
+            const scrollHeight = (container as HTMLElement).scrollHeight - window.innerHeight;
             const projectDuration = 1 / projectData.length;
             const targetProgress = (projectIndex + 0.5) * projectDuration;
             const targetScroll = scrollHeight * targetProgress;
 
             window.scrollTo({
-              top: container.getBoundingClientRect().top + window.scrollY + targetScroll,
+              top: (container as HTMLElement).getBoundingClientRect().top + window.scrollY + targetScroll,
               behavior: 'smooth'
             });
           }
         }
       }, 100);
     }
-
-    // Update active color based on scroll
-    const handleScroll = () => {
-      const container = document.querySelector('[data-projects-container]');
-      if (!container) return;
-
-      const rect = container.getBoundingClientRect();
-      const containerHeight = container.scrollHeight - window.innerHeight;
-      const scrollProgress = Math.max(0, Math.min(1, (window.scrollY - rect.top) / containerHeight));
-
-      const projectIndex = Math.floor(scrollProgress * projectData.length);
-      const clampedIndex = Math.min(projectIndex, projectData.length - 1);
-      const newColor = projectData[clampedIndex].accentColor || "99, 102, 241";
-
-      if (newColor !== activeColor) {
-        setActiveColor(newColor);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    handleScroll(); // Initial call
-
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [activeColor]);
+  }, []);
 
   return (
     <>
@@ -137,16 +111,6 @@ export default function Home() {
         className="min-h-screen relative"
       >
       <Background />
-
-      {/* Dynamic color overlay with wash effect */}
-      <div
-        className="fixed inset-0 -z-5 pointer-events-none opacity-10"
-        style={{
-          background: `
-            radial-gradient(circle at 50% 50%, rgba(${activeColor}, 0.8) 0%, rgba(${activeColor}, 0.2) 50%, transparent 100%)
-          `,
-        }}
-      />
 
         <Projects />
       {/* Testimonials section */}
