@@ -59,11 +59,19 @@ export default function ProjectDetailClient({ params, markdownContent, frontMatt
     }
   };
 
+  const [isDark, setIsDark] = React.useState(false);
+  React.useEffect(() => {
+    const check = () => setIsDark(document.documentElement.classList.contains("dark"));
+    check();
+    const observer = new MutationObserver(check);
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
+    return () => observer.disconnect();
+  }, []);
+
   const rawBrandColor = frontMatter.logoColor || "#1a1a1a";
   const brandColorLight = rawBrandColor;
   const brandColorDark = lightenForDark(rawBrandColor);
-  // Use CSS variable — set on the root div so dark mode switches happen via CSS, not React re-render
-  const brandColor = "var(--brand-color)";
+  const brandColor = isDark ? brandColorDark : brandColorLight;
 
   // Track reading progress through the page
   const { scrollYProgress: readingProgress } = useScroll();
@@ -220,8 +228,7 @@ export default function ProjectDetailClient({ params, markdownContent, frontMatt
     <div
       className="min-h-screen bg-white dark:bg-gray-900"
       style={{
-        ['--brand-color' as string]: brandColorLight,
-        ['--brand-color-dark' as string]: brandColorDark,
+        ['--brand-color' as string]: brandColor,
       } as React.CSSProperties}
     >
       {/* Reading Progress Bar */}
@@ -366,30 +373,36 @@ export default function ProjectDetailClient({ params, markdownContent, frontMatt
             </button>
           </motion.div>
 
-          {/* Logo and Title */}
+          {/* Eyebrow + Title */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="flex items-center gap-4 mb-6"
+            className="mb-6 space-y-2"
           >
-            {(frontMatter.logo || frontMatter.logoPlaceholder) && (
-              <div
-                className="w-12 h-12 rounded-full flex items-center justify-center text-2xl shadow-md overflow-hidden relative flex-shrink-0"
-                style={{
-                  backgroundColor: brandColor,
-                }}
-              >
-                {frontMatter.logo ? (
-                  <Image
-                    src={frontMatter.logo}
-                    alt={frontMatter.name}
-                    fill
-                    className="object-contain p-2"
-                  />
-                ) : (
-                  frontMatter.logoPlaceholder
+            {/* Eyebrow: small logo chip + company name */}
+            {(frontMatter.logo || frontMatter.logoPlaceholder || frontMatter.company) && (
+              <div className="flex items-center gap-2">
+                {(frontMatter.logo || frontMatter.logoPlaceholder) && (
+                  <div
+                    className="w-5 h-5 rounded-sm flex items-center justify-center text-xs shadow-sm overflow-hidden relative flex-shrink-0"
+                    style={{ backgroundColor: frontMatter.logoColor || "#E5E7EB" }}
+                  >
+                    {frontMatter.logo ? (
+                      <Image
+                        src={frontMatter.logo}
+                        alt={frontMatter.company || frontMatter.name}
+                        fill
+                        className="object-contain"
+                      />
+                    ) : (
+                      frontMatter.logoPlaceholder
+                    )}
+                  </div>
                 )}
+                <p className="text-xs font-medium tracking-widest uppercase text-gray-500 dark:text-gray-300">
+                  {frontMatter.company ?? frontMatter.name}
+                </p>
               </div>
             )}
             <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold" style={{ color: brandColor }}>
@@ -521,11 +534,10 @@ export default function ProjectDetailClient({ params, markdownContent, frontMatt
                           className="absolute w-10 h-10 sm:w-12 sm:h-12"
                           style={getPosition(icon.position)}
                           initial={{ opacity: 0, scale: 0 }}
-                          animate={{ opacity: 1, scale: 1, y: [0, -10, 0] }}
+                          animate={{ opacity: 1, scale: 1 }}
                           transition={{
                             opacity: { duration: 0.5, delay: 0.7 + index * 0.1 },
                             scale: { duration: 0.5, delay: 0.7 + index * 0.1 },
-                            y: { duration: 3, repeat: Infinity, ease: "easeInOut", delay: index * 0.4 }
                           }}
                         >
                           <Image src={icon.src} alt={`Icon ${index + 1}`} fill className="object-contain" />
@@ -553,11 +565,10 @@ export default function ProjectDetailClient({ params, markdownContent, frontMatt
                             filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.25))'
                           }}
                           initial={{ opacity: 0, scale: 0.8 }}
-                          animate={{ opacity: 1, scale: 1, y: [0, -15, 0] }}
+                          animate={{ opacity: 1, scale: 1 }}
                           transition={{
                             opacity: { duration: 0.6, delay: 0.7 + index * 0.15 },
                             scale: { duration: 0.6, delay: 0.7 + index * 0.15 },
-                            y: { duration: 4, repeat: Infinity, ease: "easeInOut", delay: index * 0.5 }
                           }}
                         >
                           <Image src={device.src} alt={`Device ${index + 1}`} fill className="object-contain" />
@@ -1093,8 +1104,8 @@ export default function ProjectDetailClient({ params, markdownContent, frontMatt
         </div>
       </section>
 
-      {/* Next Project Card */}
-      {(!isProtected || isUnlocked) && (() => {
+      {/* Next Project Card — always shown, even on locked projects */}
+      {(() => {
         // Filter out hero project and find current project index
         const nonHeroProjects = projectData.filter(p => !p.isHero);
         const currentIndex = nonHeroProjects.findIndex(p => p.id === params.slug);
@@ -1129,27 +1140,8 @@ export default function ProjectDetailClient({ params, markdownContent, frontMatt
                       {/* Text Content - Left Side on Desktop, Bottom on Mobile */}
                       <div className="lg:w-1/2 w-full flex flex-col justify-center space-y-3.5">
                         <div className="flex items-center gap-2.5">
-                          {(nextProject.logo || nextProject.logoPlaceholder) && (
-                            <div
-                              className="w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center text-lg shadow-md overflow-hidden relative flex-shrink-0"
-                              style={{
-                                backgroundColor: nextProject.logoColor || "#E5E7EB",
-                              }}
-                            >
-                              {nextProject.logo ? (
-                                <Image
-                                  src={nextProject.logo}
-                                  alt={nextProject.name}
-                                  fill
-                                  className="object-contain p-1.5"
-                                />
-                              ) : (
-                                nextProject.logoPlaceholder
-                              )}
-                            </div>
-                          )}
                           <h3 className="text-base sm:text-lg lg:text-xl font-bold leading-tight">
-                            <span className="group-hover:underline" style={{ color: nextProject.logoColor || "#1a1a1a" }}>
+                            <span className="group-hover:underline" style={{ color: isDark ? lightenForDark(nextProject.logoColor || "#1a1a1a") : (nextProject.logoColor || "#1a1a1a") }}>
                               {nextProject.name}
                             </span>
                           </h3>
@@ -1162,7 +1154,7 @@ export default function ProjectDetailClient({ params, markdownContent, frontMatt
                         <div className="pt-2">
                           <span
                             className="inline-flex items-center gap-2 font-semibold transition-colors text-xs sm:text-sm"
-                            style={{ color: nextProject.logoColor || "#1a1a1a" }}
+                            style={{ color: isDark ? lightenForDark(nextProject.logoColor || "#1a1a1a") : (nextProject.logoColor || "#1a1a1a") }}
                           >
                             <span>Read more</span>
                             <svg className="w-3 h-3 sm:w-3.5 sm:h-3.5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1210,12 +1202,10 @@ export default function ProjectDetailClient({ params, markdownContent, frontMatt
                                   }
                                 };
                                 return (
-                                  <motion.div key={iconIndex} className="absolute w-5 h-5 sm:w-6 sm:h-6"
-                                    style={getPosition(icon.position)}
-                                    animate={{ y: [0, -8, 0] }}
-                                    transition={{ y: { duration: 3, repeat: Infinity, ease: "easeInOut", delay: iconIndex * 0.4 } }}>
+                                  <div key={iconIndex} className="absolute w-5 h-5 sm:w-6 sm:h-6"
+                                    style={getPosition(icon.position)}>
                                     <Image src={icon.src} alt={`Icon ${iconIndex + 1}`} fill className="object-contain" />
-                                  </motion.div>
+                                  </div>
                                 );
                               })}
 
@@ -1224,7 +1214,7 @@ export default function ProjectDetailClient({ params, markdownContent, frontMatt
                                 const isLeftDevice = device.position === 'left';
                                 const isRightDevice = device.position === 'right';
                                 return (
-                                  <motion.div key={`next-device-${deviceIndex}`} className="absolute w-[16%] aspect-[9/19]"
+                                  <div key={`next-device-${deviceIndex}`} className="absolute w-[16%] aspect-[9/19]"
                                     style={{
                                       top: '20%',
                                       ...(isLeftDevice && { left: isMobile ? '2%' : '-8%' }),
@@ -1232,23 +1222,19 @@ export default function ProjectDetailClient({ params, markdownContent, frontMatt
                                       ...(!isLeftDevice && !isRightDevice && { top: '50%', left: '50%' }),
                                       transform: isLeftDevice || isRightDevice ? 'translateY(-50%)' : 'translate(-50%, -50%)',
                                       filter: 'drop-shadow(0 15px 30px rgba(0,0,0,0.2))'
-                                    }}
-                                    animate={{ y: [0, -12, 0] }}
-                                    transition={{ y: { duration: 4, repeat: Infinity, ease: "easeInOut", delay: deviceIndex * 0.5 } }}>
+                                    }}>
                                     <Image src={device.src} alt={`Device ${deviceIndex + 1}`} fill className="object-contain" />
-                                  </motion.div>
+                                  </div>
                                 );
                               })}
 
                               {/* Foreground layer */}
                               {nextProject.layeredImages.foreground && (
-                                <motion.div className="absolute inset-0 flex items-center justify-center"
-                                  animate={{ y: [0, 8, 0], x: [0, -4, 0] }}
-                                  transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}>
-                                  <div className="relative w-[65%] aspect-video" style={{ transform: 'translateZ(20px)', filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.4))' }}>
+                                <div className="absolute inset-0 flex items-center justify-center">
+                                  <div className="relative w-[65%] aspect-video" style={{ filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.4))' }}>
                                     <Image src={nextProject.layeredImages.foreground} alt={nextProject.name} fill className="object-contain" />
                                   </div>
-                                </motion.div>
+                                </div>
                               )}
                             </div>
                           ) : nextProject.image ? (

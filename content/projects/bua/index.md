@@ -1,6 +1,7 @@
 ---
 id: "bua"
-name: "Bua - Match Tracking for Coaches"
+name: "Enabling Informed Match Day Decisions"
+company: "BUA"
 description: "Designed and built by me - this iOS app allows field sport coaches to easily track game data, enabling them to be more informed when picking their team."
 tldr: "Designed and built by me - this iOS app allows field sport coaches to easily track game data, enabling them to be more informed when picking their team."
 logo: "/projects/bua/bua-icon.png"

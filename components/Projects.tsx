@@ -2,7 +2,7 @@
 
 import React, { useRef } from "react";
 import { createPortal } from "react-dom";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { projectData, heroData } from "@/data/projects";
@@ -11,44 +11,64 @@ import { lightenForDark } from "@/lib/brandColor";
 import GetmeeHeroShared from "@/components/GetmeeHero";
 import CurrentlyShelf from "@/components/CurrentlyShelf";
 
-function HeroImageComposition({ heroLayers, name }: { heroLayers: NonNullable<typeof heroData['heroLayers']>, name: string }) {
-  return (
-    <div className="relative w-full aspect-[4/5] flex items-center justify-center">
+function HeroImageComposition({ heroLayers, name, groupFloat = false }: { heroLayers: NonNullable<typeof heroData['heroLayers']>, name: string, groupFloat?: boolean }) {
+  const reducedMotion = useReducedMotion();
+
+  const layers = (
+    <>
       <motion.div className="absolute" style={{ width: '55%', height: '55%', top: '20%', left: '22%' }}
-        animate={{ y: [0, -10, 0], x: [0, 5, 0], rotate: [0, 3, 0] }}
-        transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}>
+        animate={reducedMotion || groupFloat ? undefined : { y: [0, -10, 0], x: [0, 5, 0], rotate: [0, 3, 0] }}
+        transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}>
         <Image src={heroLayers.background} alt="Background" fill className="object-contain" />
       </motion.div>
       <motion.div className="absolute" style={{ width: '78%', height: '91%', top: '5%', left: '11%', filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.3))' }}
-        animate={{ y: [0, -12, 0], rotate: [0, 1, 0, -1, 0] }}
-        transition={{ duration: 5.5, repeat: Infinity, ease: 'easeInOut' }}>
+        animate={reducedMotion || groupFloat ? undefined : { y: [0, -12, 0], rotate: [0, 1, 0, -1, 0] }}
+        transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}>
         <Image src={heroLayers.headshot} alt={name} fill className="object-contain" />
       </motion.div>
       <motion.div className="absolute" style={{ width: '42%', height: '42%', bottom: '12%', right: '10%', filter: 'drop-shadow(0 10px 25px rgba(0,0,0,0.2))' }}
-        animate={{ y: [0, 8, 0], x: [0, -4, 0], rotate: [0, -2, 0, 2, 0] }}
-        transition={{ duration: 6.5, repeat: Infinity, ease: 'easeInOut' }}>
+        animate={reducedMotion || groupFloat ? undefined : { y: [0, 8, 0], x: [0, -4, 0], rotate: [0, -2, 0, 2, 0] }}
+        transition={{ duration: 6.5, repeat: Infinity, ease: "easeInOut" }}>
         <Image src={heroLayers.writing} alt="Writing" fill className="object-contain" />
       </motion.div>
       <motion.div className="absolute" style={{ width: '20%', height: '20%', top: '22%', left: '4%', filter: 'drop-shadow(0 8px 20px rgba(0,0,0,0.15))' }}
-        animate={{ y: [0, -8, 0], x: [0, 3, 0], rotate: [0, 4, 0, -4, 0] }}
-        transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}>
+        animate={reducedMotion || groupFloat ? undefined : { y: [0, -8, 0], x: [0, 3, 0], rotate: [0, 4, 0, -4, 0] }}
+        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}>
         <Image src={heroLayers.logoWorkday} alt="Workday" fill className="object-contain" />
       </motion.div>
       <motion.div className="absolute" style={{ width: '20%', height: '20%', top: '22%', right: '18%', filter: 'drop-shadow(0 8px 20px rgba(0,0,0,0.15))' }}
-        animate={{ y: [0, 10, 0], x: [0, -3, 0], rotate: [0, -3, 0, 3, 0] }}
-        transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}>
+        animate={reducedMotion || groupFloat ? undefined : { y: [0, 10, 0], x: [0, -3, 0], rotate: [0, -3, 0, 3, 0] }}
+        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}>
         <Image src={heroLayers.logoMarlin} alt="Marlin" fill className="object-contain" />
       </motion.div>
       <motion.div className="absolute" style={{ width: '18%', height: '18%', top: '42%', left: '12%', filter: 'drop-shadow(0 8px 20px rgba(0,0,0,0.15))' }}
-        animate={{ y: [0, 12, 0], x: [0, 4, 0], rotate: [0, 5, 0, -5, 0] }}
-        transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}>
+        animate={reducedMotion || groupFloat ? undefined : { y: [0, 12, 0], x: [0, 4, 0], rotate: [0, 5, 0, -5, 0] }}
+        transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}>
         <Image src={heroLayers.logoCygnvs} alt="Cygnvs" fill className="object-contain" />
       </motion.div>
       <motion.div className="absolute" style={{ width: '18%', height: '18%', bottom: '14%', left: '20%', filter: 'drop-shadow(0 8px 20px rgba(0,0,0,0.15))' }}
-        animate={{ y: [0, -10, 0], x: [0, 5, 0], rotate: [0, -4, 0, 4, 0] }}
-        transition={{ duration: 5.5, repeat: Infinity, ease: 'easeInOut' }}>
+        animate={reducedMotion || groupFloat ? undefined : { y: [0, -10, 0], x: [0, 5, 0], rotate: [0, -4, 0, 4, 0] }}
+        transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}>
         <Image src={heroLayers.logoGetmee} alt="Getmee" fill className="object-contain" />
       </motion.div>
+    </>
+  );
+
+  if (groupFloat) {
+    return (
+      <motion.div
+        className="relative w-full aspect-[4/5] flex items-center justify-center"
+        animate={reducedMotion ? undefined : { y: [0, -8, 0] }}
+        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+      >
+        {layers}
+      </motion.div>
+    );
+  }
+
+  return (
+    <div className="relative w-full aspect-[4/5] flex items-center justify-center">
+      {layers}
     </div>
   );
 }
@@ -112,7 +132,7 @@ function HeroSection() {
         <div className="relative z-10 lg:hidden flex flex-col gap-0">
           {/* Image */}
           <div className="w-full max-w-xs mx-auto px-8 pt-4">
-            {p.heroLayers && <HeroImageComposition heroLayers={p.heroLayers} name={p.name} />}
+            {p.heroLayers && <HeroImageComposition heroLayers={p.heroLayers} name={p.name} groupFloat />}
           </div>
           {/* Text */}
           <div className="px-6 pb-6 space-y-3">
@@ -545,6 +565,7 @@ function ProjectCard({
   };
 
   const [isHovered, setIsHovered] = React.useState(false);
+  const reducedMotion = useReducedMotion();
 
   // Maps containerProgress to a 0→1→0 value centred on this card's window.
   // Returns 0 when the card is fully before or after its range,
@@ -599,9 +620,12 @@ function ProjectCard({
         <a href={`/projects/${project.id}`} className="lg:hidden flex flex-col gap-4 w-full max-w-2xl px-4 cursor-pointer group relative">
           <div className="w-full max-w-md mx-auto aspect-video relative rounded-lg overflow-visible">
             {project.layeredImages ? (
-              <div className="w-full h-full relative flex items-center justify-center">
-                {/* Decorative background elements */}
-                {project.layeredImages && project.accentColor && (
+              <motion.div
+                className="w-full h-full relative flex items-center justify-center"
+                animate={reducedMotion ? undefined : { y: [0, -8, 0] }}
+                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+              >
+                {false && project.accentColor && (
                   <>
                     {project.id === 'workday-help' && (
                       <>
@@ -819,143 +843,58 @@ function ProjectCard({
                   </>
                 )}
 
-                {/* Background layer - full width, positioned behind (skip for floatingCards which renders its own) */}
+                {/* Background layer */}
                 {!project.layeredImages.floatingCards && (
-                <motion.div
-                  className="absolute inset-0 flex items-center justify-center"
-                  animate={{
-                    y: [0, -8, 0],
-                  }}
-                  transition={{
-                    duration: 5.5,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                    delay: 0.3,
-                  }}
-                >
-                  <div className="relative w-[115%] aspect-video">
-                    <Image
-                      src={project.layeredImages.background}
-                      alt={`${project.name} background`}
-                      fill
-                      className="object-contain"
-                    />
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="relative w-[115%] aspect-video">
+                      <Image src={project.layeredImages.background} alt={`${project.name} background`} fill className="object-contain" />
+                    </div>
                   </div>
-                </motion.div>
                 )}
 
                 {/* Floating Icons */}
                 {project.layeredImages.floatingIcons && project.layeredImages.floatingIcons.map((icon: any, iconIndex: number) => {
                   const getPosition = (position: string) => {
                     switch (position) {
-                      case 'top-left':
-                        return { top: '20%', left: '2%' };
-                      case 'top-right':
-                        return { top: '28%', right: '-3%' };
-                      case 'middle-left':
-                        return { top: '60%', left: '-5%' };
-                      case 'middle-right':
-                        return { top: '55%', right: '-4%' };
-                      case 'bottom-center':
-                        return { bottom: '20%', left: '48%' };
-                      case 'bottom-left':
-                        return { bottom: '15%', left: '8%' };
-                      default:
-                        return { top: '50%', left: '50%', transform: 'translate(-50%, -50%)' };
+                      case 'top-left': return { top: '20%', left: '2%' };
+                      case 'top-right': return { top: '28%', right: '-3%' };
+                      case 'middle-left': return { top: '60%', left: '-5%' };
+                      case 'middle-right': return { top: '55%', right: '-4%' };
+                      case 'bottom-center': return { bottom: '20%', left: '48%' };
+                      case 'bottom-left': return { bottom: '15%', left: '8%' };
+                      default: return { top: '50%', left: '50%', transform: 'translate(-50%, -50%)' };
                     }
                   };
-
                   return (
-                    <motion.div
-                      key={iconIndex}
-                      className="absolute w-8 h-8 sm:w-10 sm:h-10"
-                      style={getPosition(icon.position)}
-                      initial={{ opacity: 0, scale: 0 }}
-                      animate={{
-                        opacity: 1,
-                        scale: 1,
-                        y: [0, -10, 0],
-                      }}
-                      transition={{
-                        opacity: { duration: 0.5, delay: 0.7 + iconIndex * 0.1 },
-                        scale: { duration: 0.5, delay: 0.7 + iconIndex * 0.1 },
-                        y: {
-                          duration: 3,
-                          repeat: Infinity,
-                          ease: "easeInOut",
-                          delay: iconIndex * 0.4,
-                        }
-                      }}
-                    >
-                      <Image
-                        src={icon.src}
-                        alt={`Icon ${iconIndex + 1}`}
-                        fill
-                        className="object-contain"
-                      />
-                    </motion.div>
+                    <div key={iconIndex} className="absolute w-8 h-8 sm:w-10 sm:h-10" style={getPosition(icon.position)}>
+                      <Image src={icon.src} alt={`Icon ${iconIndex + 1}`} fill className="object-contain" />
+                    </div>
                   );
                 })}
 
-                {/* Floating Devices (for Workday-style multi-device layouts) */}
+                {/* Floating Devices */}
                 {project.layeredImages.floatingDevices && project.layeredImages.floatingDevices.map((device: any, deviceIndex: number) => {
                   const getDevicePosition = (position: string) => {
                     switch (position) {
-                      case 'left':
-                        return { top: '25%', left: '-5%', transform: 'translateY(-50%)' };
-                      case 'right':
-                        return { top: '25%', right: '-5%', transform: 'translateY(-50%)' };
-                      default:
-                        return { top: '50%', left: '50%', transform: 'translate(-50%, -50%)' };
+                      case 'left': return { top: '25%', left: '-5%', transform: 'translateY(-50%)' };
+                      case 'right': return { top: '25%', right: '-5%', transform: 'translateY(-50%)' };
+                      default: return { top: '50%', left: '50%', transform: 'translate(-50%, -50%)' };
                     }
                   };
-
                   return (
-                    <motion.div
-                      key={`mobile-device-${deviceIndex}`}
-                      className="absolute w-[22%] aspect-[9/19]"
-                      style={{
-                        ...getDevicePosition(device.position),
-                        filter: 'drop-shadow(0 15px 30px rgba(0,0,0,0.25))'
-                      }}
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      animate={{
-                        opacity: 1,
-                        scale: 1,
-                        y: [0, -15, 0],
-                      }}
-                      transition={{
-                        opacity: { duration: 0.6, delay: 0.7 + deviceIndex * 0.15 },
-                        scale: { duration: 0.6, delay: 0.7 + deviceIndex * 0.15 },
-                        y: {
-                          duration: 4,
-                          repeat: Infinity,
-                          ease: "easeInOut",
-                          delay: deviceIndex * 0.5,
-                        }
-                      }}
-                    >
-                      <Image
-                        src={device.src}
-                        alt={`Device ${deviceIndex + 1}`}
-                        fill
-                        className="object-contain"
-                      />
-                    </motion.div>
+                    <div key={`mobile-device-${deviceIndex}`} className="absolute w-[22%] aspect-[9/19]" style={{ ...getDevicePosition(device.position), filter: 'drop-shadow(0 15px 30px rgba(0,0,0,0.25))' }}>
+                      <Image src={device.src} alt={`Device ${deviceIndex + 1}`} fill className="object-contain" />
+                    </div>
                   );
                 })}
 
                 {/* Foreground layer */}
                 {project.layeredImages.foreground && !project.layeredImages.floatingCards && (
-                  <motion.div
-                    className="absolute inset-0 flex items-center justify-center"
-                    animate={{ y: [0, 10, 0], x: [0, -6, 0] }}
-                    transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-                  >
-                    <div className="relative w-[65%] aspect-video" style={{ transform: 'translateZ(20px)', filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.4))' }}>
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="relative w-[65%] aspect-video" style={{ filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.4))' }}>
                       <Image src={project.layeredImages.foreground} alt={project.name} fill className="object-contain" />
                     </div>
-                  </motion.div>
+                  </div>
                 )}
 
                 {/* Getmee hero — mobile */}
@@ -968,14 +907,20 @@ function ProjectCard({
                   />
                 )}
 
-              </div>
+              </motion.div>
             ) : project.image ? (
-              <Image
-                src={project.image}
-                alt={project.name}
-                fill
-                className="object-cover"
-              />
+              <motion.div
+                className="relative w-full h-full"
+                animate={reducedMotion ? undefined : { y: [0, -8, 0] }}
+                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+              >
+                <Image
+                  src={project.image}
+                  alt={project.name}
+                  fill
+                  className="object-cover"
+                />
+              </motion.div>
             ) : (
               <div className="w-full h-full flex items-center justify-center text-accent-primary/30 text-sm">
                 {project.imagePlaceholder}
@@ -1070,167 +1015,33 @@ function ProjectCard({
         <div className="lg:hidden flex flex-col gap-4 w-full max-w-2xl px-4">
           <div className="w-full max-w-[224px] mx-auto aspect-square relative rounded-lg overflow-visible">
             {project.heroLayers ? (
-              <div className="relative w-full h-full flex items-center justify-center">
-                {/* Background color blob */}
-                <motion.div
-                  className="absolute"
-                  style={{ width: '55%', height: '55%', top: '20%', left: '22%' }}
-                  animate={{
-                    y: [0, -10, 0],
-                    x: [0, 5, 0],
-                    rotate: [0, 3, 0],
-                  }}
-                  transition={{
-                    duration: 7,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                >
-                  <Image
-                    src={project.heroLayers.background}
-                    alt="Background"
-                    fill
-                    className="object-contain"
-                  />
-                </motion.div>
-
-                {/* Headshot - centered, overlapping with background */}
-                <motion.div
-                  className="absolute"
-                  style={{ width: '78%', height: '91%', top: '5%', left: '11%', filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.3))' }}
-                  animate={{
-                    y: [0, -12, 0],
-                    rotate: [0, 1, 0, -1, 0],
-                  }}
-                  transition={{
-                    duration: 5.5,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                >
-                  <Image
-                    src={project.heroLayers.headshot}
-                    alt={project.name}
-                    fill
-                    className="object-contain"
-                  />
-                </motion.div>
-
-                {/* Writing/sticky notes - overlapping headshot bottom right */}
-                <motion.div
-                  className="absolute"
-                  style={{ width: '42%', height: '42%', bottom: '12%', right: '10%', filter: 'drop-shadow(0 10px 25px rgba(0,0,0,0.2))' }}
-                  animate={{
-                    y: [0, 8, 0],
-                    x: [0, -4, 0],
-                    rotate: [0, -2, 0, 2, 0],
-                  }}
-                  transition={{
-                    duration: 6.5,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                >
-                  <Image
-                    src={project.heroLayers.writing}
-                    alt="Writing"
-                    fill
-                    className="object-contain"
-                  />
-                </motion.div>
-
-                {/* Workday logo - top left, overlapping behind headshot */}
-                <motion.div
-                  className="absolute"
-                  style={{ width: '20%', height: '20%', top: '22%', left: '4%', filter: 'drop-shadow(0 8px 20px rgba(0,0,0,0.15))' }}
-                  animate={{
-                    y: [0, -8, 0],
-                    x: [0, 3, 0],
-                    rotate: [0, 4, 0, -4, 0],
-                  }}
-                  transition={{
-                    duration: 5,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                >
-                  <Image
-                    src={project.heroLayers.logoWorkday}
-                    alt="Workday"
-                    fill
-                    className="object-contain"
-                  />
-                </motion.div>
-
-                {/* Marlin logo - top right, positioned near yellow blob */}
-                <motion.div
-                  className="absolute"
-                  style={{ width: '20%', height: '20%', top: '22%', right: '18%', filter: 'drop-shadow(0 8px 20px rgba(0,0,0,0.15))' }}
-                  animate={{
-                    y: [0, 10, 0],
-                    x: [0, -3, 0],
-                    rotate: [0, -3, 0, 3, 0],
-                  }}
-                  transition={{
-                    duration: 6,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                >
-                  <Image
-                    src={project.heroLayers.logoMarlin}
-                    alt="Marlin"
-                    fill
-                    className="object-contain"
-                  />
-                </motion.div>
-
-                {/* Cygnvs logo - middle left, overlapping headshot */}
-                <motion.div
-                  className="absolute"
-                  style={{ width: '18%', height: '18%', top: '42%', left: '12%', filter: 'drop-shadow(0 8px 20px rgba(0,0,0,0.15))' }}
-                  animate={{
-                    y: [0, 12, 0],
-                    x: [0, 4, 0],
-                    rotate: [0, 5, 0, -5, 0],
-                  }}
-                  transition={{
-                    duration: 7,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                >
-                  <Image
-                    src={project.heroLayers.logoCygnvs}
-                    alt="Cygnvs"
-                    fill
-                    className="object-contain"
-                  />
-                </motion.div>
-
-                {/* Getmee logo - bottom center, overlapping headshot and writing */}
-                <motion.div
-                  className="absolute"
-                  style={{ width: '18%', height: '18%', bottom: '14%', left: '20%', filter: 'drop-shadow(0 8px 20px rgba(0,0,0,0.15))' }}
-                  animate={{
-                    y: [0, -10, 0],
-                    x: [0, 5, 0],
-                    rotate: [0, -4, 0, 4, 0],
-                  }}
-                  transition={{
-                    duration: 5.5,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                >
-                  <Image
-                    src={project.heroLayers.logoGetmee}
-                    alt="Getmee"
-                    fill
-                    className="object-contain"
-                  />
-                </motion.div>
-              </div>
+              <motion.div
+                className="relative w-full h-full flex items-center justify-center"
+                animate={reducedMotion ? undefined : { y: [0, -8, 0] }}
+                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+              >
+                <div className="absolute" style={{ width: '55%', height: '55%', top: '20%', left: '22%' }}>
+                  <Image src={project.heroLayers.background} alt="Background" fill className="object-contain" />
+                </div>
+                <div className="absolute" style={{ width: '78%', height: '91%', top: '5%', left: '11%', filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.3))' }}>
+                  <Image src={project.heroLayers.headshot} alt={project.name} fill className="object-contain" />
+                </div>
+                <div className="absolute" style={{ width: '42%', height: '42%', bottom: '12%', right: '10%', filter: 'drop-shadow(0 10px 25px rgba(0,0,0,0.2))' }}>
+                  <Image src={project.heroLayers.writing} alt="Writing" fill className="object-contain" />
+                </div>
+                <div className="absolute" style={{ width: '20%', height: '20%', top: '22%', left: '4%', filter: 'drop-shadow(0 8px 20px rgba(0,0,0,0.15))' }}>
+                  <Image src={project.heroLayers.logoWorkday} alt="Workday" fill className="object-contain" />
+                </div>
+                <div className="absolute" style={{ width: '20%', height: '20%', top: '22%', right: '18%', filter: 'drop-shadow(0 8px 20px rgba(0,0,0,0.15))' }}>
+                  <Image src={project.heroLayers.logoMarlin} alt="Marlin" fill className="object-contain" />
+                </div>
+                <div className="absolute" style={{ width: '18%', height: '18%', top: '42%', left: '12%', filter: 'drop-shadow(0 8px 20px rgba(0,0,0,0.15))' }}>
+                  <Image src={project.heroLayers.logoCygnvs} alt="Cygnvs" fill className="object-contain" />
+                </div>
+                <div className="absolute" style={{ width: '18%', height: '18%', bottom: '14%', left: '20%', filter: 'drop-shadow(0 8px 20px rgba(0,0,0,0.15))' }}>
+                  <Image src={project.heroLayers.logoGetmee} alt="Getmee" fill className="object-contain" />
+                </div>
+              </motion.div>
             ) : project.image ? (
               <Image
                 src={project.image}
@@ -1450,16 +1261,8 @@ function ProjectCard({
                   <motion.div
                     className="absolute"
                     style={{ width: '55%', height: '55%', top: '20%', left: '22%' }}
-                    animate={{
-                      y: [0, -10, 0],
-                      x: [0, 5, 0],
-                      rotate: [0, 3, 0],
-                    }}
-                    transition={{
-                      duration: 7,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                    }}
+                    animate={reducedMotion ? undefined : { y: [0, -10, 0], x: [0, 5, 0], rotate: [0, 3, 0] }}
+                    transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
                   >
                     <Image
                       src={project.heroLayers.background}
@@ -1473,15 +1276,8 @@ function ProjectCard({
                   <motion.div
                     className="absolute"
                     style={{ width: '78%', height: '91%', top: '5%', left: '11%', filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.3))' }}
-                    animate={{
-                      y: [0, -12, 0],
-                      rotate: [0, 1, 0, -1, 0],
-                    }}
-                    transition={{
-                      duration: 5.5,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                    }}
+                    animate={reducedMotion ? undefined : { y: [0, -12, 0], rotate: [0, 1, 0, -1, 0] }}
+                    transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
                   >
                     <Image
                       src={project.heroLayers.headshot}
@@ -1495,16 +1291,8 @@ function ProjectCard({
                   <motion.div
                     className="absolute"
                     style={{ width: '42%', height: '42%', bottom: '12%', right: '10%', filter: 'drop-shadow(0 10px 25px rgba(0,0,0,0.2))' }}
-                    animate={{
-                      y: [0, 8, 0],
-                      x: [0, -4, 0],
-                      rotate: [0, -2, 0, 2, 0],
-                    }}
-                    transition={{
-                      duration: 6.5,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                    }}
+                    animate={reducedMotion ? undefined : { y: [0, 8, 0], x: [0, -4, 0], rotate: [0, -2, 0, 2, 0] }}
+                    transition={{ duration: 6.5, repeat: Infinity, ease: "easeInOut" }}
                   >
                     <Image
                       src={project.heroLayers.writing}
@@ -1518,16 +1306,8 @@ function ProjectCard({
                   <motion.div
                     className="absolute"
                     style={{ width: '20%', height: '20%', top: '22%', left: '4%', filter: 'drop-shadow(0 8px 20px rgba(0,0,0,0.15))' }}
-                    animate={{
-                      y: [0, -8, 0],
-                      x: [0, 3, 0],
-                      rotate: [0, 4, 0, -4, 0],
-                    }}
-                    transition={{
-                      duration: 5,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                    }}
+                    animate={reducedMotion ? undefined : { y: [0, -8, 0], x: [0, 3, 0], rotate: [0, 4, 0, -4, 0] }}
+                    transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
                   >
                     <Image
                       src={project.heroLayers.logoWorkday}
@@ -1541,16 +1321,8 @@ function ProjectCard({
                   <motion.div
                     className="absolute"
                     style={{ width: '20%', height: '20%', top: '22%', right: '18%', filter: 'drop-shadow(0 8px 20px rgba(0,0,0,0.15))' }}
-                    animate={{
-                      y: [0, 10, 0],
-                      x: [0, -3, 0],
-                      rotate: [0, -3, 0, 3, 0],
-                    }}
-                    transition={{
-                      duration: 6,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                    }}
+                    animate={reducedMotion ? undefined : { y: [0, 10, 0], x: [0, -3, 0], rotate: [0, -3, 0, 3, 0] }}
+                    transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
                   >
                     <Image
                       src={project.heroLayers.logoMarlin}
@@ -1564,16 +1336,8 @@ function ProjectCard({
                   <motion.div
                     className="absolute"
                     style={{ width: '18%', height: '18%', top: '42%', left: '12%', filter: 'drop-shadow(0 8px 20px rgba(0,0,0,0.15))' }}
-                    animate={{
-                      y: [0, 12, 0],
-                      x: [0, 4, 0],
-                      rotate: [0, 5, 0, -5, 0],
-                    }}
-                    transition={{
-                      duration: 7,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                    }}
+                    animate={reducedMotion ? undefined : { y: [0, 12, 0], x: [0, 4, 0], rotate: [0, 5, 0, -5, 0] }}
+                    transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
                   >
                     <Image
                       src={project.heroLayers.logoCygnvs}
@@ -1587,16 +1351,8 @@ function ProjectCard({
                   <motion.div
                     className="absolute"
                     style={{ width: '18%', height: '18%', bottom: '14%', left: '20%', filter: 'drop-shadow(0 8px 20px rgba(0,0,0,0.15))' }}
-                    animate={{
-                      y: [0, -10, 0],
-                      x: [0, 5, 0],
-                      rotate: [0, -4, 0, 4, 0],
-                    }}
-                    transition={{
-                      duration: 5.5,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                    }}
+                    animate={reducedMotion ? undefined : { y: [0, -10, 0], x: [0, 5, 0], rotate: [0, -4, 0, 4, 0] }}
+                    transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
                   >
                     <Image
                       src={project.heroLayers.logoGetmee}
@@ -1608,25 +1364,14 @@ function ProjectCard({
                 </div>
               ) : project.image ? (
                 <div className="relative w-full aspect-[4/5]" style={{ filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.3))' }}>
-                  <motion.div
-                    animate={{
-                      y: [0, -15, 0],
-                      rotate: [0, 2, 0, -2, 0],
-                    }}
-                    transition={{
-                      duration: 6,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                    }}
-                    className="relative w-full h-full"
-                  >
+                  <div className="relative w-full h-full">
                     <Image
                       src={project.image}
                       alt={project.name}
                       fill
                       className="object-contain"
                     />
-                  </motion.div>
+                  </div>
                 </div>
               ) : (
                 <div className="w-full h-full flex items-center justify-center text-accent-primary/30 text-sm">
@@ -1750,7 +1495,11 @@ function ProjectCard({
 
             <div className="flex-1 min-w-0 aspect-[4/5] relative rounded-lg overflow-visible">
               {project.layeredImages ? (
-                <div className="w-full h-full relative flex items-center justify-center">
+                <motion.div
+                  className="w-full h-full relative flex items-center justify-center"
+                  animate={reducedMotion ? undefined : { y: [0, -10, 0] }}
+                  transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                >
                   {/* Background layer - full width, positioned behind */}
                   {!project.layeredImages.floatingCards && (
                   <div className="absolute inset-0 flex items-center justify-center">
@@ -1852,14 +1601,20 @@ function ProjectCard({
                       name={project.name}
                     />
                   )}
-                </div>
+                </motion.div>
               ) : project.image ? (
-                <Image
-                  src={project.image}
-                  alt={project.name}
-                  fill
-                  className="object-cover"
-                />
+                <motion.div
+                  className="relative w-full h-full"
+                  animate={reducedMotion ? undefined : { y: [0, -10, 0] }}
+                  transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                >
+                  <Image
+                    src={project.image}
+                    alt={project.name}
+                    fill
+                    className="object-cover"
+                  />
+                </motion.div>
               ) : (
                 <div className="w-full h-full flex items-center justify-center text-accent-primary/30 text-sm">
                   {project.imagePlaceholder}

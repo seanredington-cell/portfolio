@@ -1,6 +1,7 @@
 ---
 id: "registration-crisis"
 name: "Registration in the Time of a Crisis"
+company: "CYGNVS"
 description: "Reducing the error rate of registration from 50% to less than 2% during cyber incidents, solving over 60 registration paths to ensure users can quickly access their colleagues in CYGNVS."
 tldr: "Reducing the error rate of registration from 50% to less than 2% during cyber incidents, solving over 60 registration paths to ensure users can quickly access their colleagues in CYGNVS."
 logo: "/icon-cygnvs-2.png"

@@ -1,6 +1,7 @@
 ---
 id: "regulatory-reporting"
 name: "Regulatory Reporting"
+company: "CYGNVS"
 description: "Patented product that uses LLMs to empower users impacted by a cyber security incident to stay compliant with government regulations through collaboration and reporting."
 tldr: "Patented product that uses LLMs to empower users impacted by a cyber security incident to stay compliant with government regulations through collaboration and reporting."
 logo: "/icon-cygnvs-2.png"

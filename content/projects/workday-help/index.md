@@ -1,6 +1,7 @@
 ---
 id: "workday-help"
 name: "Workday Help"
+company: "WORKDAY"
 description: "Optimising Workday's fastest selling product for web and mobile apps."
 tldr: "Optimising Workday's fastest selling product for web and mobile apps."
 logo: "/wday-logo.png"

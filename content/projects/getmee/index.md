@@ -1,6 +1,7 @@
 ---
 id: "getmee"
 name: "AI-Powered Job Readiness Platform"
+company: "GETMEE AI"
 description: "How systems thinking turned a collection of isolated features into a connected product — doubling the userbase across 15+ white-label apps"
 tldr: "How systems thinking turned a collection of isolated features into a connected product — doubling the userbase across 15+ white-label apps"
 logo: "/projects/getmee/logo.svg"

@@ -220,7 +220,7 @@ const _allProjectData: Project[] = [
   {
     id: "bua",
     company: "BUA",
-    name: "Bua - Match Tracking for Coaches",
+    name: "Enabling Informed Match Day Decisions",
     description: "Designed and built by me - this iOS app allows field sport coaches to easily track game data, enabling them to be more informed when picking their team.",
     tldr: "**Designed and built by me,** - the following details the design process and implementation of an iOS app which **allows field sport coaches** to easily **track game data, enabling them to be more informed** when picking their team. I describe the research, **design and implementation** phases and give **my experiences using Claude Code for the first time.**",
     layeredImages: {
