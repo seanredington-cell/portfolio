@@ -2,7 +2,7 @@
 
 import React, { useRef } from "react";
 import { createPortal } from "react-dom";
-import { motion, useScroll, useTransform, useVelocity, useSpring, useReducedMotion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { projectData, heroData } from "@/data/projects";
@@ -116,7 +116,7 @@ function HeroSection() {
           </div>
           {/* Text */}
           <div className="px-6 pb-6 space-y-3">
-            <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
+            <div className="flex flex-col gap-1">
               <p className="text-xs font-medium tracking-widest uppercase text-gray-400 dark:text-gray-400">{p.name}</p>
               <div className="flex items-center gap-1.5">
                 <span className="relative flex h-2 w-2 flex-shrink-0">
@@ -135,16 +135,14 @@ function HeroSection() {
               <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">{p.tagline.split('\n')[1]}</p>
             )}
             {p.tags && <HeroTags tags={p.tags} />}
-            {/* Currently shelf */}
-            <div className="w-fit">
-              <div
-                className="rounded-2xl px-3 py-3 backdrop-blur-sm bg-white/50 dark:bg-gray-800/50 border border-white/70 dark:border-gray-700/60"
-                style={{
-                  boxShadow: '0 2px 12px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.7)',
-                }}
-              >
-                <CurrentlyShelf />
-              </div>
+            {/* Currently shelf — full width on mobile */}
+            <div
+              className="rounded-2xl px-3 py-3 backdrop-blur-sm bg-white/50 dark:bg-gray-800/50 border border-white/70 dark:border-gray-700/60"
+              style={{
+                boxShadow: '0 2px 12px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.7)',
+              }}
+            >
+              <CurrentlyShelf fillWidth />
             </div>
           </div>
         </div>
@@ -184,7 +182,7 @@ function HeroSection() {
                   boxShadow: '0 2px 12px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.7)',
                 }}
               >
-                <CurrentlyShelf />
+                <CurrentlyShelf fillWidth />
               </div>
             </div>
           </div>
@@ -221,14 +219,7 @@ export default function Projects() {
   const [hoverIndex, setHoverIndex] = React.useState<number | null>(null);
   const [isCarouselHovered, setIsCarouselHovered] = React.useState(false);
   const [isMounted, setIsMounted] = React.useState(false);
-  const [isMobile, setIsMobile] = React.useState(false);
   React.useEffect(() => { setIsMounted(true); }, []);
-  React.useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 1024);
-    check();
-    window.addEventListener('resize', check);
-    return () => window.removeEventListener('resize', check);
-  }, []);
 
   // Dark mode detection — updates reactively when theme is toggled
   const [isDark, setIsDark] = React.useState(false);
@@ -253,12 +244,9 @@ export default function Projects() {
     offset: ["start start", "end end"],
   });
 
-  // Track scroll velocity for motion blur effect
-  const scrollVelocity = useVelocity(scrollY);
-  const smoothVelocity = useSpring(scrollVelocity, {
-    damping: 50,
-    stiffness: 400,
-  });
+  // Scroll indicator fade (hoisted to avoid inline useTransform)
+  const scrollCTAOpacity = useTransform(scrollY, [0, 120, 200], [1, 0.5, 0]);
+  const scrollCTAPointerEvents = useTransform(scrollY, (value: number) => value < 200 ? 'auto' : 'none');
 
   // Side nav fade in/out with the projects section
   const navOpacity = useTransform(containerProgress, [0, 0.04, 0.94, 1], [0, 1, 1, 0]);
@@ -270,7 +258,7 @@ export default function Projects() {
   return (
     <>
     <HeroSection />
-    <section ref={containerRef} data-projects-container className="relative" style={{ height: `${projectData.length * 85}vh` }}>
+    <section ref={containerRef} data-projects-container className="relative" style={{ height: `${projectData.length * 120}vh` }}>
       {/* Fixed viewport - projects rotate through this */}
       <div className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden">
         {/* Content container with padding and max-width */}
@@ -282,10 +270,8 @@ export default function Projects() {
                 project={project}
                 index={index}
                 containerRef={containerRef}
-                scrollVelocity={smoothVelocity}
                 containerProgress={containerProgress}
                 isDark={isDark}
-                isMobileDevice={isMobile}
               />
             ))}
           </div>
@@ -295,8 +281,8 @@ export default function Projects() {
         <motion.div
           className="fixed bottom-8 left-1/2 -translate-x-1/2 z-[100]"
           style={{
-            opacity: useTransform(scrollY, [0, 120, 200], [1, 0.5, 0]),
-            pointerEvents: useTransform(scrollY, (value) => value < 200 ? 'auto' : 'none') as any,
+            opacity: scrollCTAOpacity,
+            pointerEvents: scrollCTAPointerEvents as any,
           }}
         >
           <motion.button
@@ -544,268 +530,78 @@ function ProjectCard({
   project,
   index,
   containerRef,
-  scrollVelocity,
   containerProgress,
   isDark,
-  isMobileDevice,
 }: {
   project: typeof projectData[0];
   index: number;
   containerRef: React.RefObject<HTMLDivElement>;
-  scrollVelocity: any;
   containerProgress: any;
   isDark: boolean;
-  isMobileDevice: boolean;
 }) {
   const bc = (hex: string | undefined) => {
     const color = hex || "#1a1a1a";
     return isDark ? lightenForDark(color) : color;
   };
 
-  const prefersReducedMotion = useReducedMotion();
-  const shouldReduceMotion = prefersReducedMotion || isMobileDevice;
-
-  const cardRef = useRef<HTMLDivElement>(null);
-  const [mousePosition, setMousePosition] = React.useState({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = React.useState(false);
 
-  // Map container progress to this specific project's window
-  const scrollYProgress = useTransform(containerProgress, (value: number) => {
+  // Maps containerProgress to a 0→1→0 value centred on this card's window.
+  // Returns 0 when the card is fully before or after its range,
+  // peaks at 1 in the middle, and works identically on scroll-up.
+  const cardOpacity = useTransform(containerProgress, (value: number) => {
     const totalProjects = projectData.length;
     const projectDuration = 1 / totalProjects;
     const projectStart = index * projectDuration;
     const projectEnd = (index + 1) * projectDuration;
 
-    if (value < projectStart) return 0;
-    if (value > projectEnd) return 1;
-    return (value - projectStart) / projectDuration;
-  });
+    // How far through this card's window are we (0–1)?
+    const t = (value - projectStart) / projectDuration;
 
-  // Add magnetic snap effect - items "stick" to center position with maximum stickiness
-  const snappedProgress = useTransform(scrollYProgress, (value) => {
-    // For first project, start locked at center (0.5), others animate in
     if (index === 0) {
-      // First project: starts locked at 0.5 and only exits
-      if (value <= 0.78) {
-        // Ultra extended locked period: 0 to 0.78 stays at 0.5 (78% of scroll)
-        return 0.5;
-      } else if (value < 0.88) {
-        // Gradual exit: 0.78 to 0.88 → 0.5 to 0.75
-        const localProgress = (value - 0.78) / 0.1;
-        return 0.5 + (localProgress * localProgress) * 0.25;
-      } else {
-        // Final exit phase: 0.88 to 1 → 0.75 to 1
-        return 0.75 + ((value - 0.88) / 0.12) * 0.25;
-      }
+      // First card: visible from start, fades out over second half
+      if (t <= 0) return 1;
+      if (t >= 1) return 0;
+      if (t < 0.5) return 1;
+      // fade out: 0.5 → 1.0
+      return 1 - (t - 0.5) / 0.5;
     }
 
-    // Other projects: full animation with ultra extended sticky zone and quick entry/exit
-    if (value < 0.15) {
-      // Quick entry phase: 0 to 0.15 → 0 to 0.35
-      return value * 2.33;
-    } else if (value < 0.28) {
-      // Magnetic pull approaching center: 0.15 to 0.28 → 0.35 to 0.48
-      const localProgress = (value - 0.15) / 0.13;
-      return 0.35 + (localProgress * localProgress) * 0.13;
-    } else if (value < 0.32) {
-      // Final snap into center: 0.28 to 0.32 → 0.48 to 0.5
-      return 0.48 + ((value - 0.28) / 0.04) * 0.02;
-    } else if (value <= 0.86) {
-      // Ultra extended locked at center: 0.32 to 0.86 stays at 0.5 (54% of scroll!)
-      return 0.5;
-    } else if (value < 0.94) {
-      // Gradual release and exit: 0.86 to 0.94 → 0.5 to 0.75
-      const localProgress = (value - 0.86) / 0.08;
-      return 0.5 + (localProgress * localProgress) * 0.25;
-    } else {
-      // Final exit phase: 0.94 to 1 → 0.75 to 1
-      return 0.75 + ((value - 0.94) / 0.06) * 0.25;
-    }
+    // All other cards: fade in, hold, fade out
+    if (t <= 0) return 0;
+    if (t >= 1) return 0;
+
+    // Fade in: 0 → 0.25
+    if (t < 0.25) return t / 0.25;
+    // Hold: 0.25 → 0.7
+    if (t < 0.7) return 1;
+    // Fade out: 0.7 → 1.0
+    return 1 - (t - 0.7) / 0.3;
   });
-
-
-  // Arc path calculations
-  // For desktop: create smooth arc paths that feel like two gears meeting
-  // For mobile: simplify to fade-in
-
-  // Helper function to create smooth arc curve using easing
-  // Creates a more organic, gear-like motion
-  const arcEase = (t: number) => {
-    // Custom easing function for smooth arc: starts slow, accelerates, then decelerates
-    return t < 0.5
-      ? 2 * t * t * (3 - 2 * t) // Ease in-out with slight acceleration
-      : 1 - Math.pow(-2 * t + 2, 3) / 2; // Smooth deceleration
-  };
-
-  // Image: follows a smooth arc path on the left side
-  // Not a circle, but an elongated arc that travels far vertically
-  const imageX = useTransform(snappedProgress, (latest) => {
-    // Smooth arc on left side - minimal horizontal movement
-    // Starts far left, moves slightly right at middle, returns left
-    const horizontalAmplitude = 150; // Small horizontal movement
-    const baseX = -200; // Base position on left side
-
-    // Use sine for smooth arc motion
-    const arcProgress = Math.sin(latest * Math.PI); // 0 -> 1 -> 0
-    return baseX + (horizontalAmplitude * arcProgress);
-  });
-
-  const imageY = useTransform(snappedProgress, (progress) => {
-    // Vertical travel - all items pass through y=0 and never go below
-    // At progress 0.5: y = 0 (horizontal centerline)
-    // At progress 0: y = 400 (above center)
-    // At progress 1: y = -400 (exiting above)
-    return 400 - (progress * 800);
-  });
-
-  const imageOpacity = useTransform(scrollYProgress,
-    index === 0 ? [0, 0.78, 0.92, 1] : [0, 0.08, 0.15, 0.82, 0.92, 1],
-    index === 0 ? [1, 1, 1, 0] : [0, 1, 1, 1, 0.5, 0]
-  );
-  const imageScale = useTransform(scrollYProgress,
-    index === 0 ? [0, 0.78, 0.92, 1] : [0, 0.08, 0.15, 0.88, 0.96, 1],
-    index === 0 ? [1, 1, 1, 0.8] : [0.8, 1, 1, 1, 1, 0.8]
-  );
-
-  // Text: follows a smooth arc path on the right side
-  // Not a circle, but an elongated arc that travels far vertically
-  const textX = useTransform(snappedProgress, (latest) => {
-    // Smooth arc on right side - minimal horizontal movement
-    // Starts far right, moves slightly left at middle, returns right
-    const horizontalAmplitude = 150; // Small horizontal movement
-    const baseX = 200; // Base position on right side
-
-    // Use sine for smooth arc motion (mirrored from left)
-    const arcProgress = Math.sin(latest * Math.PI); // 0 -> 1 -> 0
-    return baseX - (horizontalAmplitude * arcProgress); // Subtract to mirror
-  });
-
-  const textY = useTransform(snappedProgress, (progress) => {
-    // Vertical travel - same as image, aligned horizontally
-    // At progress 0.5: y = 0 (horizontal centerline)
-    // At progress 0: y = 400 (above center)
-    // At progress 1: y = -400 (exiting above)
-    return 400 - (progress * 800);
-  });
-
-  const textOpacity = useTransform(scrollYProgress,
-    index === 0 ? [0, 0.78, 0.92, 1] : [0, 0.08, 0.15, 0.82, 0.92, 1],
-    index === 0 ? [1, 1, 1, 0] : [0, 1, 1, 1, 0.5, 0]
-  );
-  const textScale = useTransform(scrollYProgress,
-    index === 0 ? [0, 0.78, 0.92, 1] : [0, 0.08, 0.15, 0.88, 0.96, 1],
-    index === 0 ? [1, 1, 1, 0.8] : [0.8, 1, 1, 1, 1, 0.8]
-  );
-
-  // Rotation: no rotation while locked, only rotate during entry and exit
-  const imageRotate = useTransform(scrollYProgress, (latest) => {
-    const baseRotation = index === 0
-      ? (latest <= 0.78 ? 0 : ((latest - 0.78) / 0.22) * 4)
-      : (latest < 0.32 ? -4 + (latest / 0.32) * 4 : (latest <= 0.86 ? 0 : ((latest - 0.86) / 0.14) * 4));
-
-    return baseRotation;
-  });
-
-  const textRotate = useTransform(scrollYProgress, (latest) => {
-    const baseRotation = index === 0
-      ? (latest <= 0.78 ? 0 : -((latest - 0.78) / 0.22) * 4)
-      : (latest < 0.32 ? 4 - (latest / 0.32) * 4 : (latest <= 0.86 ? 0 : -((latest - 0.86) / 0.14) * 4));
-
-    return baseRotation;
-  });
-
-  // First card (hero) should be visible from the start, others fade in/out
-  const cardOpacity = useTransform(
-    scrollYProgress,
-    index === 0 ? [0, 0.78, 0.92, 1] : [0, 0.08, 0.15, 0.88, 0.96, 1],
-    index === 0 ? [1, 1, 1, 0] : [0, 1, 1, 1, 1, 0]
-  );
 
   const [currentOpacity, setCurrentOpacity] = React.useState(index === 0 ? 1 : 0);
-
   React.useEffect(() => {
-    const unsubscribe = cardOpacity.on('change', (latest) => {
-      setCurrentOpacity(latest);
-    });
-    return unsubscribe;
+    return cardOpacity.on('change', (latest) => setCurrentOpacity(latest));
   }, [cardOpacity]);
-
-  // Enhanced scale based on velocity for dramatic effect (desktop only)
-  const velocityScale = useTransform(scrollVelocity, (velocity: number) => {
-    if (shouldReduceMotion) return 1;
-    const scale = 1 + Math.min(Math.abs(velocity) / 5000, 0.02);
-    return scale;
-  });
-
-  // Mouse move handler for card tilt
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width - 0.5;
-    const y = (e.clientY - rect.top) / rect.height - 0.5;
-    setMousePosition({ x, y });
-  };
 
   return (
     <motion.div
-      ref={cardRef}
       className="absolute inset-0 w-full h-full flex items-center justify-center"
       style={{
         opacity: cardOpacity,
         pointerEvents: currentOpacity > 0.5 ? 'auto' : 'none',
-        scale: velocityScale,
       }}
-      onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => {
-        setIsHovered(false);
-        setMousePosition({ x: 0, y: 0 });
-      }}
+      onMouseLeave={() => setIsHovered(false)}
     >
       {/* Mobile Layout: Stacked vertically with fade-in */}
       {!project.isHero ? (
         <a href={`/projects/${project.id}`} className="lg:hidden flex flex-col gap-4 w-full max-w-2xl px-4 cursor-pointer group relative">
-          {/* Background orbs for mobile - behind everything */}
-          {project.layeredImages && project.accentColor && !shouldReduceMotion && (
-            <>
-              <motion.div
-                className="absolute top-0 left-4 w-32 h-32 rounded-full pointer-events-none -z-10"
-                style={{
-                  background: `radial-gradient(circle, rgba(${project.accentColor}, 0.08), transparent)`,
-                }}
-                animate={{ y: [0, -25, 0], x: [0, 15, 0], scale: [1, 1.2, 1] }}
-                transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-              />
-              <motion.div
-                className="absolute bottom-20 right-8 w-24 h-24 rounded-full pointer-events-none -z-10"
-                style={{
-                  background: `radial-gradient(circle, rgba(${project.accentColor}, 0.06), transparent)`,
-                }}
-                animate={{ y: [0, 20, 0], x: [0, -12, 0], scale: [1, 1.15, 1] }}
-                transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-              />
-              <motion.div
-                className="absolute top-1/3 right-2 w-20 h-20 rounded-full pointer-events-none -z-10"
-                style={{
-                  background: `radial-gradient(circle, rgba(${project.accentColor}, 0.05), transparent)`,
-                }}
-                animate={{ y: [0, -18, 0], scale: [1, 1.25, 1] }}
-                transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-              />
-            </>
-          )}
-
-          <motion.div
-            style={{
-              opacity: imageOpacity,
-              scale: imageScale,
-            }}
-            className="w-full max-w-md mx-auto aspect-video relative rounded-lg overflow-visible"
-          >
+          <div className="w-full max-w-md mx-auto aspect-video relative rounded-lg overflow-visible">
             {project.layeredImages ? (
               <div className="w-full h-full relative flex items-center justify-center">
-                {/* Decorative background elements — desktop only */}
-                {project.layeredImages && project.accentColor && !shouldReduceMotion && (
+                {/* Decorative background elements */}
+                {project.layeredImages && project.accentColor && (
                   <>
                     {project.id === 'workday-help' && (
                       <>
@@ -1185,20 +981,14 @@ function ProjectCard({
                 {project.imagePlaceholder}
               </div>
             )}
-          </motion.div>
+          </div>
 
-          <motion.div
-            style={{
-              opacity: textOpacity,
-              scale: textScale,
-            }}
-            className="space-y-4"
-          >
-            {/* Logo + name header */}
-            <div className="flex items-center gap-2.5">
+          <div className="space-y-4">
+            {/* Eyebrow: logo + company name */}
+            <div className="flex items-center gap-2">
               {(project.logo || project.logoPlaceholder) && (
                 <div
-                  className="w-7 h-7 rounded-md flex items-center justify-center text-sm shadow-sm overflow-hidden relative flex-shrink-0"
+                  className="w-5 h-5 rounded-sm flex items-center justify-center text-xs shadow-sm overflow-hidden relative flex-shrink-0"
                   style={{ backgroundColor: project.logoColor || "#E5E7EB" }}
                 >
                   {project.logo ? (
@@ -1208,10 +998,14 @@ function ProjectCard({
                   )}
                 </div>
               )}
-              <h3 className="text-2xl sm:text-3xl font-bold">
-                <span className="group-hover:underline" style={{ color: bc(project.logoColor) }}>{project.name}</span>
-              </h3>
+              <p className="text-xs font-medium tracking-widest uppercase text-gray-500 dark:text-gray-300">
+                {project.company ?? project.name}
+              </p>
             </div>
+            {/* Project title */}
+            <h3 className="text-2xl sm:text-3xl font-bold" style={{ color: bc(project.logoColor) }}>
+              {project.name}
+            </h3>
 
             {/* Tags */}
             {project.tags && (
@@ -1240,7 +1034,7 @@ function ProjectCard({
                 )}
                 {project.tags.sector && (
                   <span
-                    className="text-xs sm:text-sm font-semibold backdrop-blur-sm px-3 py-1.5 rounded-md shadow-sm"
+                    className="hidden sm:inline-flex text-xs sm:text-sm font-semibold backdrop-blur-sm px-3 py-1.5 rounded-md shadow-sm"
                     style={{
                       color: bc(project.logoColor),
                       backgroundColor: `${bc(project.logoColor)}1a`,
@@ -1257,11 +1051,11 @@ function ProjectCard({
             </Callout>
             {project.readTime && (
               <div className="inline-flex items-center gap-1.5">
-                <svg className="w-3.5 h-3.5 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-3.5 h-3.5 text-gray-500 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <circle cx="12" cy="12" r="10" strokeWidth="2"/>
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6v6l4 2"/>
                 </svg>
-                <span className="text-sm text-gray-500 dark:text-gray-400">{project.readTime} min read</span>
+                <span className="text-sm text-gray-500 dark:text-gray-300">{project.readTime} min read</span>
               </div>
             )}
             <div className="w-full flex items-center justify-center gap-2 backdrop-blur-sm bg-white/10 dark:bg-gray-800/30 border border-white/60 dark:border-gray-700 text-gray-800 dark:text-gray-200 font-semibold px-6 py-3 rounded-full shadow-lg group-hover:shadow-xl group-hover:scale-105 group-hover:bg-white/20 dark:group-hover:bg-gray-800/50 transition-all duration-300 text-base">
@@ -1270,17 +1064,11 @@ function ProjectCard({
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" />
               </svg>
             </div>
-          </motion.div>
+          </div>
         </a>
       ) : (
         <div className="lg:hidden flex flex-col gap-4 w-full max-w-2xl px-4">
-          <motion.div
-            style={{
-              opacity: imageOpacity,
-              scale: imageScale,
-            }}
-            className="w-full max-w-[224px] mx-auto aspect-square relative rounded-lg overflow-visible"
-          >
+          <div className="w-full max-w-[224px] mx-auto aspect-square relative rounded-lg overflow-visible">
             {project.heroLayers ? (
               <div className="relative w-full h-full flex items-center justify-center">
                 {/* Background color blob */}
@@ -1455,15 +1243,9 @@ function ProjectCard({
                 {project.imagePlaceholder}
               </div>
             )}
-          </motion.div>
+          </div>
 
-          <motion.div
-            style={{
-              opacity: textOpacity,
-              scale: textScale,
-            }}
-            className="space-y-4"
-          >
+          <div className="space-y-4">
             <div>
               <h3 className="text-base font-normal text-gray-600 dark:text-gray-400">
                 {project.name}
@@ -1556,240 +1338,17 @@ function ProjectCard({
               </div>
             )}
 
-          </motion.div>
+          </div>
         </div>
       )}
 
-      {/* Desktop Layout: Side-by-side with arc animations */}
+      {/* Desktop Layout: Side-by-side */}
       <div className="hidden lg:flex items-center justify-center gap-4 w-full relative">
-        {/* Background orbs for desktop - behind everything */}
-        {!project.isHero && project.layeredImages && project.accentColor && (
-          <>
-            <motion.div
-              className="absolute top-10 left-20 w-40 h-40 rounded-full pointer-events-none -z-10"
-              style={{
-                background: `radial-gradient(circle, rgba(${project.accentColor}, 0.06), transparent)`,
-                opacity: useTransform(scrollYProgress,
-                  [0, 0.2, 0.5, 0.75, 1],
-                  [0, 1, 1, 1, 0]
-                ),
-              }}
-              animate={{
-                y: [0, -30, 0],
-                x: [0, 20, 0],
-                scale: [1, 1.3, 1],
-              }}
-              transition={{
-                duration: 9,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-            />
-            <motion.div
-              className="absolute bottom-16 left-32 w-32 h-32 rounded-full pointer-events-none -z-10"
-              style={{
-                background: `radial-gradient(circle, rgba(${project.accentColor}, 0.05), transparent)`,
-                opacity: useTransform(scrollYProgress,
-                  [0, 0.2, 0.5, 0.75, 1],
-                  [0, 1, 1, 1, 0]
-                ),
-              }}
-              animate={{
-                y: [0, 25, 0],
-                x: [0, -15, 0],
-                scale: [1, 1.2, 1],
-              }}
-              transition={{
-                duration: 8,
-                repeat: Infinity,
-                ease: "easeInOut",
-                delay: 0.7,
-              }}
-            />
-            <motion.div
-              className="absolute top-1/3 left-10 w-28 h-28 rounded-full pointer-events-none -z-10"
-              style={{
-                background: `radial-gradient(circle, rgba(${project.accentColor}, 0.04), transparent)`,
-                opacity: useTransform(scrollYProgress,
-                  [0, 0.2, 0.5, 0.75, 1],
-                  [0, 1, 1, 1, 0]
-                ),
-              }}
-              animate={{
-                y: [0, -22, 0],
-                scale: [1, 1.35, 1],
-              }}
-              transition={{
-                duration: 10,
-                repeat: Infinity,
-                ease: "easeInOut",
-                delay: 1.2,
-              }}
-            />
-            <motion.div
-              className="absolute top-20 right-32 w-36 h-36 rounded-full pointer-events-none -z-10"
-              style={{
-                background: `radial-gradient(circle, rgba(${project.accentColor}, 0.05), transparent)`,
-                opacity: useTransform(scrollYProgress,
-                  [0, 0.2, 0.5, 0.75, 1],
-                  [0, 1, 1, 1, 0]
-                ),
-              }}
-              animate={{
-                y: [0, 28, 0],
-                x: [0, 18, 0],
-                scale: [1, 1.25, 1],
-              }}
-              transition={{
-                duration: 8.5,
-                repeat: Infinity,
-                ease: "easeInOut",
-                delay: 0.4,
-              }}
-            />
-            <motion.div
-              className="absolute bottom-24 right-16 w-30 h-30 rounded-full pointer-events-none -z-10"
-              style={{
-                background: `radial-gradient(circle, rgba(${project.accentColor}, 0.07), transparent)`,
-                opacity: useTransform(scrollYProgress,
-                  [0, 0.2, 0.5, 0.75, 1],
-                  [0, 1, 1, 1, 0]
-                ),
-              }}
-              animate={{
-                y: [0, -20, 0],
-                x: [0, -10, 0],
-                scale: [1, 1.18, 1],
-              }}
-              transition={{
-                duration: 7.5,
-                repeat: Infinity,
-                ease: "easeInOut",
-                delay: 1.5,
-              }}
-            />
-          </>
-        )}
-
-        {/* Hero orbs - more subtle and elegant */}
-        {project.isHero && (
-          <>
-            <motion.div
-              className="absolute top-16 left-24 w-48 h-48 rounded-full pointer-events-none -z-10"
-              style={{
-                background: `radial-gradient(circle, rgba(99, 102, 241, 0.12), transparent)`,
-              }}
-              animate={{
-                y: [0, -35, 0],
-                x: [0, 25, 0],
-                scale: [1, 1.4, 1],
-              }}
-              transition={{
-                duration: 10,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-            />
-            <motion.div
-              className="absolute bottom-20 left-40 w-40 h-40 rounded-full pointer-events-none -z-10"
-              style={{
-                background: `radial-gradient(circle, rgba(147, 197, 253, 0.1), transparent)`,
-              }}
-              animate={{
-                y: [0, 30, 0],
-                x: [0, -20, 0],
-                scale: [1, 1.3, 1],
-              }}
-              transition={{
-                duration: 9,
-                repeat: Infinity,
-                ease: "easeInOut",
-                delay: 0.8,
-              }}
-            />
-            <motion.div
-              className="absolute top-1/3 left-16 w-36 h-36 rounded-full pointer-events-none -z-10"
-              style={{
-                background: `radial-gradient(circle, rgba(59, 130, 246, 0.08), transparent)`,
-              }}
-              animate={{
-                y: [0, -28, 0],
-                scale: [1, 1.5, 1],
-              }}
-              transition={{
-                duration: 11,
-                repeat: Infinity,
-                ease: "easeInOut",
-                delay: 1.5,
-              }}
-            />
-            <motion.div
-              className="absolute top-24 right-36 w-44 h-44 rounded-full pointer-events-none -z-10"
-              style={{
-                background: `radial-gradient(circle, rgba(96, 165, 250, 0.11), transparent)`,
-              }}
-              animate={{
-                y: [0, 32, 0],
-                x: [0, 22, 0],
-                scale: [1, 1.35, 1],
-              }}
-              transition={{
-                duration: 9.5,
-                repeat: Infinity,
-                ease: "easeInOut",
-                delay: 0.5,
-              }}
-            />
-            <motion.div
-              className="absolute bottom-28 right-20 w-38 h-38 rounded-full pointer-events-none -z-10"
-              style={{
-                background: `radial-gradient(circle, rgba(37, 99, 235, 0.13), transparent)`,
-              }}
-              animate={{
-                y: [0, -25, 0],
-                x: [0, -15, 0],
-                scale: [1, 1.25, 1],
-              }}
-              transition={{
-                duration: 8.5,
-                repeat: Infinity,
-                ease: "easeInOut",
-                delay: 1.8,
-              }}
-            />
-            <motion.div
-              className="absolute top-1/2 right-48 w-32 h-32 rounded-full pointer-events-none -z-10"
-              style={{
-                background: `radial-gradient(circle, rgba(59, 130, 246, 0.09), transparent)`,
-              }}
-              animate={{
-                y: [0, 20, 0],
-                x: [0, 12, 0],
-                scale: [1, 1.4, 1],
-              }}
-              transition={{
-                duration: 10.5,
-                repeat: Infinity,
-                ease: "easeInOut",
-                delay: 2.2,
-              }}
-            />
-          </>
-        )}
 
         {project.isHero ? (
           <>
             {/* Hero layout: Text on left, Image on right */}
-            <motion.div
-              style={{
-                x: imageX,
-                y: imageY,
-                opacity: imageOpacity,
-                scale: imageScale,
-                rotate: imageRotate,
-              }}
-              className="flex-1 min-w-0 space-y-5"
-            >
+            <div className="flex-1 min-w-0 space-y-5">
               <div>
                 <h3 className="text-sm font-normal text-gray-600 dark:text-gray-400">
                   {project.name}
@@ -1882,22 +1441,9 @@ function ProjectCard({
                 </div>
               )}
 
-            </motion.div>
+            </div>
 
-            <motion.div
-              style={{
-                x: textX,
-                y: textY,
-                opacity: textOpacity,
-                scale: textScale,
-                rotate: textRotate,
-                rotateY: isHovered ? mousePosition.x * 10 : 0,
-                rotateX: isHovered ? -mousePosition.y * 10 : 0,
-                transformStyle: "preserve-3d",
-              }}
-              transition={{ type: "spring", stiffness: 300, damping: 30 }}
-              className="flex-1 min-w-0 flex items-center justify-center"
-            >
+            <div className="flex-1 min-w-0 flex items-center justify-center">
               {project.heroLayers ? (
                 <div className="relative w-[80%] aspect-[4/5] flex items-center justify-center">
                   {/* Background color blob */}
@@ -2087,21 +1633,12 @@ function ProjectCard({
                   {project.imagePlaceholder}
                 </div>
               )}
-            </motion.div>
+            </div>
           </>
         ) : (
           <>
             {/* Project layout: Text on left, Image on right */}
-            <motion.div
-              style={{
-                x: imageX,
-                y: imageY,
-                opacity: textOpacity,
-                scale: textScale,
-                rotate: imageRotate,
-              }}
-              className="flex-[1.2] min-w-0 space-y-5"
-            >
+            <div className="flex-[1.2] min-w-0 space-y-5">
               {/* Eyebrow: logo + role label */}
               <div className="flex items-center gap-2">
                 {(project.logo || project.logoPlaceholder) && (
@@ -2116,7 +1653,7 @@ function ProjectCard({
                     )}
                   </div>
                 )}
-                <p className="text-xs font-medium tracking-widest uppercase text-gray-400 dark:text-gray-500">
+                <p className="text-xs font-medium tracking-widest uppercase text-gray-500 dark:text-gray-300">
                   {project.company ?? project.name}
                 </p>
               </div>
@@ -2170,11 +1707,11 @@ function ProjectCard({
 
               {project.readTime && (
                 <div className="inline-flex items-center gap-1.5 mt-1">
-                  <svg className="w-3.5 h-3.5 text-gray-400 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-3.5 h-3.5 text-gray-500 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <circle cx="12" cy="12" r="10" strokeWidth="2"/>
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6v6l4 2"/>
                   </svg>
-                  <span className="text-sm text-gray-400 dark:text-gray-400">{project.readTime} min read</span>
+                  <span className="text-sm text-gray-500 dark:text-gray-300">{project.readTime} min read</span>
                 </div>
               )}
 
@@ -2209,336 +1746,14 @@ function ProjectCard({
                   </motion.svg>
                 </motion.div>
               </div>
-            </motion.div>
+            </div>
 
-            <motion.div
-              style={{
-                x: textX,
-                y: textY,
-                opacity: imageOpacity,
-                scale: imageScale,
-                rotate: textRotate,
-                rotateY: isHovered ? mousePosition.x * 8 : 0,
-                rotateX: isHovered ? -mousePosition.y * 8 : 0,
-                transformStyle: "preserve-3d",
-              }}
-              transition={{ type: "spring", stiffness: 300, damping: 30 }}
-              className="flex-1 min-w-0 aspect-[4/5] relative rounded-lg overflow-visible"
-            >
+            <div className="flex-1 min-w-0 aspect-[4/5] relative rounded-lg overflow-visible">
               {project.layeredImages ? (
                 <div className="w-full h-full relative flex items-center justify-center">
-                  {/* Decorative background elements — desktop only */}
-                  {project.layeredImages && project.accentColor && !shouldReduceMotion && (
-                    <>
-                      {project.id === 'workday-help' && (
-                        <>
-                          <motion.div
-                            className="absolute top-12 left-10 w-20 h-20 rounded-full"
-                            style={{
-                              background: `radial-gradient(circle, rgba(${project.accentColor}, 0.15), transparent)`,
-                              opacity: useTransform(scrollYProgress,
-                                [0, 0.2, 0.5, 0.75, 1],
-                                [0, 1, 1, 1, 0]
-                              ),
-                            }}
-                            animate={{
-                              y: [0, -20, 0],
-                              x: [0, 10, 0],
-                              scale: [1, 1.1, 1],
-                            }}
-                            transition={{
-                              duration: 6,
-                              repeat: Infinity,
-                              ease: "easeInOut",
-                            }}
-                          />
-                          <motion.div
-                            className="absolute bottom-20 right-14 w-16 h-16 rounded-full"
-                            style={{
-                              background: `radial-gradient(circle, rgba(${project.accentColor}, 0.12), transparent)`,
-                              opacity: useTransform(scrollYProgress,
-                                [0, 0.2, 0.5, 0.75, 1],
-                                [0, 1, 1, 1, 0]
-                              ),
-                            }}
-                            animate={{
-                              y: [0, 15, 0],
-                              x: [0, -8, 0],
-                              scale: [1, 1.15, 1],
-                            }}
-                            transition={{
-                              duration: 5,
-                              repeat: Infinity,
-                              ease: "easeInOut",
-                              delay: 0.5,
-                            }}
-                          />
-                          <motion.div
-                            className="absolute top-1/3 right-20 w-12 h-12 rounded-full"
-                            style={{
-                              background: `radial-gradient(circle, rgba(${project.accentColor}, 0.1), transparent)`,
-                              opacity: useTransform(scrollYProgress,
-                                [0, 0.2, 0.5, 0.75, 1],
-                                [0, 1, 1, 1, 0]
-                              ),
-                            }}
-                            animate={{
-                              y: [0, -12, 0],
-                              scale: [1, 1.2, 1],
-                            }}
-                            transition={{
-                              duration: 7,
-                              repeat: Infinity,
-                              ease: "easeInOut",
-                              delay: 1,
-                            }}
-                          />
-                          <motion.div
-                            className="absolute top-1/4 left-16 w-10 h-10 rounded-full"
-                            style={{
-                              background: `radial-gradient(circle, rgba(${project.accentColor}, 0.08), transparent)`,
-                              opacity: useTransform(scrollYProgress,
-                                [0, 0.2, 0.5, 0.75, 1],
-                                [0, 1, 1, 1, 0]
-                              ),
-                            }}
-                            animate={{
-                              y: [0, 10, 0],
-                              x: [0, 5, 0],
-                              scale: [1, 1.1, 1],
-                            }}
-                            transition={{
-                              duration: 6.5,
-                              repeat: Infinity,
-                              ease: "easeInOut",
-                              delay: 1.5,
-                            }}
-                          />
-                        </>
-                      )}
-                      {project.id === 'bua' && (
-                        <>
-                          <motion.div
-                            className="absolute top-14 right-12 w-24 h-24 rounded-full"
-                            style={{
-                              background: `radial-gradient(circle, rgba(${project.accentColor}, 0.12), transparent)`,
-                              opacity: useTransform(scrollYProgress,
-                                [0, 0.2, 0.5, 0.75, 1],
-                                [0, 1, 1, 1, 0]
-                              ),
-                            }}
-                            animate={{
-                              y: [0, 18, 0],
-                              x: [0, -12, 0],
-                              scale: [1, 1.15, 1],
-                            }}
-                            transition={{
-                              duration: 6.5,
-                              repeat: Infinity,
-                              ease: "easeInOut",
-                            }}
-                          />
-                          <motion.div
-                            className="absolute bottom-16 left-12 w-18 h-18 rounded-full"
-                            style={{
-                              background: `radial-gradient(circle, rgba(${project.accentColor}, 0.15), transparent)`,
-                              opacity: useTransform(scrollYProgress,
-                                [0, 0.2, 0.5, 0.75, 1],
-                                [0, 1, 1, 1, 0]
-                              ),
-                            }}
-                            animate={{
-                              y: [0, -16, 0],
-                              x: [0, 8, 0],
-                              scale: [1, 1.12, 1],
-                            }}
-                            transition={{
-                              duration: 5.5,
-                              repeat: Infinity,
-                              ease: "easeInOut",
-                              delay: 0.7,
-                            }}
-                          />
-                          <motion.div
-                            className="absolute top-1/4 left-14 w-13 h-13 rounded-full"
-                            style={{
-                              background: `radial-gradient(circle, rgba(${project.accentColor}, 0.1), transparent)`,
-                              opacity: useTransform(scrollYProgress,
-                                [0, 0.2, 0.5, 0.75, 1],
-                                [0, 1, 1, 1, 0]
-                              ),
-                            }}
-                            animate={{
-                              y: [0, -14, 0],
-                              scale: [1, 1.18, 1],
-                            }}
-                            transition={{
-                              duration: 7.5,
-                              repeat: Infinity,
-                              ease: "easeInOut",
-                              delay: 1.2,
-                            }}
-                          />
-                        </>
-                      )}
-                      {project.id === 'registration-crisis' && (
-                        <>
-                          <motion.div
-                            className="absolute top-10 left-14 w-22 h-22 rounded-full"
-                            style={{
-                              background: `radial-gradient(circle, rgba(${project.accentColor}, 0.14), transparent)`,
-                              opacity: useTransform(scrollYProgress,
-                                [0, 0.2, 0.5, 0.75, 1],
-                                [0, 1, 1, 1, 0]
-                              ),
-                            }}
-                            animate={{
-                              y: [0, -22, 0],
-                              x: [0, 6, 0],
-                              scale: [1, 1.14, 1],
-                            }}
-                            transition={{
-                              duration: 6.8,
-                              repeat: Infinity,
-                              ease: "easeInOut",
-                            }}
-                          />
-                          <motion.div
-                            className="absolute bottom-18 right-10 w-20 h-20 rounded-full"
-                            style={{
-                              background: `radial-gradient(circle, rgba(${project.accentColor}, 0.11), transparent)`,
-                              opacity: useTransform(scrollYProgress,
-                                [0, 0.2, 0.5, 0.75, 1],
-                                [0, 1, 1, 1, 0]
-                              ),
-                            }}
-                            animate={{
-                              y: [0, 14, 0],
-                              x: [0, -10, 0],
-                              scale: [1, 1.13, 1],
-                            }}
-                            transition={{
-                              duration: 5.8,
-                              repeat: Infinity,
-                              ease: "easeInOut",
-                              delay: 0.4,
-                            }}
-                          />
-                          <motion.div
-                            className="absolute top-2/3 right-16 w-14 h-14 rounded-full"
-                            style={{
-                              background: `radial-gradient(circle, rgba(${project.accentColor}, 0.09), transparent)`,
-                              opacity: useTransform(scrollYProgress,
-                                [0, 0.2, 0.5, 0.75, 1],
-                                [0, 1, 1, 1, 0]
-                              ),
-                            }}
-                            animate={{
-                              y: [0, -10, 0],
-                              x: [0, 7, 0],
-                              scale: [1, 1.16, 1],
-                            }}
-                            transition={{
-                              duration: 7.2,
-                              repeat: Infinity,
-                              ease: "easeInOut",
-                              delay: 0.9,
-                            }}
-                          />
-                        </>
-                      )}
-                      {project.id === 'regulatory-reporting' && (
-                        <>
-                          <motion.div
-                            className="absolute top-18 left-8 w-17 h-17 rounded-full"
-                            style={{
-                              background: `radial-gradient(circle, rgba(${project.accentColor}, 0.13), transparent)`,
-                              opacity: useTransform(scrollYProgress,
-                                [0, 0.2, 0.5, 0.75, 1],
-                                [0, 1, 1, 1, 0]
-                              ),
-                            }}
-                            animate={{
-                              y: [0, -18, 0],
-                              x: [0, 9, 0],
-                              scale: [1, 1.11, 1],
-                            }}
-                            transition={{
-                              duration: 6.3,
-                              repeat: Infinity,
-                              ease: "easeInOut",
-                            }}
-                          />
-                          <motion.div
-                            className="absolute bottom-12 right-12 w-24 h-24 rounded-full"
-                            style={{
-                              background: `radial-gradient(circle, rgba(${project.accentColor}, 0.16), transparent)`,
-                              opacity: useTransform(scrollYProgress,
-                                [0, 0.2, 0.5, 0.75, 1],
-                                [0, 1, 1, 1, 0]
-                              ),
-                            }}
-                            animate={{
-                              y: [0, 16, 0],
-                              x: [0, -7, 0],
-                              scale: [1, 1.14, 1],
-                            }}
-                            transition={{
-                              duration: 5.2,
-                              repeat: Infinity,
-                              ease: "easeInOut",
-                              delay: 0.6,
-                            }}
-                          />
-                          <motion.div
-                            className="absolute top-1/2 right-8 w-13 h-13 rounded-full"
-                            style={{
-                              background: `radial-gradient(circle, rgba(${project.accentColor}, 0.1), transparent)`,
-                              opacity: useTransform(scrollYProgress,
-                                [0, 0.2, 0.5, 0.75, 1],
-                                [0, 1, 1, 1, 0]
-                              ),
-                            }}
-                            animate={{
-                              y: [0, -13, 0],
-                              scale: [1, 1.19, 1],
-                            }}
-                            transition={{
-                              duration: 7.8,
-                              repeat: Infinity,
-                              ease: "easeInOut",
-                              delay: 1.4,
-                            }}
-                          />
-                        </>
-                      )}
-                    </>
-                  )}
-
                   {/* Background layer - full width, positioned behind */}
                   {!project.layeredImages.floatingCards && (
-                  <motion.div
-                    className="absolute inset-0 flex items-center justify-center"
-                    style={{
-                      opacity: useTransform(scrollYProgress,
-                        [0, 0.2, 0.5, 0.75, 1],
-                        [0, 1, 1, 1, 0]
-                      ),
-                      scale: useTransform(scrollYProgress,
-                        [0, 0.2, 0.5, 0.75, 1],
-                        [0.85, 1, 1, 1, 0.85]
-                      ),
-                    }}
-                    animate={{
-                      y: [0, -10, 0],
-                    }}
-                    transition={{
-                      duration: 5.5,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                      delay: 0.3,
-                    }}
-                  >
+                  <div className="absolute inset-0 flex items-center justify-center">
                     <div className="relative w-[115%] aspect-[4/5]">
                       <Image
                         src={project.layeredImages.background}
@@ -2547,7 +1762,7 @@ function ProjectCard({
                         className="object-contain"
                       />
                     </div>
-                  </motion.div>
+                  </div>
                   )}
 
                   {/* Floating Icons */}
@@ -2572,27 +1787,10 @@ function ProjectCard({
                     };
 
                     return (
-                      <motion.div
+                      <div
                         key={iconIndex}
                         className="absolute w-12 h-12 lg:w-14 lg:h-14"
-                        style={{
-                          ...getPosition(icon.position),
-                          opacity: useTransform(scrollYProgress,
-                            [0, 0.2, 0.5, 0.75, 1],
-                            [0, 1, 1, 1, 0]
-                          ),
-                        }}
-                        animate={{
-                          y: [0, -10, 0],
-                        }}
-                        transition={{
-                          y: {
-                            duration: 3,
-                            repeat: Infinity,
-                            ease: "easeInOut",
-                            delay: iconIndex * 0.4,
-                          }
-                        }}
+                        style={getPosition(icon.position)}
                       >
                         <Image
                           src={icon.src}
@@ -2600,7 +1798,7 @@ function ProjectCard({
                           fill
                           className="object-contain"
                         />
-                      </motion.div>
+                      </div>
                     );
                   })}
 
@@ -2618,27 +1816,12 @@ function ProjectCard({
                     };
 
                     return (
-                      <motion.div
+                      <div
                         key={`desktop-device-${deviceIndex}`}
                         className="absolute w-[26%] aspect-[9/19]"
                         style={{
                           ...getDevicePosition(device.position),
                           filter: 'drop-shadow(0 15px 30px rgba(0,0,0,0.25))',
-                          opacity: useTransform(scrollYProgress,
-                            [0, 0.2, 0.5, 0.75, 1],
-                            [0, 1, 1, 1, 0]
-                          ),
-                        }}
-                        animate={{
-                          y: [0, -15, 0],
-                        }}
-                        transition={{
-                          y: {
-                            duration: 4,
-                            repeat: Infinity,
-                            ease: "easeInOut",
-                            delay: deviceIndex * 0.5,
-                          }
                         }}
                       >
                         <Image
@@ -2647,25 +1830,17 @@ function ProjectCard({
                           fill
                           className="object-contain"
                         />
-                      </motion.div>
+                      </div>
                     );
                   })}
 
                   {/* Foreground layer */}
                   {project.layeredImages.foreground && !project.layeredImages.floatingCards && (
-                      <motion.div
-                        className="absolute inset-0 flex items-center justify-center"
-                        style={{
-                          opacity: useTransform(scrollYProgress, [0, 0.1, 0.25, 0.5, 0.8, 0.95, 1], [0, 0, 1, 1, 1, 1, 0]),
-                          scale: useTransform(scrollYProgress, [0, 0.1, 0.25, 0.5, 0.8, 0.95, 1], [0.7, 0.7, 1, 1, 1, 1, 0.7]),
-                        }}
-                        animate={{ y: [0, 10, 0], x: [0, -6, 0], rotate: [0, -1.5, 0, 1.5, 0] }}
-                        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-                      >
-                        <div className="relative w-[65%] aspect-[4/5]" style={{ transform: 'translateZ(20px)', filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.4))' }}>
-                          <Image src={project.layeredImages.foreground} alt={project.name} fill className="object-contain" />
-                        </div>
-                      </motion.div>
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="relative w-[65%] aspect-[4/5]" style={{ filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.4))' }}>
+                        <Image src={project.layeredImages.foreground} alt={project.name} fill className="object-contain" />
+                      </div>
+                    </div>
                   )}
 
                   {/* Getmee floating cards hero */}
@@ -2690,7 +1865,7 @@ function ProjectCard({
                   {project.imagePlaceholder}
                 </div>
               )}
-            </motion.div>
+            </div>
 
             {/* Clickable overlay for entire card */}
             <a

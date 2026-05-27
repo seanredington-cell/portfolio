@@ -92,7 +92,7 @@ const _allProjectData: Project[] = [
   {
     id: "getmee",
     company: "GETMEE AI",
-    name: "Getmee - AI-Powered English Learning Platform",
+    name: "AI-Powered Job Readiness Platform",
     description: "How systems thinking turned a collection of isolated features into a connected product — doubling the userbase across 15+ white-label apps",
     tldr: "How systems thinking turned a collection of isolated features into a connected product — doubling the userbase across 15+ white-label apps",
     image: "/projects/getmee/Getmee_whitelabel_app_prior_to_arrival.png",

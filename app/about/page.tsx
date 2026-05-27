@@ -13,6 +13,8 @@ import Background from "@/components/Background";
 export default function About() {
   const [dismissed, setDismissed] = React.useState(false);
   const { scrollYProgress } = useScroll();
+  const scrollCTAOpacity = useTransform(scrollYProgress, [0, 0.05, 0.12], [1, 0.5, 0]);
+  const scrollCTAPointerEvents = useTransform(scrollYProgress, (v) => v < 0.12 ? 'auto' : 'none');
 
   return (
     <main className="min-h-screen pt-24 sm:pt-28 relative z-0">
@@ -43,7 +45,7 @@ export default function About() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className="backdrop-blur-xl bg-white/70 dark:bg-gray-800/70 rounded-3xl shadow-2xl border border-white/40 dark:border-gray-700 p-8 sm:p-12"
+          className="backdrop-blur-xl bg-white/70 dark:bg-gray-800/70 rounded-3xl shadow-2xl border border-white/40 dark:border-gray-700 p-6 sm:p-12"
           style={{ boxShadow: '0 20px 60px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.8)' }}
         >
           <div className="space-y-4">
@@ -86,18 +88,31 @@ export default function About() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-          className="backdrop-blur-xl bg-white/70 dark:bg-gray-800/70 rounded-3xl shadow-2xl border border-white/40 dark:border-gray-700 p-8 sm:p-12"
+          className="backdrop-blur-xl bg-white/70 dark:bg-gray-800/70 rounded-3xl shadow-2xl border border-white/40 dark:border-gray-700 p-6 sm:p-12"
           style={{ boxShadow: '0 20px 60px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.8)' }}
         >
           <div className="space-y-12 leading-relaxed">
           {/* Experience Section */}
           <section>
-            <div className="flex items-center justify-between mb-12">
+            {/* Download CV — full width above Experience on mobile, inline with heading on sm+ */}
+            <a
+              href="/SEAN_REDINGTON_CV_2026.pdf"
+              download
+              className="sm:hidden flex items-center justify-center gap-2 w-full bg-white/10 dark:bg-gray-800/30 border border-white/60 dark:border-gray-700 text-gray-800 dark:text-gray-200 font-semibold px-5 py-3 rounded-2xl shadow-lg mb-8 text-sm active:scale-95 transition-transform"
+              style={{ boxShadow: '0 8px 32px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.5)' }}
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+              <span>Download CV</span>
+            </a>
+
+            <div className="flex items-center justify-between mb-12 gap-4">
               <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Experience</h2>
               <motion.a
                 href="/SEAN_REDINGTON_CV_2026.pdf"
                 download
-                className="inline-flex items-center gap-2 backdrop-blur-sm bg-white/10 dark:bg-gray-800/30 border border-white/60 dark:border-gray-700 text-gray-800 dark:text-gray-200 font-semibold px-5 py-2.5 rounded-full shadow-lg hover:shadow-xl hover:scale-105 hover:bg-white/20 dark:hover:bg-gray-800/50 transition-all duration-300 text-sm"
+                className="hidden sm:inline-flex items-center gap-2 backdrop-blur-sm bg-white/10 dark:bg-gray-800/30 border border-white/60 dark:border-gray-700 text-gray-800 dark:text-gray-200 font-semibold px-5 py-2.5 rounded-full shadow-lg hover:shadow-xl hover:scale-105 hover:bg-white/20 dark:hover:bg-gray-800/50 transition-all duration-300 text-sm"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 style={{ boxShadow: '0 8px 32px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.5)' }}
@@ -118,7 +133,7 @@ export default function About() {
                   </div>
                   <p className="text-xs font-medium tracking-widest uppercase text-gray-500 dark:text-gray-400">Getmee AI, Melbourne</p>
                 </div>
-                <div className="flex items-center justify-between gap-4">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 sm:gap-4">
                   <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100">Head of Product & Design</h3>
                   <div className="flex items-center gap-2 flex-shrink-0">
                     <span className="text-xs font-semibold px-3 py-1 rounded-md bg-blue-100 dark:bg-blue-900/40 text-blue-800 dark:text-blue-300">CONTRACT</span>
@@ -152,7 +167,7 @@ export default function About() {
                   </div>
                   <p className="text-xs font-medium tracking-widest uppercase text-gray-500 dark:text-gray-400">Marlin Communications, Melbourne</p>
                 </div>
-                <div className="flex items-center justify-between gap-4">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 sm:gap-4">
                   <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100">UX/UI Designer</h3>
                   <div className="flex items-center gap-2 flex-shrink-0">
                     <span className="text-xs font-semibold px-3 py-1 rounded-md bg-blue-100 dark:bg-blue-900/40 text-blue-800 dark:text-blue-300">CONTRACT</span>
@@ -172,7 +187,7 @@ export default function About() {
                   </div>
                   <p className="text-xs font-medium tracking-widest uppercase text-gray-500 dark:text-gray-400">CYGNVS, Dublin</p>
                 </div>
-                <div className="flex items-center justify-between gap-4">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 sm:gap-4">
                   <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100">UX Designer</h3>
                   <span className="text-sm text-gray-600 dark:text-gray-300 whitespace-nowrap flex-shrink-0">Mar 2022 – May 2024</span>
                 </div>
@@ -203,7 +218,7 @@ export default function About() {
                   </div>
                   <p className="text-xs font-medium tracking-widest uppercase text-gray-500 dark:text-gray-400">Workday, Dublin</p>
                 </div>
-                <div className="flex items-center justify-between gap-4">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 sm:gap-4">
                   <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100">Sr Associate UX Designer</h3>
                   <span className="text-sm text-gray-600 dark:text-gray-300 whitespace-nowrap flex-shrink-0">2019 – 2022</span>
                 </div>
@@ -225,7 +240,7 @@ export default function About() {
             <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-8">Education</h2>
 
             <div className="space-y-5">
-                <div className="flex items-center justify-between gap-4">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 sm:gap-4">
                   <div>
                     <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100">BSc Product Design & Technology</h3>
                     <p className="text-base text-gray-600 dark:text-gray-300">University of Limerick, Limerick</p>
@@ -354,9 +369,10 @@ export default function About() {
       {/* Floating scroll CTA — fixed bottom-centre, fades on scroll or click */}
       <motion.div
         className="fixed bottom-8 left-1/2 -translate-x-1/2 z-[100]"
+        animate={{ opacity: dismissed ? 0 : 1, pointerEvents: dismissed ? 'none' : 'auto' }}
         style={{
-          opacity: useTransform(scrollYProgress, [0, 0.05, 0.12], dismissed ? [0, 0, 0] : [1, 0.5, 0]),
-          pointerEvents: useTransform(scrollYProgress, (v) => (!dismissed && v < 0.12 ? 'auto' : 'none')) as any,
+          opacity: scrollCTAOpacity,
+          pointerEvents: scrollCTAPointerEvents as any,
         }}
       >
         <motion.button

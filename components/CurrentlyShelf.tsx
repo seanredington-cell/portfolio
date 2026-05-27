@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 
@@ -39,12 +39,9 @@ const items = [
   },
 ];
 
-export default function CurrentlyShelf() {
+export default function CurrentlyShelf({ fillWidth = false }: { fillWidth?: boolean }) {
   const [index, setIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
-  // One ref per item — all rendered (hidden) so we can measure any width at any time
-  const measureRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const [widths, setWidths] = useState<number[]>([]);
 
   useEffect(() => {
     if (isPaused) return;
@@ -54,14 +51,7 @@ export default function CurrentlyShelf() {
     return () => clearInterval(interval);
   }, [isPaused]);
 
-  // Measure all hidden ghost items once on mount
-  useEffect(() => {
-    const measured = measureRefs.current.map((el) => el?.scrollWidth ?? 0);
-    setWidths(measured);
-  }, []);
-
   const current = items[index];
-  const currentWidth = widths[index] ?? undefined;
 
   return (
     <div
@@ -69,21 +59,6 @@ export default function CurrentlyShelf() {
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
-      {/* Hidden ghost elements to measure natural widths */}
-      <div className="absolute invisible pointer-events-none" aria-hidden>
-        {items.map((item, i) => (
-          <div
-            key={i}
-            ref={(el) => { measureRefs.current[i] = el; }}
-            className="w-max"
-          >
-            <p className="text-[10px] font-semibold uppercase tracking-widest leading-none mb-0.5 whitespace-nowrap">{item.label}</p>
-            <p className="text-sm font-semibold leading-tight whitespace-nowrap">{item.title}</p>
-            <p className="text-xs leading-tight whitespace-nowrap">{item.subtitle}</p>
-          </div>
-        ))}
-      </div>
-
       {/* Vertical dot indicators */}
       <div className="flex flex-col items-center gap-1 flex-shrink-0">
         {items.map((_, i) => (
@@ -122,12 +97,8 @@ export default function CurrentlyShelf() {
         </AnimatePresence>
       </div>
 
-      {/* Text — animates to the measured width of the current item */}
-      <motion.div
-        animate={{ width: currentWidth }}
-        transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-        className="overflow-hidden flex-shrink-0"
-      >
+      {/* Text */}
+      <div className="overflow-hidden flex-1 min-w-0">
         <AnimatePresence mode="wait">
           <motion.div
             key={index}
@@ -148,7 +119,7 @@ export default function CurrentlyShelf() {
             </p>
           </motion.div>
         </AnimatePresence>
-      </motion.div>
+      </div>
     </div>
   );
 }

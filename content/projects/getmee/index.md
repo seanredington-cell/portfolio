@@ -1,6 +1,6 @@
 ---
 id: "getmee"
-name: "Getmee - AI-Powered English Learning Platform"
+name: "AI-Powered Job Readiness Platform"
 description: "How systems thinking turned a collection of isolated features into a connected product — doubling the userbase across 15+ white-label apps"
 tldr: "How systems thinking turned a collection of isolated features into a connected product — doubling the userbase across 15+ white-label apps"
 logo: "/projects/getmee/logo.svg"
