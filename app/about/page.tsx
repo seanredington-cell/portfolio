@@ -59,7 +59,7 @@ export default function About() {
               >
                 <div className="w-10 h-10 rounded-full overflow-hidden">
                   <Image
-                    src="/about-hero/headshot-image.png"
+                    src="/about-hero/headshot-image.webp"
                     alt="Seán Redington"
                     width={40}
                     height={40}
@@ -129,7 +129,7 @@ export default function About() {
               <div className="space-y-4 pb-10 border-b border-gray-200/60 dark:border-gray-700/60 last:border-0">
                 <div className="flex items-center gap-2 mb-1">
                   <div className="w-5 h-5 rounded-sm overflow-hidden flex-shrink-0">
-                    <Image src="/about-hero/logo-getmee.png" alt="Getmee AI" width={20} height={20} className="object-contain w-full h-full" />
+                    <Image src="/about-hero/logo-getmee.webp" alt="Getmee AI" width={20} height={20} className="object-contain w-full h-full" />
                   </div>
                   <p className="text-xs font-medium tracking-widest uppercase text-gray-500 dark:text-gray-400">Getmee AI, Melbourne</p>
                 </div>
@@ -163,7 +163,7 @@ export default function About() {
               <div className="space-y-4 pb-10 border-b border-gray-200/60 dark:border-gray-700/60 last:border-0">
                 <div className="flex items-center gap-2 mb-1">
                   <div className="w-5 h-5 rounded-sm overflow-hidden flex-shrink-0">
-                    <Image src="/about-hero/logo-marlin.png" alt="Marlin Communications" width={20} height={20} className="object-contain w-full h-full" />
+                    <Image src="/about-hero/logo-marlin.webp" alt="Marlin Communications" width={20} height={20} className="object-contain w-full h-full" />
                   </div>
                   <p className="text-xs font-medium tracking-widest uppercase text-gray-500 dark:text-gray-400">Marlin Communications, Melbourne</p>
                 </div>
@@ -183,7 +183,7 @@ export default function About() {
               <div className="space-y-4 pb-10 border-b border-gray-200/60 dark:border-gray-700/60 last:border-0">
                 <div className="flex items-center gap-2 mb-1">
                   <div className="w-5 h-5 rounded-sm overflow-hidden flex-shrink-0">
-                    <Image src="/about-hero/logo-cygnvs.png" alt="CYGNVS" width={20} height={20} className="object-contain w-full h-full" />
+                    <Image src="/about-hero/logo-cygnvs.webp" alt="CYGNVS" width={20} height={20} className="object-contain w-full h-full" />
                   </div>
                   <p className="text-xs font-medium tracking-widest uppercase text-gray-500 dark:text-gray-400">CYGNVS, Dublin</p>
                 </div>
@@ -214,7 +214,7 @@ export default function About() {
               <div className="space-y-4 pb-10 border-b border-gray-200/60 dark:border-gray-700/60 last:border-0">
                 <div className="flex items-center gap-2 mb-1">
                   <div className="w-5 h-5 rounded-sm overflow-hidden flex-shrink-0">
-                    <Image src="/about-hero/logo-workday.png" alt="Workday" width={20} height={20} className="object-contain w-full h-full" />
+                    <Image src="/about-hero/logo-workday.webp" alt="Workday" width={20} height={20} className="object-contain w-full h-full" />
                   </div>
                   <p className="text-xs font-medium tracking-widest uppercase text-gray-500 dark:text-gray-400">Workday, Dublin</p>
                 </div>

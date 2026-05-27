@@ -112,7 +112,7 @@ export default function ProjectDetailClient({ params, markdownContent, frontMatt
           <div class="internal-note-wrapper">
             <div class="internal-note">
               <div class="internal-note-header">
-                <img src="/about-hero/headshot-image.png" alt="Seán" class="internal-note-avatar" width="32" height="32" />
+                <img src="/about-hero/headshot-image.webp" alt="Seán" class="internal-note-avatar" width="32" height="32" />
                 <div class="internal-note-label">Note</div>
               </div>
               <div class="internal-note-content">${noteContent}</div>

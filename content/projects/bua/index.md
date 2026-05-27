@@ -4,13 +4,13 @@ name: "Enabling Informed Match Day Decisions"
 company: "BUA"
 description: "Designed and built by me - this iOS app allows field sport coaches to easily track game data, enabling them to be more informed when picking their team."
 tldr: "Designed and built by me - this iOS app allows field sport coaches to easily track game data, enabling them to be more informed when picking their team."
-logo: "/projects/bua/bua-icon.png"
+logo: "/projects/bua/bua-icon.webp"
 logoPlaceholder: "⚽"
 logoColor: "#177272"
 accentColor: "23, 114, 114"
 layeredImages:
-  background: "/projects/bua/hero/bua-hero-bg.png"
-  foreground: "/projects/bua/hero/bua-hero-foreground.png"
+  background: "/projects/bua/hero/bua-hero-bg.webp"
+  foreground: "/projects/bua/hero/bua-hero-foreground.webp"
 tags:
   sector: "Sports Tech"
   role: "Development, UX Design"
@@ -37,7 +37,7 @@ In most cases, however, these teams will have someone on the sideline with a pen
 
 My Dad is one of those people on the sideline. He's been coaching teams for almost 40 years. His main gripes are that it rains a lot in Ireland (not something I can fix as of yet) and that paper gets lost between games meaning he has to rely on his memory of matches for information.
 
-![Map of Ireland overlayed with logos and primary colors of the county level teams. All counties have both Gaelic Football and Hurling teams.](/projects/bua/Irish-gaa-map.png)
+![Map of Ireland overlayed with logos and primary colors of the county level teams. All counties have both Gaelic Football and Hurling teams.](/projects/bua/Irish-gaa-map.webp)
 
 ---
 
@@ -62,7 +62,7 @@ I tried to distill these things into a single problem statement to help when fin
 
 There are some options out there, but they were generally either expensive or difficult to use. Even when broadening the scope to other, more popular, field sports (soccer or hockey) there didn't seem to be anything that fit the bill. The image below is a review of what I found with comments relating to its ability to meet the needs I'd established so far.
 
-![Competitor analysis showing existing solutions and their limitations](/projects/bua/competitor-analysis.png)
+![Competitor analysis showing existing solutions and their limitations](/projects/bua/competitor-analysis.webp)
 
 ## What Now?
 
@@ -94,19 +94,19 @@ This avenue did not work...Why?
 - Working with paper is more challenging than it seems and there's limited space, even with a neat template.
 - Paper would need to be printed for each game and viewed later on in a separate tool. I felt that adding this overhead was not productive.
 
-![Using paper to record games](/projects/bua/bua-on-paper.png)
+![Using paper to record games](/projects/bua/bua-on-paper.webp)
 
 ### In hindsight, not my greatest idea. Let's try something else
 
 After lots more sketching sessions and back and forth discussions with the main user (once again, my dad) I started working on what I felt was the most important flow: For a given team, we want to capture the right stat, for the right person, at the right time.
 
-![Task flow for capturing stats during a game](/projects/bua/bua-task-flow-1.png)
+![Task flow for capturing stats during a game](/projects/bua/bua-task-flow-1.webp)
 
 ### Time to sense check and validate?
 
 I ran a rough testing session by going through the different task flow options with the user without giving indication to which I thought was best. We discussed pros and cons of each before landing on what we felt would work the best consistently.
 
-![Different options for recording stats](/projects/bua/record-stat-options.png)
+![Different options for recording stats](/projects/bua/record-stat-options.webp)
 
 ### Hang on a minute, maybe I can actually build this
 
@@ -116,7 +116,7 @@ Full of self confidence, and with an unwavering belief that Claude could take on
 
 This decision was crucial in assisting my design process. This wasn't just exploration any more, there was a clear objective. This app needed to simple enough for me to build but it also needed to offer real value to its user.
 
-![Wireframes showing the main screens and flows](/projects/bua/bua-wireframes.png)
+![Wireframes showing the main screens and flows](/projects/bua/bua-wireframes.webp)
 
 ### What does '*this*' actually need to be able to do?
 
@@ -129,7 +129,7 @@ After yet another chat with the end user, we decided upon a set of features that
 
 After creating some wireframes for the main screens and key flows, higher fidelity screens were refined that I felt were *just about good enough* to move forward with building this bad boy.
 
-![High fidelity UI designs for the app](/projects/bua/bua-ui.png)
+![High fidelity UI designs for the app](/projects/bua/bua-ui.webp)
 
 ---
 
@@ -141,7 +141,7 @@ Now I was in uncharted water (my computer terminal), fishing for one of nature's
 
 After lots of research, I landed on a set tools that could be used to get everything going; Cursor (for code editing), Claude Code (for code writing), XCode (to allow me to create an iOS app) and Supabase (to manage all user data and the backend).
 
-![The tools used to build the app](/projects/bua/tools-used.png)
+![The tools used to build the app](/projects/bua/tools-used.webp)
 
 I was left to prompt to my heart's desire. I thought it would be as simple as pointing Claude at my Figma designs and watching as it created a polished app in minutes. These turned out to be the thoughts of a naive madman.
 
@@ -155,13 +155,13 @@ It built something that was as useful as a wet towel in a rainstorm. I knew I'd 
 
 What followed was a long cycle of prompting, iterating, testing, and then going again. This involved a LOT of me asking for one thing and getting another. Eventually though, I was making progress, and boy was it exciting.
 
-![The iterative development process](/projects/bua/bua-meme.png)
+![The iterative development process](/projects/bua/bua-meme.webp)
 
 ### Brick by brick, prompt by prompt…
 
 Through research, my prompting improved, along with my technical proficiency. I was adding more and more features to the app while testing each one with the user. In an effort to draw a line in the sand, a final list of requirements were made and a deadline was set so that the app could be tested during the beginning of the new season.
 
-![Feature checklist for the app](/projects/bua/bua-checklist.png)
+![Feature checklist for the app](/projects/bua/bua-checklist.webp)
 
 ### It works, oh my god, it works!
 
@@ -171,13 +171,13 @@ The user can create teams and players, record information on their matches, and 
 
 ### [Watch the demo if you haven't already](https://www.loom.com/share/5859ca8ec35a4ba19bb856ac5d773071)
 
-![Bua home page showing recent matches](/projects/bua/Bua-Home-Page.png)
+![Bua home page showing recent matches](/projects/bua/Bua-Home-Page.webp)
 
-![Recording matches in real-time](/projects/bua/Record-Matches.png)
+![Recording matches in real-time](/projects/bua/Record-Matches.webp)
 
-![Teams overview and management](/projects/bua/bua-Teams.png)
+![Teams overview and management](/projects/bua/bua-Teams.webp)
 
-![Player profile with performance stats](/projects/bua/bua-Player-Profiles.png)
+![Player profile with performance stats](/projects/bua/bua-Player-Profiles.webp)
 
 ---
 

@@ -4,22 +4,22 @@ name: "Registration in the Time of a Crisis"
 company: "CYGNVS"
 description: "Reducing the error rate of registration from 50% to less than 2% during cyber incidents, solving over 60 registration paths to ensure users can quickly access their colleagues in CYGNVS."
 tldr: "Reducing the error rate of registration from 50% to less than 2% during cyber incidents, solving over 60 registration paths to ensure users can quickly access their colleagues in CYGNVS."
-logo: "/icon-cygnvs-2.png"
+logo: "/icon-cygnvs-2.webp"
 logoPlaceholder: "🔐"
 logoColor: "#1E3A8A"
 accentColor: "30, 58, 138"
 protected: true
 password: "letmein"
-image: "/projects/registration-crisis/registration-hero.png"
+image: "/projects/registration-crisis/registration-hero.webp"
 layeredImages:
   background: "/projects/registration-crisis/registrayion-hero-bg.svg"
-  foreground: "/projects/registration-crisis/registration-hero.png"
+  foreground: "/projects/registration-crisis/registration-hero.webp"
   floatingIcons:
-    - src: "/projects/registration-crisis/🤯.png"
+    - src: "/projects/registration-crisis/🤯.webp"
       position: "top-left"
-    - src: "/projects/registration-crisis/😡.png"
+    - src: "/projects/registration-crisis/😡.webp"
       position: "top-right"
-    - src: "/projects/registration-crisis/❌.png"
+    - src: "/projects/registration-crisis/❌.webp"
       position: "bottom-left"
 tags:
   sector: "Cybersecurity"
@@ -67,23 +67,23 @@ We realised that their issues were varied and not unique and would need to be fi
 
 To start, working with a product manager, we mapped out all 65 existing registration and sign in flows on our platform. Many of these were problematic, leading to dead ends or requiring support intervention. This complexity arose from our diverse registration methods, with each security layer multiplying the number of paths.
 
-![All registration flows mapped](/projects/registration-crisis/reg-image-1.png)
+![All registration flows mapped](/projects/registration-crisis/reg-image-1.webp)
 
 ### Defining the flow
 
 Working with internal stakeholders from all levels within the company, I created and iterated on a number of task flows which encompassed each of these flows. These were heavily scrutinised to ensure that all cases of registration were accounted for.
 
-![Task flow diagram](/projects/registration-crisis/reg-image-2.png)
+![Task flow diagram](/projects/registration-crisis/reg-image-2.webp)
 
 ### User testing
 
 After creating and discussing a number of different sketches and lo-fi mock ups with the stakeholders, high fidelity wire frames were created on both web and mobile that would be used to test the registration flow.
 
-![User testing screens](/projects/registration-crisis/reg-image-3.png)
+![User testing screens](/projects/registration-crisis/reg-image-3.webp)
 
 The flows were tested on mobile by 11 participants with no prior knowledge of the product using Optimal Workshop.
 
-![User test results](/projects/registration-crisis/reg-image-4.png)
+![User test results](/projects/registration-crisis/reg-image-4.webp)
 
 The main takeaways were as follows:
 
@@ -97,7 +97,7 @@ Realising that our users' main pain points were in relation to the copy, I made 
 
 After discussing the findings and iterations with the wider team, I worked on delivering fully spec'd out flows to our development teams on both web and mobile.
 
-![Final mobile designs](/projects/registration-crisis/reg-image-5.png)
+![Final mobile designs](/projects/registration-crisis/reg-image-5.webp)
 
 ### Quickly addressing new requirements
 
@@ -107,7 +107,7 @@ This project was fast-tracked due to its importance and was being built by the d
 
 Based on this, we kicked off a secondary project which allowed users quick access to the platform for a limited time, before requiring them to complete registration. This project again was done with security at the forefront and was fast-tracked due to its business advantage.
 
-![Quick access flow](/projects/registration-crisis/reg-image-6.png)
+![Quick access flow](/projects/registration-crisis/reg-image-6.webp)
 
 ---
 

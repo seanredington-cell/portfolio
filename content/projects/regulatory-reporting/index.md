@@ -4,15 +4,15 @@ name: "Regulatory Reporting"
 company: "CYGNVS"
 description: "Patented product that uses LLMs to empower users impacted by a cyber security incident to stay compliant with government regulations through collaboration and reporting."
 tldr: "Patented product that uses LLMs to empower users impacted by a cyber security incident to stay compliant with government regulations through collaboration and reporting."
-logo: "/icon-cygnvs-2.png"
+logo: "/icon-cygnvs-2.webp"
 logoPlaceholder: "📊"
 logoColor: "#3B82F6"
 accentColor: "59, 130, 246"
 protected: true
 password: "letmein"
-image: "/projects/regulatory-reporting/iso_1_rectangle.png"
+image: "/projects/regulatory-reporting/iso_1_rectangle.webp"
 layeredImages:
-  background: "/projects/regulatory-reporting/reporting-hero-bg.png"
+  background: "/projects/regulatory-reporting/reporting-hero-bg.webp"
   floatingIcons:
     - src: "/projects/regulatory-reporting/reporting-icon-2.svg"
       position: "top-left"
@@ -44,7 +44,7 @@ CYGNVS is a collaborative out-of-band incident response platform. In the event o
 
 Due to the functionality of CYGNVS, it was decided that we would explore if the platform could be used to help people comply with these new laws.
 
-![Notes on V1 of Reporting](/projects/regulatory-reporting/rep-image-1.png)
+![Notes on V1 of Reporting](/projects/regulatory-reporting/rep-image-1.webp)
 
 ---
 
@@ -87,13 +87,13 @@ CYGNVS is structured using spaces called Rooms, each of which are used for one i
 
 A Workstream contains a number of different modules that allow users to communicate with each other, track workflow and capture important information about the incident among other things.
 
-![CYGNVS platform structure](/projects/regulatory-reporting/rep-image-2.png)
+![CYGNVS platform structure](/projects/regulatory-reporting/rep-image-2.webp)
 
 I identified that by changing how we displayed one of our modules from a table to a form, we could make it quite simple for users to capture information about the report in a workstream.
 
 This meant that the Workstream would be the foundation on which we built this feature.
 
-![Table to form transformation](/projects/regulatory-reporting/rep-image-3.png)
+![Table to form transformation](/projects/regulatory-reporting/rep-image-3.webp)
 
 Once designs were shared with stakeholders including our CEO, CTO and VP of engineering, we had the green light to explore what the future of reporting might look like.
 
@@ -103,13 +103,13 @@ It was clear we were missing two major components of the reporting journey - sel
 
 A library of all reports was created which allowed users to search and filter. Upon selecting a report users were provided with additional information on the report before creating it.
 
-![Report library](/projects/regulatory-reporting/rep-image-4.png)
+![Report library](/projects/regulatory-reporting/rep-image-4.webp)
 
 Submitting a report was tricky as most needed to be submitted by law-firms directly to an agency. We made the strategic decision to not actually allow for the submission of the reports using our platform as it was incredibly complex. Instead, we enabled users to lock a version of that report which would then be saved as a correctly formatted .PDF which was ready for submission.
 
 From speaking with the law firms, we recognised that reports may need multiple revisions, so users were able to unlock the report to continue working on them, while still having a version history of the report saved in the platform for future reference.
 
-![Report submission flow](/projects/regulatory-reporting/rep-image-5.png)
+![Report submission flow](/projects/regulatory-reporting/rep-image-5.webp)
 
 Once completed, we looked at how we could improve the experience of filling out the report itself.
 
@@ -119,13 +119,13 @@ Within a Room, lots of information was being captured in different workstreams. 
 
 After discussions with internal experts around how this information should be surfaced, it became clear that it would live on a side panel within the reporting page. I iterated on a number of different ways which this could be done.
 
-![Side panel iterations](/projects/regulatory-reporting/rep-image-6.png)
+![Side panel iterations](/projects/regulatory-reporting/rep-image-6.webp)
 
 Once a user selected a field within a report, the panel would show cards with related information in the room they were in, allowing them to leverage this information to ensure that the report was filled out correctly. Users could also search from this side panel for all of the information in the room.
 
 To develop trust in this feature, it was given a name; *CYGNVS Co-Pilot* (later changed numerous times) with a plan to use it to help users complete reports accurately.
 
-![Report with side panel](/projects/regulatory-reporting/rep-image-7.png)
+![Report with side panel](/projects/regulatory-reporting/rep-image-7.webp)
 
 Being able to add this information to reports was very well received, however, it did bring with itself a new set of challenges.
 
@@ -133,15 +133,15 @@ Being able to add this information to reports was very well received, however, i
 
 Linking information from outside of the report, to fields within the report created quite a few complex scenarios that needed to be accounted for. To map all of these out, I created a task flow that included all of the possible actions that could take place when a user selected a field.
 
-![Task flow for reporting](/projects/regulatory-reporting/rep-image-8.png)
+![Task flow for reporting](/projects/regulatory-reporting/rep-image-8.webp)
 
 Using this task flow as a reference I then worked through each of the flows and created high fidelity UI.
 
-![Linking information flow](/projects/regulatory-reporting/rep-image-9.png)
+![Linking information flow](/projects/regulatory-reporting/rep-image-9.webp)
 
 As one of the key problems we were trying to solve for was related to compliance in the event of a court summoning, we needed to ensure that all of the data and changes within a report were recorded. To solve for this, we added a field level activity log that tracked all of the updates to that field.
 
-![Activity log](/projects/regulatory-reporting/rep-image-10.png)
+![Activity log](/projects/regulatory-reporting/rep-image-10.webp)
 
 ### Phase 5 - HMW enable more efficient collaboration within a report
 
@@ -149,7 +149,7 @@ Lots of different people were collaborating on filling out reports so ensuring t
 
 Reports had a comment section which was at the bottom of the page. Moving this comment section to a field level allows users to contextually comment while being able to see the updates that had taken place on that field.
 
-![Field-level updates and comments](/projects/regulatory-reporting/rep-image-11.png)
+![Field-level updates and comments](/projects/regulatory-reporting/rep-image-11.webp)
 
 ### Phase 6 - HMW guide users to complete reports correctly
 
@@ -157,7 +157,7 @@ I wanted to further explore the idea of the CYGNVS Co-Pilot and where it could b
 
 By adding suggested reports based on the information that was in other workstreams, it would show its usefulness. This would help users that knew they needed to fill out reports, but were unsure of which reports needed to be completed.
 
-![Report suggestions](/projects/regulatory-reporting/rep-image-12.png)
+![Report suggestions](/projects/regulatory-reporting/rep-image-12.webp)
 
 The load time and accuracy of the recommendations were also improved. By using a universal sentence encoder, the accuracy and speed of the results were greatly increased, leading to a much snappier report filling experience for the user.
 

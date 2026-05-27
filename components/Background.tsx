@@ -34,7 +34,7 @@ export default function Background() {
       <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none opacity-30">
         <div className="relative w-full h-full">
           <Image
-            src="/background-gradient.jpg"
+            src="/background-gradient.webp"
             alt="Background gradient"
             fill
             className="object-cover"

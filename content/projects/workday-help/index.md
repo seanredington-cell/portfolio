@@ -4,18 +4,18 @@ name: "Workday Help"
 company: "WORKDAY"
 description: "Optimising Workday's fastest selling product for web and mobile apps."
 tldr: "Optimising Workday's fastest selling product for web and mobile apps."
-logo: "/wday-logo.png"
+logo: "/wday-logo.webp"
 logoPlaceholder: "💼"
 logoColor: "#E65100"
 accentColor: "230, 81, 0"
 protected: true
 password: "letmein"
 layeredImages:
-  background: "/projects/workday-help/wday-mac-m.png"
+  background: "/projects/workday-help/wday-mac-m.webp"
   floatingDevices:
-    - src: "/projects/workday-help/wday-phone-L.png"
+    - src: "/projects/workday-help/wday-phone-L.webp"
       position: "left"
-    - src: "/projects/workday-help/wday-phone-R.png"
+    - src: "/projects/workday-help/wday-phone-R.webp"
       position: "right"
 tags:
   sector: "Enterprise HR"
@@ -39,7 +39,7 @@ I was fortunate to get to work across both teams on both web and mobile projects
 
 There were some basic screens built out by the developers using Workday's proprietary coding language Xpresso (XO), however these fell far short of the mark with regards to the user experience that we were pushing for, and given the interest in the product as a whole, we were granted the opportunity to re-work these screens using custom components after conducting a thorough round of design and research iterations.
 
-![Initial screens for Help prior to any major design investment](/projects/workday-help/wday-image-1.png)
+![Initial screens for Help prior to any major design investment](/projects/workday-help/wday-image-1.webp)
 
 ---
 
@@ -71,9 +71,9 @@ Along with the help of a senior designer, and with the support of a researcher, 
 
 In one case, we ran an express Dscout mission with over 30 participants to gain user feedback on the desktop screens and find out how we could go about improving them. We took notes on all the videos submitted by users in Dscout on our Miro board which we then grouped and turned into insights to allow us to iterate effectively on our designs.
 
-![MIRO was used to capture information during the usability testing](/projects/workday-help/wday-image-2.png)
+![MIRO was used to capture information during the usability testing](/projects/workday-help/wday-image-2.webp)
 
-![Miro board for usability testing](/projects/workday-help/wday-image-3.png)
+![Miro board for usability testing](/projects/workday-help/wday-image-3.webp)
 
 ---
 
@@ -83,7 +83,7 @@ In one case, we ran an express Dscout mission with over 30 participants to gain 
 
 Help Center is the central point of entry for Workday users that wish to have their query answered. Users can find answers based on categories or trending knowledge base articles, view their recently created cases, or create a case to get assistance from a HR professional.
 
-![Help Center final designs on both web and native mobile apps](/projects/workday-help/wday-image-4.png)
+![Help Center final designs on both web and native mobile apps](/projects/workday-help/wday-image-4.webp)
 
 ### Create Case on Mobile
 
@@ -95,13 +95,13 @@ To do this, we surfaced articles to users related to the case type that they wer
 
 When we tested this, users' were delighted that they could find answers themselves instead of having to wait for someone to respond to their case.
 
-![Create Case on mobile. Multiple iterations of this were tested extensively before finalising the design](/projects/workday-help/wday-image-5.png)
+![Create Case on mobile. Multiple iterations of this were tested extensively before finalising the design](/projects/workday-help/wday-image-5.webp)
 
 ### Your Cases
 
 Once a case had been created, users needed a way to track the progress of that case on both web and mobile, and easily reply to case solvers to enable them to solve their cases as swiftly as possible.
 
-![Your Cases view on web and mobile](/projects/workday-help/wday-image-6.png)
+![Your Cases view on web and mobile](/projects/workday-help/wday-image-6.webp)
 
 ---
 

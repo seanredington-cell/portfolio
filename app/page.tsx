@@ -112,7 +112,7 @@ export default function Home() {
                 }}
               >
                 <img
-                  src="/about-hero/headshot-image.png"
+                  src="/about-hero/headshot-image.webp"
                   alt="Seán Redington"
                   className="w-full h-full object-cover"
                 />

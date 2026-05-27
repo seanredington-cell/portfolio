@@ -56,13 +56,9 @@ function HeroImageComposition({ heroLayers, name, groupFloat = false }: { heroLa
 
   if (groupFloat) {
     return (
-      <motion.div
-        className="relative w-full aspect-[4/5] flex items-center justify-center"
-        animate={reducedMotion ? undefined : { y: [0, -8, 0] }}
-        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-      >
+      <div className="relative w-full aspect-[4/5] flex items-center justify-center">
         {layers}
-      </motion.div>
+      </div>
     );
   }
 
@@ -620,10 +616,8 @@ function ProjectCard({
         <a href={`/projects/${project.id}`} className="lg:hidden flex flex-col gap-4 w-full max-w-2xl px-4 cursor-pointer group relative">
           <div className="w-full max-w-md mx-auto aspect-video relative rounded-lg overflow-visible">
             {project.layeredImages ? (
-              <motion.div
+              <div
                 className="w-full h-full relative flex items-center justify-center"
-                animate={reducedMotion ? undefined : { y: [0, -8, 0] }}
-                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
               >
                 {false && project.accentColor && (
                   <>
@@ -907,20 +901,16 @@ function ProjectCard({
                   />
                 )}
 
-              </motion.div>
+              </div>
             ) : project.image ? (
-              <motion.div
-                className="relative w-full h-full"
-                animate={reducedMotion ? undefined : { y: [0, -8, 0] }}
-                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-              >
+              <div className="relative w-full h-full">
                 <Image
                   src={project.image}
                   alt={project.name}
                   fill
                   className="object-cover"
                 />
-              </motion.div>
+              </div>
             ) : (
               <div className="w-full h-full flex items-center justify-center text-accent-primary/30 text-sm">
                 {project.imagePlaceholder}
@@ -1015,11 +1005,7 @@ function ProjectCard({
         <div className="lg:hidden flex flex-col gap-4 w-full max-w-2xl px-4">
           <div className="w-full max-w-[224px] mx-auto aspect-square relative rounded-lg overflow-visible">
             {project.heroLayers ? (
-              <motion.div
-                className="relative w-full h-full flex items-center justify-center"
-                animate={reducedMotion ? undefined : { y: [0, -8, 0] }}
-                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-              >
+              <div className="relative w-full h-full flex items-center justify-center">
                 <div className="absolute" style={{ width: '55%', height: '55%', top: '20%', left: '22%' }}>
                   <Image src={project.heroLayers.background} alt="Background" fill className="object-contain" />
                 </div>
@@ -1041,7 +1027,7 @@ function ProjectCard({
                 <div className="absolute" style={{ width: '18%', height: '18%', bottom: '14%', left: '20%', filter: 'drop-shadow(0 8px 20px rgba(0,0,0,0.15))' }}>
                   <Image src={project.heroLayers.logoGetmee} alt="Getmee" fill className="object-contain" />
                 </div>
-              </motion.div>
+              </div>
             ) : project.image ? (
               <Image
                 src={project.image}

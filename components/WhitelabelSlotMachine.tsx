@@ -9,16 +9,16 @@ interface WhitelabelSlotMachineProps {
 }
 
 const apps = [
-  { id: 1, name: "Brand 1", image: "/projects/getmee/Slider image 1.png" },
-  { id: 2, name: "Brand 2", image: "/projects/getmee/Slider image 2.png" },
-  { id: 3, name: "Brand 3", image: "/projects/getmee/Slider image 3.png" },
-  { id: 4, name: "Brand 4", image: "/projects/getmee/Slider image 4.png" },
-  { id: 5, name: "Brand 5", image: "/projects/getmee/Slider image 5.png" },
-  { id: 6, name: "Brand 6", image: "/projects/getmee/Slider image 6.png" },
-  { id: 7, name: "Brand 7", image: "/projects/getmee/Slider image 7.png" },
-  { id: 8, name: "Brand 8", image: "/projects/getmee/Slider image 8.png" },
-  { id: 9, name: "Brand 9", image: "/projects/getmee/Slider image 9.png" },
-  { id: 10, name: "Brand 10", image: "/projects/getmee/Slider image 10.png" },
+  { id: 1, name: "Brand 1", image: "/projects/getmee/Slider image 1.webp" },
+  { id: 2, name: "Brand 2", image: "/projects/getmee/Slider image 2.webp" },
+  { id: 3, name: "Brand 3", image: "/projects/getmee/Slider image 3.webp" },
+  { id: 4, name: "Brand 4", image: "/projects/getmee/Slider image 4.webp" },
+  { id: 5, name: "Brand 5", image: "/projects/getmee/Slider image 5.webp" },
+  { id: 6, name: "Brand 6", image: "/projects/getmee/Slider image 6.webp" },
+  { id: 7, name: "Brand 7", image: "/projects/getmee/Slider image 7.webp" },
+  { id: 8, name: "Brand 8", image: "/projects/getmee/Slider image 8.webp" },
+  { id: 9, name: "Brand 9", image: "/projects/getmee/Slider image 9.webp" },
+  { id: 10, name: "Brand 10", image: "/projects/getmee/Slider image 10.webp" },
 ];
 
 // Image native dimensions

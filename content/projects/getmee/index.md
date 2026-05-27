@@ -7,16 +7,16 @@ tldr: "How systems thinking turned a collection of isolated features into a conn
 logo: "/projects/getmee/logo.svg"
 logoColor: "#E17033"
 accentColor: "225, 112, 51"
-image: "/projects/getmee/Getmee_whitelabel_app_prior_to_arrival.png"
+image: "/projects/getmee/Getmee_whitelabel_app_prior_to_arrival.webp"
 layeredImages:
-  background: "/projects/getmee/hero/background.png"
-  foreground: "/projects/getmee/hero/front.png"
+  background: "/projects/getmee/hero/background.webp"
+  foreground: "/projects/getmee/hero/front.webp"
   floatingCards:
-    - src: "/projects/getmee/hero/card-1.png"
+    - src: "/projects/getmee/hero/card-1.webp"
       position: "top-right"
-    - src: "/projects/getmee/hero/card-2.png"
+    - src: "/projects/getmee/hero/card-2.webp"
       position: "middle-right"
-    - src: "/projects/getmee/hero/card-3.png"
+    - src: "/projects/getmee/hero/card-3.webp"
       position: "bottom-right"
 tags:
   sector: "EdTech"
@@ -36,7 +36,7 @@ Getmee is an AI EdTech platform serving universities, employment services, and l
 
 When I joined Getmee, the 12-person development team was drowning in customer requests with no real prioritisation framework. Each new item was given the highest priority, and without any real processes across the product lifecycle, much of the work was fragmented and half complete.
 
-![Example of some key screens from one of the whitelabel apps when I first started](/projects/getmee/Getmee_whitelabel_app_prior_to_arrival.png)
+![Example of some key screens from one of the whitelabel apps when I first started](/projects/getmee/Getmee_whitelabel_app_prior_to_arrival.webp)
 
 ## Building the foundation
 
@@ -64,13 +64,13 @@ With a solid foundation in place, I shifted focus to tightening the product itse
 
 I started by reducing friction. Passwordless registration replaced the confusing password flow, and I spent significant time fixing stability issues impacting all white-label apps. These weren't headline features, but they compounded into far fewer support requests and greater trust in the product.
 
-![Passwordless registration flow](/projects/getmee/Getmee_Registration.png)
+![Passwordless registration flow](/projects/getmee/Getmee_Registration.webp)
 
 The English Level Test was another critical upgrade. Previously it was just a standalone assessment that students took once and forgot about. This was a nice feature, but it could be expanded upon to address a real user problem: learners with lower English proficiency found the app frustrating because AI-generated content was using vocabulary way past their level.
 
 With the help of the English teachers, I updated the Test, adding new question types, actionable feedback, and most importantly ensured that the assessed level now informed content difficulty across the app. It went from a standalone feature to the engine behind the user's learning experience.
 
-![English Level Test before and after](/projects/getmee/English_Test_Results.png)
+![English Level Test before and after](/projects/getmee/English_Test_Results.webp)
 
 I also built per-role navigation so students, teachers, and admins saw different experiences, and created Resources and Courses systems so that organisations could plug in their own training material. With 15+ white-label apps serving different contexts, this configurability was essential for our growth.
 
@@ -86,7 +86,7 @@ When digging deep though, the real problem emerged: **teachers didn't have time 
 
 Meanwhile, students using the app faced the other side of that problem; **if teachers don't create, assign and monitor tasks, then students didn't know what to do**. The app was full of valuable features (AI interview simulations, flashcards, pronunciation practice, soft skills training) but they existed in isolation. There was no clear path for how using these features would translate to improved English proficiency.
 
-![App lack of structure](/projects/getmee/App_lack_of_structure.png)
+![App lack of structure](/projects/getmee/App_lack_of_structure.webp)
 
 ## Identifying Opportunities
 
@@ -101,7 +101,7 @@ Following the user and customer conversations, I conducted competitor analysis u
 
 The platforms I looked at did a good job of solving English learner engagement, but none of them were built with employment at the core. For our users (immigrants, students and job seekers), that's the end goal. The opportunity for us was to combine employability-focused features with personalised CEFR-aligned learning journeys that required zero teacher management.
 
-![Competitive analysis findings](/projects/getmee/image.png)
+![Competitive analysis findings](/projects/getmee/image.webp)
 
 ## Designing the System, not just the feature
 
@@ -119,17 +119,17 @@ We didn't just need to build an AI task generator and leave it at that. I had to
 
 The app's home page was restructured to show users their clear next action, reducing any ambiguity or decision fatigue for them. AI generated tasks, made up of all of the app's key features, unlocked each day, creating a mild sense of urgency for users. Each time a user completed a task they earned points, which added up to unlock English Level Tests that tracked their progress over time.
 
-![English Learning Journey](/projects/getmee/English_Journey_Images.png)
+![English Learning Journey](/projects/getmee/English_Journey_Images.webp)
 
 **Teacher dashboard:** Teachers could view and adjust each student's level from the dashboard. They could also continue to create their own tasks with a refreshed UX. All person-generated content would be prioritised on the students' app, ensuring teacher content always took precedence over AI-generated content.
 
-![Teacher Dashboard Mockup](/projects/getmee/Members_mockup.png)
+![Teacher Dashboard Mockup](/projects/getmee/Members_mockup.webp)
 
 The real work in this project was in defining quality, building multi-level feedback loops, and restructuring the product experience so that everything, from onboarding to daily tasks to level progression, felt like a coherent journey rather than a collection of features.
 
 I wrote the system prompts. I designed the QA rubric. I specified the confidence thresholds. I learned to design the *behaviour* of the AI, not just the UI around it.
 
-![System Flow](/projects/getmee/system_flow_image.png)
+![System Flow](/projects/getmee/system_flow_image.webp)
 
 ## Early Validation
 

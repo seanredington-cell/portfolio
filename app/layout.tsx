@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/about-hero/headshot-image.png",
+        url: "/about-hero/headshot-image.webp",
         width: 800,
         height: 800,
         alt: "Seán Redington",
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Seán Redington - UX Portfolio",
     description: "A practical problem solver that does more than push pixels.",
-    images: ["/about-hero/headshot-image.png"],
+    images: ["/about-hero/headshot-image.webp"],
   },
 };
 
