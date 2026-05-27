@@ -6,7 +6,7 @@ import Background from "@/components/Background";
 import TestimonialCarousel from "@/components/TestimonialCarousel";
 import { useEffect, useState, useRef } from "react";
 import { projectData } from "@/data/projects";
-import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function Home() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -132,23 +132,14 @@ export default function Home() {
         )}
       </AnimatePresence>
 
-      <motion.main
+      <main
         ref={containerRef}
         className="min-h-screen relative"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: isLoading ? 0 : 1 }}
-        transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
       >
-      <motion.div
-        initial={{ opacity: 0, scale: 1.05 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-      >
-        <Background />
-      </motion.div>
+      <Background />
 
       {/* Dynamic color overlay with wash effect */}
-      <motion.div
+      <div
         className="fixed inset-0 -z-5 pointer-events-none opacity-10"
         style={{
           background: `
@@ -157,13 +148,7 @@ export default function Home() {
         }}
       />
 
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-      >
         <Projects />
-      </motion.div>
       {/* Testimonials section */}
       <section className="pt-0 pb-16 sm:pb-24 overflow-hidden">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-8">
@@ -190,7 +175,7 @@ export default function Home() {
       </section>
 
       <Footer />
-    </motion.main>
+    </main>
     </>
   );
 }

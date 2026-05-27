@@ -127,7 +127,7 @@ function HeroSection() {
         {/* Mobile layout */}
         <div className="relative z-10 lg:hidden flex flex-col gap-0">
           {/* Image */}
-          <div className="w-full max-w-xs mx-auto px-8 pt-4">
+          <div className="w-full max-w-[200px] mx-auto px-4 pt-2">
             {p.heroLayers && <HeroImageComposition heroLayers={p.heroLayers} name={p.name} groupFloat />}
           </div>
           {/* Text */}
@@ -601,6 +601,9 @@ function ProjectCard({
     return cardOpacity.on('change', (latest) => setCurrentOpacity(latest));
   }, [cardOpacity]);
 
+  // Don't render images for cards that are fully invisible — saves memory on mobile
+  const isVisible = currentOpacity > 0;
+
   return (
     <motion.div
       className="absolute inset-0 w-full h-full flex items-center justify-center"
@@ -611,8 +614,8 @@ function ProjectCard({
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Mobile Layout: Stacked vertically with fade-in */}
-      {!project.isHero ? (
+      {/* Only render content when card is visible — prevents all images loading into memory simultaneously */}
+      {isVisible && !project.isHero ? (
         <a href={`/projects/${project.id}`} className="lg:hidden flex flex-col gap-4 w-full max-w-2xl px-4 cursor-pointer group relative">
           <div className="w-full max-w-md mx-auto aspect-video relative rounded-lg overflow-visible">
             {project.layeredImages ? (
@@ -1001,7 +1004,7 @@ function ProjectCard({
             </div>
           </div>
         </a>
-      ) : (
+      ) : isVisible ? (
         <div className="lg:hidden flex flex-col gap-4 w-full max-w-2xl px-4">
           <div className="w-full max-w-[224px] mx-auto aspect-square relative rounded-lg overflow-visible">
             {project.heroLayers ? (
@@ -1137,10 +1140,10 @@ function ProjectCard({
 
           </div>
         </div>
-      )}
+      ) : null}
 
       {/* Desktop Layout: Side-by-side */}
-      <div className="hidden lg:flex items-center justify-center gap-4 w-full relative">
+      {isVisible && <div className="hidden lg:flex items-center justify-center gap-4 w-full relative">
 
         {project.isHero ? (
           <>
@@ -1616,7 +1619,7 @@ function ProjectCard({
             />
           </>
         )}
-      </div>
+      </div>}
     </motion.div>
   );
 }
