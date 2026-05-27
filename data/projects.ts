@@ -20,6 +20,7 @@ export interface Project {
   description: string;
   tldr?: string; // Short TLDR summary for project detail page
   image?: string;
+  mobileImage?: string; // Flat composited image for mobile snap view (avoids layered image memory cost)
   layeredImages?: {
     background: string;
     foreground?: string;

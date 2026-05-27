@@ -69,9 +69,9 @@ function HeroImageComposition({ heroLayers, name, groupFloat = false }: { heroLa
   );
 }
 
-function HeroTags({ tags }: { tags: NonNullable<typeof heroData['tags']> }) {
+function HeroTags({ tags, center = false }: { tags: NonNullable<typeof heroData['tags']>, center?: boolean }) {
   return (
-    <div className="flex flex-wrap items-center gap-2">
+    <div className={`flex flex-wrap items-center gap-2 ${center ? 'justify-center' : ''}`}>
       {tags.role && (
         <span className="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-md shadow-sm bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
           <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
@@ -97,10 +97,48 @@ function HeroTags({ tags }: { tags: NonNullable<typeof heroData['tags']> }) {
 function HeroSection() {
   const p = heroData;
   return (
-    <section className="w-full flex items-center justify-center px-4 sm:px-6 lg:px-16 py-4 sm:py-12 lg:py-20 min-h-0 lg:min-h-screen">
-      {/* Glow + card wrapper */}
-      <div className="relative w-full max-w-6xl">
-        {/* Glow — wraps the whole card, stronger at top-left and bottom-right */}
+    <section className="w-full flex items-center justify-center px-4 sm:px-6 lg:px-16 pt-20 pb-4 sm:py-12 lg:py-20 min-h-0 lg:min-h-screen">
+
+      {/* Mobile layout — no card, centre aligned */}
+      <div className="lg:hidden w-full flex flex-col items-center gap-0 text-center">
+        {/* Image */}
+        <div className="w-full max-w-[200px] mx-auto px-4 pt-2">
+          {p.heroLayers && <HeroImageComposition heroLayers={p.heroLayers} name={p.name} groupFloat />}
+        </div>
+        {/* Text */}
+        <div className="px-2 pb-6 space-y-3 w-full">
+          <div className="flex flex-col items-center gap-1">
+            <p className="text-xs font-medium tracking-widest uppercase text-gray-400 dark:text-gray-400">{p.name}</p>
+            <div className="flex items-center justify-center gap-1.5">
+              <span className="relative flex h-2 w-2 flex-shrink-0">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-orange-400" />
+              </span>
+              <span className="text-sm text-orange-500 dark:text-orange-400 font-medium">Open to new opportunities</span>
+            </div>
+          </div>
+          {p.tagline && (
+            <p className="text-xl text-gray-900 dark:text-gray-100 font-bold leading-snug">
+              {p.tagline.split('\n')[0]}
+            </p>
+          )}
+          {p.tagline && p.tagline.split('\n')[1] && (
+            <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">{p.tagline.split('\n')[1]}</p>
+          )}
+          {p.tags && <HeroTags tags={p.tags} center />}
+          {/* Currently shelf — full width on mobile */}
+          <div
+            className="rounded-2xl px-3 py-3 backdrop-blur-sm bg-white/50 dark:bg-gray-800/50 border border-white/70 dark:border-gray-700/60"
+            style={{ boxShadow: '0 2px 12px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.7)' }}
+          >
+            <CurrentlyShelf fillWidth />
+          </div>
+        </div>
+      </div>
+
+      {/* Desktop: glow + glassmorphic card */}
+      <div className="relative w-full max-w-6xl hidden lg:block">
+        {/* Glow */}
         <div
           className="absolute pointer-events-none"
           style={{
@@ -114,54 +152,15 @@ function HeroSection() {
             filter: 'blur(24px)',
           }}
         />
-      {/* Glassmorphic card */}
-      <div
-        className="relative w-full rounded-3xl overflow-hidden border border-white/50 dark:border-gray-700/60"
-        style={{
-          backdropFilter: 'blur(20px)',
-          boxShadow: '0 8px 48px rgba(0,0,0,0.10), inset 0 1px 0 rgba(255,255,255,0.8)',
-        }}
-      >
-        <div className="absolute inset-0 rounded-3xl bg-white/55 dark:bg-gray-900/80 pointer-events-none" />
-
-        {/* Mobile layout */}
-        <div className="relative z-10 lg:hidden flex flex-col gap-0">
-          {/* Image */}
-          <div className="w-full max-w-[200px] mx-auto px-4 pt-2">
-            {p.heroLayers && <HeroImageComposition heroLayers={p.heroLayers} name={p.name} groupFloat />}
-          </div>
-          {/* Text */}
-          <div className="px-6 pb-6 space-y-3">
-            <div className="flex flex-col gap-1">
-              <p className="text-xs font-medium tracking-widest uppercase text-gray-400 dark:text-gray-400">{p.name}</p>
-              <div className="flex items-center gap-1.5">
-                <span className="relative flex h-2 w-2 flex-shrink-0">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75" />
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-orange-400" />
-                </span>
-                <span className="text-sm text-orange-500 dark:text-orange-400 font-medium">Open to new opportunities</span>
-              </div>
-            </div>
-            {p.tagline && (
-              <p className="text-xl text-gray-900 dark:text-gray-100 font-bold leading-snug">
-                {p.tagline.split('\n')[0]}
-              </p>
-            )}
-            {p.tagline && p.tagline.split('\n')[1] && (
-              <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">{p.tagline.split('\n')[1]}</p>
-            )}
-            {p.tags && <HeroTags tags={p.tags} />}
-            {/* Currently shelf — full width on mobile */}
-            <div
-              className="rounded-2xl px-3 py-3 backdrop-blur-sm bg-white/50 dark:bg-gray-800/50 border border-white/70 dark:border-gray-700/60"
-              style={{
-                boxShadow: '0 2px 12px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.7)',
-              }}
-            >
-              <CurrentlyShelf fillWidth />
-            </div>
-          </div>
-        </div>
+        {/* Glassmorphic card */}
+        <div
+          className="relative w-full rounded-3xl overflow-hidden border border-white/50 dark:border-gray-700/60"
+          style={{
+            backdropFilter: 'blur(20px)',
+            boxShadow: '0 8px 48px rgba(0,0,0,0.10), inset 0 1px 0 rgba(255,255,255,0.8)',
+          }}
+        >
+          <div className="absolute inset-0 rounded-3xl bg-white/55 dark:bg-gray-900/80 pointer-events-none" />
 
         {/* Desktop layout — 40/60 split */}
         <div className="relative z-10 hidden lg:flex items-center min-h-[480px]">
@@ -210,11 +209,211 @@ function HeroSection() {
                 <HeroImageComposition heroLayers={p.heroLayers} name={p.name} />
               </div>
             )}
+          </div>{/* end image column */}
+        </div>{/* end desktop flex layout */}
+        </div>{/* end glassmorphic card */}
+      </div>{/* end hidden lg:block */}
+    </section>
+  );
+}
+
+/**
+ * Static layered image composition for mobile list cards.
+ * Same assets as desktop but no animations — keeps memory and CPU low.
+ */
+function MobileLayeredImage({ project }: { project: typeof projectData[0] }) {
+  if (!project.layeredImages && !project.image) {
+    return (
+      <div className="w-full h-full flex items-center justify-center text-5xl">
+        {project.logoPlaceholder}
+      </div>
+    );
+  }
+
+  if (!project.layeredImages) {
+    return (
+      <div className="relative w-full h-full">
+        <Image src={project.image!} alt={project.name} fill className="object-contain" sizes="(max-width: 1024px) 100vw" />
+      </div>
+    );
+  }
+
+  const { background, foreground, floatingIcons, floatingDevices, floatingCards } = project.layeredImages;
+
+  // Getmee floating cards
+  if (project.id === 'getmee' && floatingCards) {
+    return (
+      <GetmeeHeroShared
+        background={background}
+        foreground={foreground!}
+        cards={floatingCards}
+        name={project.name}
+      />
+    );
+  }
+
+  const getIconPos = (position: string): React.CSSProperties => {
+    switch (position) {
+      case 'top-left':    return { top: '20%', left: '2%' };
+      case 'top-right':   return { top: '28%', right: '-3%' };
+      case 'middle-left': return { top: '60%', left: '-5%' };
+      case 'middle-right':return { top: '55%', right: '-4%' };
+      case 'bottom-center':return { bottom: '20%', left: '48%' };
+      case 'bottom-left': return { bottom: '15%', left: '8%' };
+      default:            return { top: '50%', left: '50%', transform: 'translate(-50%,-50%)' };
+    }
+  };
+
+  const getDevicePos = (position: string): React.CSSProperties => {
+    switch (position) {
+      case 'left':  return { top: '25%', left: '-5%', transform: 'translateY(-50%)' };
+      case 'right': return { top: '25%', right: '-5%', transform: 'translateY(-50%)' };
+      default:      return { top: '50%', left: '50%', transform: 'translate(-50%,-50%)' };
+    }
+  };
+
+  return (
+    <div className="relative w-full h-full flex items-center justify-center">
+      {/* Background */}
+      {background && !floatingCards && (
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="relative w-[115%] aspect-video">
+            <Image src={background} alt={`${project.name} background`} fill className="object-contain" sizes="(max-width: 1024px) 100vw" />
           </div>
         </div>
-      </div>
-      </div>
-    </section>
+      )}
+
+      {/* Floating icons */}
+      {floatingIcons?.map((icon, i) => (
+        <div key={i} className="absolute w-8 h-8" style={getIconPos(icon.position)}>
+          <Image src={icon.src} alt="" fill className="object-contain" />
+        </div>
+      ))}
+
+      {/* Floating devices */}
+      {floatingDevices?.map((device, i) => (
+        <div key={i} className="absolute w-[22%] aspect-[9/19]"
+          style={{ ...getDevicePos(device.position), filter: 'drop-shadow(0 15px 30px rgba(0,0,0,0.25))' }}>
+          <Image src={device.src} alt="" fill className="object-contain" />
+        </div>
+      ))}
+
+      {/* Foreground */}
+      {foreground && !floatingCards && (
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="relative w-[65%] aspect-video" style={{ filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.4))' }}>
+            <Image src={foreground} alt={project.name} fill className="object-contain" sizes="(max-width: 1024px) 100vw" />
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+/**
+ * Mobile Projects List
+ *
+ * Simple vertical scroll list for mobile — no JS on the scroll thread,
+ * no sticky positioning, no Framer Motion. Just cards.
+ */
+function MobileProjectsList({ isDark }: { isDark: boolean }) {
+  const bc = (hex: string | undefined) => {
+    const color = hex || "#1a1a1a";
+    return isDark ? lightenForDark(color) : color;
+  };
+
+  return (
+    <div className="flex flex-col gap-6 px-4 pb-8">
+      {projectData.map((project) => (
+        <div key={project.id} className="relative rounded-3xl overflow-hidden border border-white/50 dark:border-gray-700/60"
+          style={{
+            backdropFilter: 'blur(20px)',
+            boxShadow: '0 8px 48px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.8)',
+          }}
+        >
+          {/* Card background */}
+          <div className="absolute inset-0 bg-white/55 dark:bg-gray-900/80 pointer-events-none" />
+
+          {/* Accent glow */}
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{ background: `radial-gradient(ellipse at 50% 0%, rgba(${project.accentColor}, 0.09) 0%, transparent 65%)` }}
+          />
+
+        <a
+          href={`/projects/${project.id}`}
+          className="relative z-10 flex flex-col gap-5 px-5 py-8 group"
+        >
+
+          {/* Image */}
+          <div className="relative z-10 w-full max-w-md mx-auto aspect-video">
+            <MobileLayeredImage project={project} />
+          </div>
+
+          {/* Text */}
+          <div className="relative z-10 flex flex-col items-center text-center gap-4">
+            {/* Eyebrow */}
+            <div className="flex items-center justify-center gap-2">
+              {(project.logo || project.logoPlaceholder) && (
+                <div
+                  className="w-5 h-5 rounded-sm flex items-center justify-center text-xs shadow-sm overflow-hidden relative flex-shrink-0"
+                  style={{ backgroundColor: project.logoColor || "#E5E7EB" }}
+                >
+                  {project.logo ? (
+                    <Image src={project.logo} alt={project.company || project.name} fill className="object-contain" />
+                  ) : (
+                    project.logoPlaceholder
+                  )}
+                </div>
+              )}
+              <p className="text-xs font-medium tracking-widest uppercase text-gray-500 dark:text-gray-400">
+                {project.company ?? project.name}
+              </p>
+            </div>
+
+            {/* Title */}
+            <h3 className="text-xl font-bold leading-snug" style={{ color: bc(project.logoColor) }}>
+              {project.name}
+            </h3>
+
+            {/* Tags */}
+            {project.tags && (
+              <div className="flex flex-wrap justify-center gap-2">
+                {project.tags.role && (
+                  <span className="text-xs font-semibold px-3 py-1.5 rounded-md"
+                    style={{ color: bc(project.logoColor), backgroundColor: `${bc(project.logoColor)}1a` }}>
+                    {project.tags.role}
+                  </span>
+                )}
+                {project.tags.timeline && (
+                  <span className="text-xs font-semibold px-3 py-1.5 rounded-md"
+                    style={{ color: bc(project.logoColor), backgroundColor: `${bc(project.logoColor)}1a` }}>
+                    {project.tags.timeline}
+                  </span>
+                )}
+              </div>
+            )}
+
+            {/* Description */}
+            <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
+              {project.description}
+            </p>
+
+            {/* CTA */}
+            <div
+              className="w-full flex items-center justify-center gap-2 backdrop-blur-sm bg-white/10 dark:bg-gray-800/30 border border-white/60 dark:border-gray-700 text-gray-800 dark:text-gray-200 font-semibold px-6 py-2.5 rounded-full text-sm mt-1"
+              style={{ boxShadow: '0 8px 32px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.5)' }}
+            >
+              <span>Read more</span>
+              <svg className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
+            </div>
+          </div>
+        </a>
+        </div>
+      ))}
+    </div>
   );
 }
 
@@ -274,7 +473,14 @@ export default function Projects() {
   return (
     <>
     <HeroSection />
-    <section ref={containerRef} data-projects-container className="relative" style={{ height: `${projectData.length * 120}vh` }}>
+
+    {/* ── MOBILE: simple vertical list, zero JS on scroll thread ── */}
+    <div className="lg:hidden">
+      <MobileProjectsList isDark={isDark} />
+    </div>
+
+    {/* ── DESKTOP: existing sticky scroll mechanic ── */}
+    <section ref={containerRef} data-projects-container className="relative hidden lg:block" style={{ height: `${projectData.length * 120}vh` }}>
       {/* Fixed viewport - projects rotate through this */}
       <div className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden">
         {/* Content container with padding and max-width */}

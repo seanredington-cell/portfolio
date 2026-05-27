@@ -150,7 +150,7 @@ export default function Home() {
 
         <Projects />
       {/* Testimonials section */}
-      <section className="pt-0 pb-16 sm:pb-24 overflow-hidden">
+      <section className="pt-16 sm:pt-24 pb-4 sm:pb-8 overflow-hidden">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-8">
           <motion.h2
             initial={{ opacity: 0, y: 16 }}
