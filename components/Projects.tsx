@@ -1688,7 +1688,7 @@ function ProjectCard({
               </div>
             </div>
 
-            <div className="flex-1 min-w-0 aspect-[4/5] relative rounded-lg overflow-visible">
+            <div className="flex-1 min-w-0 aspect-square relative rounded-lg overflow-visible">
               {project.layeredImages ? (
                 <motion.div
                   className="w-full h-full relative flex items-center justify-center"
@@ -1807,7 +1807,7 @@ function ProjectCard({
                     src={project.image}
                     alt={project.name}
                     fill
-                    className="object-cover"
+                    className="object-contain"
                   />
                 </motion.div>
               ) : (
