@@ -14,8 +14,7 @@ import { useRef, useEffect, useState } from "react";
  * - Animated grid pattern
  */
 export default function Background() {
-  const { scrollY } = useScroll();
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(true); // default true = safe for SSR/mobile
 
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < 1024);
@@ -24,7 +23,8 @@ export default function Background() {
     return () => window.removeEventListener('resize', check);
   }, []);
 
-  // Parallax transforms — desktop only, static on mobile
+  // Scroll hooks — only used on desktop
+  const { scrollY } = useScroll();
   const layer1Y = useTransform(scrollY, [300, 1500], isMobile ? [0, 0] : [0, 150]);
   const layer2Y = useTransform(scrollY, [300, 1500], isMobile ? [0, 0] : [0, 250]);
   const layer3Y = useTransform(scrollY, [300, 1500], isMobile ? [0, 0] : [0, 100]);
@@ -36,122 +36,82 @@ export default function Background() {
       {/* Base layer - respects dark mode */}
       <div className="fixed inset-0 -z-20 bg-white dark:bg-gray-900" />
 
-      {/* Blurry gradient layer with parallax (desktop) / static (mobile) */}
-      <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none opacity-25 dark:opacity-10">
-        {/* Layer 1 */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 2, ease: "easeOut" }}
-          style={{ y: layer1Y }}
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1400px] h-[800px] sm:w-[1800px] sm:h-[1000px] lg:w-[2200px] lg:h-[1200px]"
-        >
-          <div
-            className="w-full h-full rounded-full blur-[120px] sm:blur-[150px] lg:blur-[180px]"
-            style={{
-              background: `
-                radial-gradient(
-                  circle at 50% 50%,
-                  rgba(59, 130, 246, 1) 0%,
-                  rgba(96, 165, 250, 0.75) 30%,
-                  rgba(147, 197, 253, 0.5) 60%,
-                  rgba(191, 219, 254, 0.25) 80%,
-                  transparent 100%
-                )
-              `,
-            }}
-          />
-        </motion.div>
+      {/* Gradient layer — blurred blobs on desktop, simple radial on mobile */}
+      {isMobile ? (
+        /* Mobile: single CSS gradient, zero GPU blur, zero JS */
+        <div className="fixed inset-0 -z-10 pointer-events-none" style={{
+          background: `
+            radial-gradient(ellipse 80% 50% at 20% 30%, rgba(59,130,246,0.07) 0%, transparent 70%),
+            radial-gradient(ellipse 60% 40% at 80% 70%, rgba(37,99,235,0.05) 0%, transparent 70%)
+          `
+        }} />
+      ) : (
+        <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none opacity-25 dark:opacity-10">
+          {/* Layer 1 */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 2, ease: "easeOut" }}
+            style={{ y: layer1Y }}
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[2200px] h-[1200px]"
+          >
+            <div
+              className="w-full h-full rounded-full blur-[180px]"
+              style={{
+                background: `radial-gradient(circle at 50% 50%, rgba(59,130,246,1) 0%, rgba(96,165,250,0.75) 30%, rgba(147,197,253,0.5) 60%, transparent 100%)`,
+              }}
+            />
+          </motion.div>
 
-        {/* Layer 2 */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 2, delay: 0.2, ease: "easeOut" }}
-          style={{ y: layer2Y }}
-          className="absolute top-1/3 right-1/4 w-[1000px] h-[600px] sm:w-[1200px] sm:h-[800px] lg:w-[1400px] lg:h-[900px]"
-        >
-          <div
-            className="w-full h-full rounded-full blur-[100px] sm:blur-[130px] lg:blur-[150px]"
-            style={{
-              background: `
-                radial-gradient(
-                  ellipse 80% 50% at 50% 50%,
-                  rgba(37, 99, 235, 1) 0%,
-                  rgba(59, 130, 246, 0.7) 40%,
-                  rgba(96, 165, 250, 0.5) 80%,
-                  transparent 100%
-                )
-              `,
-            }}
-          />
-        </motion.div>
+          {/* Layer 2 */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 2, delay: 0.2, ease: "easeOut" }}
+            style={{ y: layer2Y }}
+            className="absolute top-1/3 right-1/4 w-[1400px] h-[900px]"
+          >
+            <div
+              className="w-full h-full rounded-full blur-[150px]"
+              style={{
+                background: `radial-gradient(ellipse 80% 50% at 50% 50%, rgba(37,99,235,1) 0%, rgba(59,130,246,0.7) 40%, transparent 100%)`,
+              }}
+            />
+          </motion.div>
 
-        {/* Layer 3 */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 2, delay: 0.4, ease: "easeOut" }}
-          style={{ y: layer3Y }}
-          className="absolute bottom-1/4 left-1/3 w-[800px] h-[500px] sm:w-[1000px] sm:h-[600px] lg:w-[1200px] lg:h-[700px]"
-        >
-          <div
-            className="w-full h-full rounded-full blur-[90px] sm:blur-[120px] lg:blur-[140px]"
-            style={{
-              background: `
-                radial-gradient(
-                  ellipse 70% 45% at 50% 50%,
-                  rgba(29, 78, 216, 1) 0%,
-                  rgba(59, 130, 246, 0.75) 50%,
-                  transparent 100%
-                )
-              `,
-            }}
-          />
-        </motion.div>
+          {/* Layer 3 */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 2, delay: 0.4, ease: "easeOut" }}
+            style={{ y: layer3Y }}
+            className="absolute bottom-1/4 left-1/3 w-[1200px] h-[700px]"
+          >
+            <div
+              className="w-full h-full rounded-full blur-[140px]"
+              style={{
+                background: `radial-gradient(ellipse 70% 45% at 50% 50%, rgba(29,78,216,1) 0%, rgba(59,130,246,0.75) 50%, transparent 100%)`,
+              }}
+            />
+          </motion.div>
+        </div>
+      )}
 
-        {/* Subtle grain texture */}
-        <div
-          className="absolute inset-0"
+      {/* Grid pattern — desktop only */}
+      {!isMobile && (
+        <motion.div
+          className="fixed inset-0 -z-10 overflow-hidden pointer-events-none opacity-20 dark:opacity-5"
           style={{
             backgroundImage: `
-              repeating-radial-gradient(circle at 0 0, transparent 0, rgba(0,0,0,0.04) 1px, transparent 2px),
-              repeating-radial-gradient(circle at 50% 50%, transparent 0, rgba(0,0,0,0.03) 1px, transparent 2px),
-              repeating-radial-gradient(circle at 100% 100%, transparent 0, rgba(0,0,0,0.02) 1px, transparent 2px)
+              linear-gradient(to right, rgba(99,102,241,0.05) 1px, transparent 1px),
+              linear-gradient(to bottom, rgba(99,102,241,0.05) 1px, transparent 1px)
             `,
-            backgroundSize: '4px 4px, 5px 5px, 6px 6px',
-            backgroundPosition: '0 0, 2px 2px, 3px 3px',
-            opacity: 0.5,
+            backgroundSize: '60px 60px',
+            y: gridY,
+            scale: gridScale,
           }}
         />
-
-        {/* Fine grain overlay */}
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage: `
-              repeating-linear-gradient(0deg, transparent 0, transparent 1px, rgba(0,0,0,0.015) 1px, rgba(0,0,0,0.015) 2px),
-              repeating-linear-gradient(90deg, transparent 0, transparent 1px, rgba(0,0,0,0.015) 1px, rgba(0,0,0,0.015) 2px)
-            `,
-            backgroundSize: '3px 3px',
-            opacity: 0.4,
-          }}
-        />
-      </div>
-
-      {/* Animated grid pattern — parallax on desktop, static on mobile */}
-      <motion.div
-        className="fixed inset-0 -z-10 overflow-hidden pointer-events-none opacity-20 dark:opacity-5"
-        style={{
-          backgroundImage: `
-            linear-gradient(to right, rgba(99, 102, 241, 0.05) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(99, 102, 241, 0.05) 1px, transparent 1px)
-          `,
-          backgroundSize: '60px 60px',
-          y: gridY,
-          scale: gridScale,
-        }}
-      />
+      )}
     </>
   );
 }

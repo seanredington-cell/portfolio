@@ -224,90 +224,18 @@ function HeroSection() {
  * Same assets as desktop but no animations — keeps memory and CPU low.
  */
 function MobileLayeredImage({ project }: { project: typeof projectData[0] }) {
-  if (!project.layeredImages && !project.image) {
-    return (
-      <div className="w-full h-full flex items-center justify-center text-5xl">
-        {project.logoPlaceholder}
-      </div>
-    );
-  }
-
-  if (!project.layeredImages) {
+  // Mobile: always use the single flat hero image — no layered compositions,
+  // no drop-shadows, no multiple GPU texture uploads.
+  if (project.image) {
     return (
       <div className="relative w-full h-full">
-        <Image src={project.image!} alt={project.name} fill className="object-contain" sizes="(max-width: 1024px) 100vw" />
+        <Image src={project.image} alt={project.name} fill className="object-contain" sizes="(max-width: 1024px) 100vw" />
       </div>
     );
   }
-
-  const { background, foreground, floatingIcons, floatingDevices, floatingCards } = project.layeredImages;
-
-  // Getmee floating cards
-  if (project.id === 'getmee' && floatingCards) {
-    return (
-      <GetmeeHeroShared
-        background={background}
-        foreground={foreground!}
-        cards={floatingCards}
-        name={project.name}
-      />
-    );
-  }
-
-  const getIconPos = (position: string): React.CSSProperties => {
-    switch (position) {
-      case 'top-left':    return { top: '20%', left: '2%' };
-      case 'top-right':   return { top: '28%', right: '-3%' };
-      case 'middle-left': return { top: '60%', left: '-5%' };
-      case 'middle-right':return { top: '55%', right: '-4%' };
-      case 'bottom-center':return { bottom: '20%', left: '48%' };
-      case 'bottom-left': return { bottom: '15%', left: '8%' };
-      default:            return { top: '50%', left: '50%', transform: 'translate(-50%,-50%)' };
-    }
-  };
-
-  const getDevicePos = (position: string): React.CSSProperties => {
-    switch (position) {
-      case 'left':  return { top: '25%', left: '-5%', transform: 'translateY(-50%)' };
-      case 'right': return { top: '25%', right: '-5%', transform: 'translateY(-50%)' };
-      default:      return { top: '50%', left: '50%', transform: 'translate(-50%,-50%)' };
-    }
-  };
-
   return (
-    <div className="relative w-full h-full flex items-center justify-center">
-      {/* Background */}
-      {background && !floatingCards && (
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="relative w-[115%] aspect-video">
-            <Image src={background} alt={`${project.name} background`} fill className="object-contain" sizes="(max-width: 1024px) 100vw" />
-          </div>
-        </div>
-      )}
-
-      {/* Floating icons */}
-      {floatingIcons?.map((icon, i) => (
-        <div key={i} className="absolute w-8 h-8" style={getIconPos(icon.position)}>
-          <Image src={icon.src} alt="" fill className="object-contain" />
-        </div>
-      ))}
-
-      {/* Floating devices */}
-      {floatingDevices?.map((device, i) => (
-        <div key={i} className="absolute w-[22%] aspect-[9/19]"
-          style={{ ...getDevicePos(device.position), filter: 'drop-shadow(0 15px 30px rgba(0,0,0,0.25))' }}>
-          <Image src={device.src} alt="" fill className="object-contain" />
-        </div>
-      ))}
-
-      {/* Foreground */}
-      {foreground && !floatingCards && (
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="relative w-[65%] aspect-video" style={{ filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.4))' }}>
-            <Image src={foreground} alt={project.name} fill className="object-contain" sizes="(max-width: 1024px) 100vw" />
-          </div>
-        </div>
-      )}
+    <div className="w-full h-full flex items-center justify-center text-5xl">
+      {project.logoPlaceholder}
     </div>
   );
 }
