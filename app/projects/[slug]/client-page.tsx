@@ -131,6 +131,13 @@ export default function ProjectDetailClient({ params, markdownContent, frontMatt
       );
     }
 
+    // Add lazy loading and async decoding to all content images — prevents
+    // simultaneous GPU decode of many images when scrolling fast on mobile
+    content = content.replace(
+      /<img(?![^>]*loading=)([^>]*?)>/g,
+      '<img loading="lazy" decoding="async"$1>'
+    );
+
     return content;
   }, [markdownContent, params.slug]);
 
@@ -319,7 +326,6 @@ export default function ProjectDetailClient({ params, markdownContent, frontMatt
           right: '16px',
           pointerEvents: showBackToTop ? 'auto' : 'none',
           boxShadow: '0 8px 32px rgba(0, 0, 0, 0.12)',
-          willChange: 'transform',
         }}
         aria-label="Back to top"
       >
@@ -418,7 +424,7 @@ export default function ProjectDetailClient({ params, markdownContent, frontMatt
             >
               {frontMatter.tags.role && (
                 <span
-                  className="text-xs font-semibold backdrop-blur-sm px-3 py-1.5 rounded-md shadow-sm"
+                  className="text-xs font-semibold px-3 py-1.5 rounded-md shadow-sm"
                   style={{
                     color: brandColor,
                     backgroundColor: `${brandColor}1a`,
@@ -429,7 +435,7 @@ export default function ProjectDetailClient({ params, markdownContent, frontMatt
               )}
               {frontMatter.tags.timeline && (
                 <span
-                  className="text-xs font-semibold backdrop-blur-sm px-3 py-1.5 rounded-md shadow-sm"
+                  className="text-xs font-semibold px-3 py-1.5 rounded-md shadow-sm"
                   style={{
                     color: brandColor,
                     backgroundColor: `${brandColor}1a`,
@@ -440,7 +446,7 @@ export default function ProjectDetailClient({ params, markdownContent, frontMatt
               )}
               {frontMatter.tags.sector && (
                 <span
-                  className="text-xs font-semibold backdrop-blur-sm px-3 py-1.5 rounded-md shadow-sm"
+                  className="text-xs font-semibold px-3 py-1.5 rounded-md shadow-sm"
                   style={{
                     color: brandColor,
                     backgroundColor: `${brandColor}1a`,
@@ -701,7 +707,7 @@ export default function ProjectDetailClient({ params, markdownContent, frontMatt
             <div className="flex items-center gap-2">
               <button
                 onClick={() => setActiveTab('full')}
-                className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 backdrop-blur-sm border ${
+                className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 border ${
                   activeTab === 'full'
                     ? 'bg-white/80 dark:bg-gray-800/80 border-white/60 dark:border-gray-600 shadow-md text-gray-900 dark:text-gray-100'
                     : 'bg-white/20 dark:bg-gray-800/20 border-white/30 dark:border-gray-700/50 text-gray-500 dark:text-gray-400 hover:bg-white/40 dark:hover:bg-gray-800/40'
@@ -717,7 +723,7 @@ export default function ProjectDetailClient({ params, markdownContent, frontMatt
               </button>
               <button
                 onClick={() => setActiveTab('quick')}
-                className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 backdrop-blur-sm border ${
+                className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 border ${
                   activeTab === 'quick'
                     ? 'bg-white/80 dark:bg-gray-800/80 border-white/60 dark:border-gray-600 shadow-md text-gray-900 dark:text-gray-100'
                     : 'bg-white/20 dark:bg-gray-800/20 border-white/30 dark:border-gray-700/50 text-gray-500 dark:text-gray-400 hover:bg-white/40 dark:hover:bg-gray-800/40'
@@ -785,9 +791,13 @@ export default function ProjectDetailClient({ params, markdownContent, frontMatt
               background-color: color-mix(in srgb, var(--brand-color) 10%, transparent);
             }
 
-            /* Image optimization */
+            /* Image optimization — prevent simultaneous decode on fast scroll */
             .markdown-content img {
               content-visibility: auto;
+              contain-intrinsic-size: auto 400px;
+              max-width: 100%;
+              height: auto;
+              display: block;
             }
 
             /* Callout Card Styles (regulatory-reporting) */

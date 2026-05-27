@@ -523,7 +523,7 @@ export default function Projects() {
                 });
               }
             }}
-            className="backdrop-blur-sm bg-white/10 dark:bg-gray-800/30 border border-white/60 dark:border-gray-700 shadow-2xl px-6 py-3 rounded-full flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-white/20 dark:hover:bg-gray-800/50 hover:scale-105 transition-all duration-300 cursor-pointer whitespace-nowrap"
+            className="bg-white/80 dark:bg-gray-800/80 border border-white/60 dark:border-gray-700 shadow-2xl px-6 py-3 rounded-full flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-white/90 dark:hover:bg-gray-800/90 hover:scale-105 transition-all duration-300 cursor-pointer whitespace-nowrap"
             style={{
               boxShadow: '0 8px 32px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.5)',
             }}
@@ -1157,7 +1157,7 @@ function ProjectCard({
               <div className="flex flex-wrap items-center gap-2">
                 {project.tags.role && (
                   <span
-                    className="text-xs sm:text-sm font-semibold backdrop-blur-sm px-3 py-1.5 rounded-md shadow-sm"
+                    className="text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-md shadow-sm"
                     style={{
                       color: bc(project.logoColor),
                       backgroundColor: `${bc(project.logoColor)}1a`,
@@ -1168,7 +1168,7 @@ function ProjectCard({
                 )}
                 {project.tags.timeline && (
                   <span
-                    className="text-xs sm:text-sm font-semibold backdrop-blur-sm px-3 py-1.5 rounded-md shadow-sm"
+                    className="text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-md shadow-sm"
                     style={{
                       color: bc(project.logoColor),
                       backgroundColor: `${bc(project.logoColor)}1a`,
@@ -1179,7 +1179,7 @@ function ProjectCard({
                 )}
                 {project.tags.sector && (
                   <span
-                    className="hidden sm:inline-flex text-xs sm:text-sm font-semibold backdrop-blur-sm px-3 py-1.5 rounded-md shadow-sm"
+                    className="hidden sm:inline-flex text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-md shadow-sm"
                     style={{
                       color: bc(project.logoColor),
                       backgroundColor: `${bc(project.logoColor)}1a`,
@@ -1203,7 +1203,7 @@ function ProjectCard({
                 <span className="text-sm text-gray-500 dark:text-gray-300">{project.readTime} min read</span>
               </div>
             )}
-            <div className="w-full flex items-center justify-center gap-2 backdrop-blur-sm bg-white/10 dark:bg-gray-800/30 border border-white/60 dark:border-gray-700 text-gray-800 dark:text-gray-200 font-semibold px-6 py-3 rounded-full shadow-lg group-hover:shadow-xl group-hover:scale-105 group-hover:bg-white/20 dark:group-hover:bg-gray-800/50 transition-all duration-300 text-base">
+            <div className="w-full flex items-center justify-center gap-2 bg-white/80 dark:bg-gray-800/80 border border-white/60 dark:border-gray-700 text-gray-800 dark:text-gray-200 font-semibold px-6 py-3 rounded-full shadow-lg group-hover:shadow-xl group-hover:scale-105 group-hover:bg-white/90 dark:group-hover:bg-gray-800/90 transition-all duration-300 text-base">
               <span>Read more</span>
               <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" />
@@ -1270,7 +1270,7 @@ function ProjectCard({
                   <>
                     {/* Hero tags with icons and grey styling */}
                     {project.tags.role && (
-                      <span className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold backdrop-blur-sm px-3 py-1.5 rounded-md shadow-sm bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
+                      <span className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-md shadow-sm bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
                         <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -1279,7 +1279,7 @@ function ProjectCard({
                       </span>
                     )}
                     {project.tags.timeline && (
-                      <span className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold backdrop-blur-sm px-3 py-1.5 rounded-md shadow-sm bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
+                      <span className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-md shadow-sm bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
                         <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                         </svg>
@@ -1287,7 +1287,7 @@ function ProjectCard({
                       </span>
                     )}
                     {project.tags.sector && (
-                      <span className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold backdrop-blur-sm px-3 py-1.5 rounded-md shadow-sm bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
+                      <span className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-md shadow-sm bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
                         <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
@@ -1300,7 +1300,7 @@ function ProjectCard({
                     {/* Regular project tags with brand colors, no icons */}
                     {project.tags.role && (
                       <span
-                        className="text-xs font-semibold backdrop-blur-sm px-3 py-1.5 rounded-md shadow-sm"
+                        className="text-xs font-semibold px-3 py-1.5 rounded-md shadow-sm"
                         style={{
                           color: bc(project.logoColor),
                           backgroundColor: `${bc(project.logoColor)}1a`,
@@ -1311,7 +1311,7 @@ function ProjectCard({
                     )}
                     {project.tags.timeline && (
                       <span
-                        className="text-xs font-semibold backdrop-blur-sm px-3 py-1.5 rounded-md shadow-sm"
+                        className="text-xs font-semibold px-3 py-1.5 rounded-md shadow-sm"
                         style={{
                           color: bc(project.logoColor),
                           backgroundColor: `${bc(project.logoColor)}1a`,
@@ -1322,7 +1322,7 @@ function ProjectCard({
                     )}
                     {project.tags.sector && (
                       <span
-                        className="text-xs font-semibold backdrop-blur-sm px-3 py-1.5 rounded-md shadow-sm"
+                        className="text-xs font-semibold px-3 py-1.5 rounded-md shadow-sm"
                         style={{
                           color: bc(project.logoColor),
                           backgroundColor: `${bc(project.logoColor)}1a`,
@@ -1373,7 +1373,7 @@ function ProjectCard({
                     <>
                       {/* Hero tags with icons and grey styling */}
                       {project.tags.role && (
-                        <span className="inline-flex items-center gap-1.5 text-xs font-semibold backdrop-blur-sm px-3 py-1.5 rounded-md shadow-sm bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
+                        <span className="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-md shadow-sm bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
                           <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -1382,7 +1382,7 @@ function ProjectCard({
                         </span>
                       )}
                       {project.tags.timeline && (
-                        <span className="inline-flex items-center gap-1.5 text-xs font-semibold backdrop-blur-sm px-3 py-1.5 rounded-md shadow-sm bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
+                        <span className="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-md shadow-sm bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
                           <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                           </svg>
@@ -1390,7 +1390,7 @@ function ProjectCard({
                         </span>
                       )}
                       {project.tags.sector && (
-                        <span className="inline-flex items-center gap-1.5 text-xs font-semibold backdrop-blur-sm px-3 py-1.5 rounded-md shadow-sm bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
+                        <span className="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-md shadow-sm bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
                           <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                           </svg>
@@ -1403,7 +1403,7 @@ function ProjectCard({
                       {/* Regular project tags with brand colors, no icons */}
                       {project.tags.role && (
                         <span
-                          className="text-xs font-semibold backdrop-blur-sm px-3 py-1.5 rounded-md shadow-sm"
+                          className="text-xs font-semibold px-3 py-1.5 rounded-md shadow-sm"
                           style={{
                             color: bc(project.logoColor),
                             backgroundColor: `${bc(project.logoColor)}1a`,
@@ -1414,7 +1414,7 @@ function ProjectCard({
                       )}
                       {project.tags.timeline && (
                         <span
-                          className="text-xs font-semibold backdrop-blur-sm px-3 py-1.5 rounded-md shadow-sm"
+                          className="text-xs font-semibold px-3 py-1.5 rounded-md shadow-sm"
                           style={{
                             color: bc(project.logoColor),
                             backgroundColor: `${bc(project.logoColor)}1a`,
@@ -1425,7 +1425,7 @@ function ProjectCard({
                       )}
                       {project.tags.sector && (
                         <span
-                          className="text-xs font-semibold backdrop-blur-sm px-3 py-1.5 rounded-md shadow-sm"
+                          className="text-xs font-semibold px-3 py-1.5 rounded-md shadow-sm"
                           style={{
                             color: bc(project.logoColor),
                             backgroundColor: `${bc(project.logoColor)}1a`,
@@ -1608,7 +1608,7 @@ function ProjectCard({
                 <div className="flex flex-wrap items-center gap-2">
                   {project.tags.role && (
                     <span
-                      className="text-xs font-semibold backdrop-blur-sm px-3 py-1.5 rounded-md shadow-sm"
+                      className="text-xs font-semibold px-3 py-1.5 rounded-md shadow-sm"
                       style={{
                         color: bc(project.logoColor),
                         backgroundColor: `${bc(project.logoColor)}1a`,
@@ -1619,7 +1619,7 @@ function ProjectCard({
                   )}
                   {project.tags.timeline && (
                     <span
-                      className="text-xs font-semibold backdrop-blur-sm px-3 py-1.5 rounded-md shadow-sm"
+                      className="text-xs font-semibold px-3 py-1.5 rounded-md shadow-sm"
                       style={{
                         color: bc(project.logoColor),
                         backgroundColor: `${bc(project.logoColor)}1a`,
@@ -1630,7 +1630,7 @@ function ProjectCard({
                   )}
                   {project.tags.sector && (
                     <span
-                      className="text-xs font-semibold backdrop-blur-sm px-3 py-1.5 rounded-md shadow-sm"
+                      className="text-xs font-semibold px-3 py-1.5 rounded-md shadow-sm"
                       style={{
                         color: bc(project.logoColor),
                         backgroundColor: `${bc(project.logoColor)}1a`,
@@ -1659,7 +1659,7 @@ function ProjectCard({
               {/* Visible button (non-interactive, just visual) */}
               <div className="relative z-20 pointer-events-none mt-5">
                 <motion.div
-                  className="inline-flex items-center gap-2 backdrop-blur-sm bg-white/10 dark:bg-gray-800/30 border border-white/60 dark:border-gray-700 text-gray-800 dark:text-gray-200 font-semibold px-6 py-2.5 rounded-full text-sm"
+                  className="inline-flex items-center gap-2 bg-white/80 dark:bg-gray-800/80 border border-white/60 dark:border-gray-700 text-gray-800 dark:text-gray-200 font-semibold px-6 py-2.5 rounded-full text-sm"
                   style={{
                     boxShadow: '0 8px 32px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.5)',
                   }}

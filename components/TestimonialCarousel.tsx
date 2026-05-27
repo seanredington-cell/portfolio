@@ -217,7 +217,7 @@ export default function TestimonialCarousel() {
       <div className="flex items-center justify-center gap-3 mt-3">
         <button
           onClick={() => goTo(-1)}
-          className="w-7 h-7 rounded-full flex items-center justify-center backdrop-blur-sm bg-white/60 dark:bg-gray-800/60 border border-white/50 dark:border-gray-700 shadow-sm hover:scale-110 transition-transform"
+          className="w-7 h-7 rounded-full flex items-center justify-center bg-white/90 dark:bg-gray-800/90 border border-white/50 dark:border-gray-700 shadow-sm hover:scale-110 transition-transform"
           aria-label="Previous testimonial"
         >
           <svg className="w-3 h-3 text-gray-600 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -249,7 +249,7 @@ export default function TestimonialCarousel() {
 
         <button
           onClick={() => goTo(1)}
-          className="w-7 h-7 rounded-full flex items-center justify-center backdrop-blur-sm bg-white/60 dark:bg-gray-800/60 border border-white/50 dark:border-gray-700 shadow-sm hover:scale-110 transition-transform"
+          className="w-7 h-7 rounded-full flex items-center justify-center bg-white/90 dark:bg-gray-800/90 border border-white/50 dark:border-gray-700 shadow-sm hover:scale-110 transition-transform"
           aria-label="Next testimonial"
         >
           <svg className="w-3 h-3 text-gray-600 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
