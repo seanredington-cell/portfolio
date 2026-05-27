@@ -8,6 +8,7 @@ logo: "/projects/bua/bua-icon.webp"
 logoPlaceholder: "⚽"
 logoColor: "#177272"
 accentColor: "23, 114, 114"
+image: "/projects/bua/bua-hero.webp"
 layeredImages:
   background: "/projects/bua/hero/bua-hero-bg.webp"
   foreground: "/projects/bua/hero/bua-hero-foreground.webp"

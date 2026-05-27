@@ -10,7 +10,7 @@ logoColor: "#3B82F6"
 accentColor: "59, 130, 246"
 protected: true
 password: "letmein"
-image: "/projects/regulatory-reporting/iso_1_rectangle.webp"
+image: "/projects/regulatory-reporting/rep-hero.webp"
 layeredImages:
   background: "/projects/regulatory-reporting/reporting-hero-bg.webp"
   floatingIcons:

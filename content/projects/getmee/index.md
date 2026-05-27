@@ -7,7 +7,7 @@ tldr: "How systems thinking turned a collection of isolated features into a conn
 logo: "/projects/getmee/logo.svg"
 logoColor: "#E17033"
 accentColor: "225, 112, 51"
-image: "/projects/getmee/Getmee_whitelabel_app_prior_to_arrival.webp"
+image: "/projects/getmee/getmee-hero.webp"
 layeredImages:
   background: "/projects/getmee/hero/background.webp"
   foreground: "/projects/getmee/hero/front.webp"

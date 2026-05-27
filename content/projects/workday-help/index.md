@@ -8,6 +8,7 @@ logo: "/wday-logo.webp"
 logoPlaceholder: "💼"
 logoColor: "#E65100"
 accentColor: "230, 81, 0"
+image: "/projects/workday-help/wday-hero.webp"
 protected: true
 password: "letmein"
 layeredImages:

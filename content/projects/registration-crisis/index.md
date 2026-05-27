@@ -10,7 +10,7 @@ logoColor: "#1E3A8A"
 accentColor: "30, 58, 138"
 protected: true
 password: "letmein"
-image: "/projects/registration-crisis/registration-hero.webp"
+image: "/projects/registration-crisis/reg-hero.webp"
 layeredImages:
   background: "/projects/registration-crisis/registrayion-hero-bg.svg"
   foreground: "/projects/registration-crisis/registration-hero.webp"
