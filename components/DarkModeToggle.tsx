@@ -2,15 +2,19 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import { usePathname } from "next/navigation";
 import { useDarkMode } from "@/contexts/DarkModeContext";
 
 export default function DarkModeToggle() {
   const { isDarkMode, toggleDarkMode } = useDarkMode();
+  const pathname = usePathname();
+
+  const isSimplePage = pathname === '/' || pathname === '/about' || pathname === '/contact';
 
   return (
     <motion.button
       onClick={toggleDarkMode}
-      className="dark-mode-toggle flex fixed z-[100] w-11 h-11 sm:w-12 sm:h-12 rounded-full backdrop-blur-sm bg-white/10 dark:bg-gray-800/30 border border-white/60 dark:border-gray-700 items-center justify-center top-[20px] sm:top-[26px]"
+      className={`dark-mode-toggle flex fixed z-[100] w-11 h-11 sm:w-12 sm:h-12 rounded-full backdrop-blur-sm bg-white/10 dark:bg-gray-800/30 border border-white/60 dark:border-gray-700 items-center justify-center top-[20px] sm:top-[26px] ${isSimplePage ? 'flex' : 'hidden sm:flex'}`}
       style={{
         right: '16px',
         boxShadow: '0 8px 32px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.5)',
