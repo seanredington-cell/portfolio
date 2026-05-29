@@ -346,7 +346,7 @@ function MobileProjectsList({ isDark }: { isDark: boolean }) {
               className="w-full flex items-center justify-center gap-2 bg-white/20 dark:bg-gray-800/40 border border-white/60 dark:border-gray-700 text-gray-800 dark:text-gray-200 font-semibold px-6 py-2.5 rounded-full text-sm mt-1"
               style={{ boxShadow: '0 8px 32px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.5)' }}
             >
-              <span>Read more</span>
+              <span>Read more{project.readTime && <><em className="font-normal"> ({project.readTime} mins)</em></>}</span>
               <svg className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" />
               </svg>
@@ -1136,12 +1136,14 @@ function ProjectCard({
               {project.description}
             </Callout>
             {project.readTime && (
-              <div className="inline-flex items-center gap-1.5">
+              <div className="inline-flex items-center gap-1.5 flex-wrap">
                 <svg className="w-3.5 h-3.5 text-gray-500 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <circle cx="12" cy="12" r="10" strokeWidth="2"/>
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6v6l4 2"/>
                 </svg>
                 <span className="text-sm text-gray-500 dark:text-gray-300">{project.readTime} min read</span>
+                <span className="text-gray-300 dark:text-gray-600">·</span>
+                <span className="text-sm text-gray-500 dark:text-gray-300">✦ AI Summary available</span>
               </div>
             )}
             <div className="w-full flex items-center justify-center gap-2 bg-white/80 dark:bg-gray-800/80 border border-white/60 dark:border-gray-700 text-gray-800 dark:text-gray-200 font-semibold px-6 py-3 rounded-full shadow-lg group-hover:shadow-xl group-hover:scale-105 group-hover:bg-white/90 dark:group-hover:bg-gray-800/90 transition-all duration-300 text-base">
@@ -1588,12 +1590,14 @@ function ProjectCard({
               </Callout>
 
               {project.readTime && (
-                <div className="inline-flex items-center gap-1.5 mt-1">
+                <div className="inline-flex items-center gap-1.5 mt-1 flex-wrap">
                   <svg className="w-3.5 h-3.5 text-gray-500 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <circle cx="12" cy="12" r="10" strokeWidth="2"/>
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6v6l4 2"/>
                   </svg>
                   <span className="text-sm text-gray-500 dark:text-gray-300">{project.readTime} min read</span>
+                  <span className="text-gray-300 dark:text-gray-600">·</span>
+                  <span className="text-sm text-gray-500 dark:text-gray-300">✦ AI Summary available</span>
                 </div>
               )}
 

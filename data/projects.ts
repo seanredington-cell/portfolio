@@ -107,7 +107,7 @@ const _allProjectData: Project[] = [
       role: "Head of Product & Design",
       timeline: "12 months",
     },
-    readTime: 8,
+    readTime: 10,
   },
   {
     id: "registration-crisis",

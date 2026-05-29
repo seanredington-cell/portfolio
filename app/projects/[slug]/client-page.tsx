@@ -791,10 +791,8 @@ export default function ProjectDetailClient({ params, markdownContent, frontMatt
               background-color: color-mix(in srgb, var(--brand-color) 10%, transparent);
             }
 
-            /* Image optimization — prevent simultaneous decode on fast scroll */
+            /* Image optimization */
             .markdown-content img {
-              content-visibility: auto;
-              contain-intrinsic-size: auto 400px;
               max-width: 100%;
               height: auto;
               display: block;

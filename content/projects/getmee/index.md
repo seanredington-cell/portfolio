@@ -105,29 +105,35 @@ The platforms I looked at did a good job of solving English learner engagement, 
 
 ## Designing the System, not just the feature
 
-We didn't just need to build an AI task generator and leave it at that. I had to design an entire learning loop that learners and teachers had confidence in.
-
-**AI generation layer:** Through trial and error, I created a system prompt which generates CEFR-appropriate tasks, personalised to students' interests. This prompt had built in confidence thresholds which determined if the content was good enough to publish.
+My first version generated tasks one day at a time, in isolation. It worked in my own testing, but it broke down once I realised every learner's journey is different. A single daily guess couldn't build a coherent week or structure learning in a way that made sense at scale.
 
 ![QA Generation Pipeline](/projects/getmee/QA_Generation_Pipeline_v2.svg)
 
-**Quality assurance layer:** Ensuring tasks were of high quality was paramount. A second AI agent reviewed the generated tasks independently against a pedagogical rubric. Students could also flag tasks that they saw as poor quality, which then would be sent to our review dashboard where we could see the entire task list and remove high flag % tasks.
+The change made was to plan the whole week up front, making sure that the entire context of the learner, the system, and the curriculum were properly considered. This taught me a core lesson of the project: AI can generate content, but it needs guardrails, put up by experts, to do so successfully.
+
+Working with English teachers, I defined a near 50-page Curriculum Framework covering what learners can and can't do at each CEFR level, which task types suit each level, and what good looks like. I then worked with the development team to build a library of example tasks and specs for every task type. These would all serve as the reference that the agents would use to ensure personalised, proper learning tasks were being created.
+
+![Updated Task Generation Flow](/projects/getmee/updated_task_generation_flow.webp)
+
+The generation itself is split across three agents, so no single call has to do everything. A Curriculum Planner decides the week's focus and assembles a self-contained brief; the learner's context plus the task types and content relevant to them. A second agent, built again with teachers, generates the tasks using that brief as its guide along with seeing the user's previous tasks so as not to create duplicates. A third reviews every task against a defined rubric and the weekly brief, so only relevant, on-level tasks reach the user.
+
+AI could still make mistakes though, so students needed the ability to flag tasks that they saw as poor quality. Flagged tasks were sent to our dashboard where we could see the entire task list and remove any tasks that had been flagged disproportionally to their usage.
 
 ![Student Flags Process](/projects/getmee/Student_Flags_v3.svg)
 
-**Student experience:** During onboarding, students could select their interests and complete an English Level Test, this would then prompt the AI to generate relevant tasks for them.
+For the student, the experience was simple. During onboarding, they could select their interests and take an English Level Test, this would then prompt the AI to generate relevant tasks for them.
 
 The app's home page was restructured to show users their clear next action, reducing any ambiguity or decision fatigue for them. AI generated tasks, made up of all of the app's key features, unlocked each day, creating a mild sense of urgency for users. Each time a user completed a task they earned points, which added up to unlock English Level Tests that tracked their progress over time.
 
 ![English Learning Journey](/projects/getmee/English_Journey_Images.webp)
 
-**Teacher dashboard:** Teachers could view and adjust each student's level from the dashboard. They could also continue to create their own tasks with a refreshed UX. All person-generated content would be prioritised on the students' app, ensuring teacher content always took precedence over AI-generated content.
+Teachers could view and adjust each student's level from the dashboard. They could also continue to create their own tasks with a refreshed UX. All person-generated content would be prioritised on the students' app, ensuring teacher content always took precedence over AI-generated content.
 
 ![Teacher Dashboard Mockup](/projects/getmee/Members_mockup.webp)
 
 The real work in this project was in defining quality, building multi-level feedback loops, and restructuring the product experience so that everything, from onboarding to daily tasks to level progression, felt like a coherent journey rather than a collection of features.
 
-I wrote the system prompts. I designed the QA rubric. I specified the confidence thresholds. I learned to design the *behaviour* of the AI, not just the UI around it.
+I learned to design the *behaviour* of the AI, not just the UI around it.
 
 ![System Flow](/projects/getmee/system_flow_image.webp)
 

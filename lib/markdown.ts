@@ -44,6 +44,7 @@ export async function getProjectBySlug(slug: string) {
     '<img loading="lazy" decoding="async"$1>'
   );
 
+
   // Add class to specific images to remove styling
   contentHtml = contentHtml.replace(
     /<img src="\/projects\/bua\/competitor-analysis\.png"/g,

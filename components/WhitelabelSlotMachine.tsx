@@ -55,11 +55,11 @@ export default function WhitelabelSlotMachine({ brandColor }: WhitelabelSlotMach
   };
 
   return (
-    <div className="my-16 sm:my-20">
+    <div className="my-16 sm:my-20" style={{ contain: 'layout' }}>
       {/* Window is exactly one SLIDE_H tall so one image fills it perfectly */}
       <div
         className="relative mx-auto overflow-hidden rounded-3xl shadow-xl bg-white dark:bg-gray-800"
-        style={{ width: DISPLAY_W, height: SLIDE_H }}
+        style={{ width: DISPLAY_W, height: SLIDE_H, contain: 'layout' }}
       >
         <motion.div style={{ y }}>
           {repeated.map((app, i) => (

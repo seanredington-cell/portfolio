@@ -38,12 +38,14 @@ export function DarkModeProvider({ children }: { children: React.ReactNode }) {
   }, [isDarkMode, mounted]);
 
   const toggleDarkMode = () => {
-    // Disable smooth scrolling briefly to prevent scroll jump on theme change
-    document.documentElement.style.scrollBehavior = 'auto';
+    if (document.documentElement.classList.contains('dark')) {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('darkMode', 'false');
+    } else {
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('darkMode', 'true');
+    }
     setIsDarkMode((prev) => !prev);
-    requestAnimationFrame(() => {
-      document.documentElement.style.scrollBehavior = '';
-    });
   };
 
   return (
