@@ -68,9 +68,8 @@ export default function ProjectDetailClient({ params, markdownContent, frontMatt
     return () => observer.disconnect();
   }, []);
 
-  const rawBrandColor = frontMatter.logoColor || "#1a1a1a";
-  const brandColorLight = rawBrandColor;
-  const brandColorDark = lightenForDark(rawBrandColor);
+  const brandColorLight = frontMatter.logoColor || "#1a1a1a";
+  const brandColorDark = lightenForDark(brandColorLight);
   const brandColor = isDark ? brandColorDark : brandColorLight;
 
   // Track reading progress through the page
@@ -228,7 +227,8 @@ export default function ProjectDetailClient({ params, markdownContent, frontMatt
     <div
       className="min-h-screen bg-white dark:bg-gray-900"
       style={{
-        ['--brand-color' as string]: brandColor,
+        ['--brand-color' as string]: brandColorLight,
+        ['--brand-color-dark' as string]: brandColorDark,
       } as React.CSSProperties}
     >
       {/* Reading Progress Bar — desktop only */}

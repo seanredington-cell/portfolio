@@ -6,7 +6,7 @@
   --font-poppins: 'Poppins', system-ui, sans-serif;
 }
 
-/* Project page brand colour — switches between light/dark variants via CSS only, no React re-render */
+/* Project page brand colour — CSS switches between light/dark variants, no JS re-render needed */
 .dark [style*="--brand-color-dark"] {
   --brand-color: var(--brand-color-dark);
 }
@@ -304,7 +304,6 @@ body {
     -webkit-backdrop-filter: none !important;
     backdrop-filter: none !important;
   }
-
 
   /* No infinite Framer Motion animations */
   .project-orb {
