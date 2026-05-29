@@ -27,7 +27,10 @@ export default function ProjectDetailClient({ params, markdownContent, frontMatt
   const [showBackToTop, setShowBackToTop] = React.useState(false);
   const [activeTab, setActiveTab] = React.useState<'full' | 'quick'>('full');
   const [expandedImage, setExpandedImage] = React.useState<string | null>(null);
-  const [isMobile, setIsMobile] = React.useState(false);
+  const [isMobile, setIsMobile] = React.useState<boolean>(() => {
+    if (typeof window === 'undefined') return false;
+    return window.innerWidth < 1024;
+  });
   const contentRef = React.useRef<HTMLDivElement>(null);
 
   // Password gate state
@@ -60,10 +63,12 @@ export default function ProjectDetailClient({ params, markdownContent, frontMatt
     }
   };
 
-  const [isDark, setIsDark] = React.useState(false);
+  const [isDark, setIsDark] = React.useState<boolean>(() => {
+    if (typeof window === 'undefined') return false;
+    return document.documentElement.classList.contains('dark');
+  });
   React.useEffect(() => {
     const check = () => setIsDark(document.documentElement.classList.contains("dark"));
-    check();
     const observer = new MutationObserver(check);
     observer.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
     return () => observer.disconnect();
