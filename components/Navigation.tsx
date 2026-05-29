@@ -2,9 +2,8 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
-import { useDarkMode } from "@/contexts/DarkModeContext";
 
 /**
  * Navigation Component
@@ -49,28 +48,10 @@ const ContactIcon = ({ isActive }: { isActive: boolean }) => (
 
 export default function Navigation() {
   const pathname = usePathname();
-  const [isMobile, setIsMobile] = useState(false);
   const [mounted, setMounted] = useState(false);
-  const { isDarkMode: contextDark } = useDarkMode();
-  // Initialise directly from the DOM — the inline script in layout.tsx sets the
-  // dark class synchronously before hydration, so this is always correct on first paint.
-  const [isDarkMode, setIsDarkMode] = useState<boolean>(() => {
-    if (typeof window === 'undefined') return false;
-    return document.documentElement.classList.contains('dark');
-  });
-  useEffect(() => {
-    setIsDarkMode(document.documentElement.classList.contains('dark'));
-  }, [contextDark]); // re-sync on every toggle
 
   useEffect(() => {
     setMounted(true);
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 640);
-    };
-
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
   const navItems = [
@@ -141,24 +122,16 @@ export default function Navigation() {
                   </span>
 
                   {/* Link text - on mobile, only show for active item; always show on sm and up */}
-                  <AnimatePresence mode="wait">
-                    {(isActive || !isMobile) && (
-                      <motion.span
-                        key={`${item.href}-label`}
-                        initial={{ opacity: 0, width: 0 }}
-                        animate={{ opacity: 1, width: "auto" }}
-                        exit={{ opacity: 0, width: 0 }}
-                        transition={{ duration: 0.2, ease: "easeInOut" }}
-                        className={`relative text-xs sm:text-sm font-medium whitespace-nowrap overflow-hidden ${
-                          isActive
-                            ? "text-accent-primary dark:text-white font-semibold"
-                            : "text-gray-600 dark:text-gray-300 group-hover:text-accent-primary"
-                        }`}
-                      >
-                        {item.name}
-                      </motion.span>
-                    )}
-                  </AnimatePresence>
+                  <span
+                    className={`relative text-xs sm:text-sm font-medium whitespace-nowrap overflow-hidden
+                      ${isActive ? "inline" : "hidden sm:inline"}
+                      ${isActive
+                        ? "text-accent-primary dark:text-white font-semibold"
+                        : "text-gray-600 dark:text-gray-300 group-hover:text-accent-primary"
+                      }`}
+                  >
+                    {item.name}
+                  </span>
 
                   {/* Hover underline effect */}
                   <motion.div
