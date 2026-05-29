@@ -27,10 +27,6 @@ export default function ProjectDetailClient({ params, markdownContent, frontMatt
   const [showBackToTop, setShowBackToTop] = React.useState(false);
   const [activeTab, setActiveTab] = React.useState<'full' | 'quick'>('full');
   const [expandedImage, setExpandedImage] = React.useState<string | null>(null);
-  const [isMobile, setIsMobile] = React.useState<boolean>(() => {
-    if (typeof window === 'undefined') return false;
-    return window.innerWidth < 1024;
-  });
   const contentRef = React.useRef<HTMLDivElement>(null);
 
   // Password gate state
@@ -63,12 +59,10 @@ export default function ProjectDetailClient({ params, markdownContent, frontMatt
     }
   };
 
-  const [isDark, setIsDark] = React.useState<boolean>(() => {
-    if (typeof window === 'undefined') return false;
-    return document.documentElement.classList.contains('dark');
-  });
+  const [isDark, setIsDark] = React.useState(false);
   React.useEffect(() => {
     const check = () => setIsDark(document.documentElement.classList.contains("dark"));
+    check();
     const observer = new MutationObserver(check);
     observer.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
     return () => observer.disconnect();
@@ -83,13 +77,6 @@ export default function ProjectDetailClient({ params, markdownContent, frontMatt
   const { scrollYProgress: readingProgress } = useScroll();
 
 
-  // Track screen size for responsive device positioning
-  React.useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 1024);
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
 
   // Show back to top after scrolling
   React.useEffect(() => {
@@ -493,108 +480,16 @@ export default function ProjectDetailClient({ params, markdownContent, frontMatt
             <div className="relative w-full aspect-square rounded-xl overflow-visible">
               <div className="w-full h-full relative flex items-center justify-center">
 
-                {/* Mobile: always use flat image — no layered GPU composition */}
-                {isMobile ? (
-                  frontMatter.image ? (
-                    <div className="relative w-full h-full">
-                      <Image
-                        src={frontMatter.image}
-                        alt={frontMatter.name}
-                        fill
-                        className="object-contain"
-                        priority
-                      />
-                    </div>
-                  ) : null
-                ) : frontMatter.layeredImages ? (
-                  /* Desktop: full layered composition */
-                  params.slug === 'getmee' && frontMatter.layeredImages.floatingCards ? (
-                    <GetmeeHero
-                      background={frontMatter.layeredImages.background}
-                      foreground={frontMatter.layeredImages.foreground}
-                      cards={frontMatter.layeredImages.floatingCards}
-                      name={frontMatter.name}
-                    />
-                  ) : (
-                    <>
-                      {/* Main background image */}
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="relative w-full h-full" style={{ filter: 'drop-shadow(0 10px 30px rgba(0,0,0,0.3))' }}>
-                          <Image
-                            src={frontMatter.layeredImages.background}
-                            alt={`${frontMatter.name} background`}
-                            fill
-                            className="object-contain"
-                            priority
-                          />
-                        </div>
-                      </div>
-
-                      {/* Floating Icons */}
-                      {frontMatter.layeredImages.floatingIcons && frontMatter.layeredImages.floatingIcons.map((icon: any, index: number) => {
-                        const getPosition = (position: string) => {
-                          switch (position) {
-                            case 'top-left':    return { top: '20%', left: '2%' };
-                            case 'top-right':   return { top: '28%', right: '-3%' };
-                            case 'middle-left': return { top: '60%', left: '-5%' };
-                            case 'middle-right':return { top: '55%', right: '-4%' };
-                            case 'bottom-center':return { bottom: '20%', left: '48%' };
-                            case 'bottom-left': return { bottom: '15%', left: '8%' };
-                            default:            return { top: '50%', left: '50%', transform: 'translate(-50%, -50%)' };
-                          }
-                        };
-                        return (
-                          <motion.div
-                            key={index}
-                            className="absolute w-10 h-10 sm:w-12 sm:h-12"
-                            style={getPosition(icon.position)}
-                            initial={{ opacity: 0, scale: 0 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            transition={{ opacity: { duration: 0.5, delay: 0.7 + index * 0.1 }, scale: { duration: 0.5, delay: 0.7 + index * 0.1 } }}
-                          >
-                            <Image src={icon.src} alt={`Icon ${index + 1}`} fill className="object-contain" />
-                          </motion.div>
-                        );
-                      })}
-
-                      {/* Floating Devices */}
-                      {frontMatter.layeredImages.floatingDevices && frontMatter.layeredImages.floatingDevices.map((device: any, index: number) => {
-                        const isLeftDevice = device.position === 'left';
-                        const isRightDevice = device.position === 'right';
-                        return (
-                          <motion.div
-                            key={`device-${index}`}
-                            className="absolute w-[18%] aspect-[9/19]"
-                            style={{
-                              top: '20%',
-                              ...(isLeftDevice && { left: '-8%' }),
-                              ...(isRightDevice && { right: '-8%' }),
-                              ...(!isLeftDevice && !isRightDevice && { top: '50%', left: '50%' }),
-                              transform: isLeftDevice || isRightDevice ? 'translateY(-50%)' : 'translate(-50%, -50%)',
-                              filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.25))'
-                            }}
-                            initial={{ opacity: 0, scale: 0.8 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            transition={{ opacity: { duration: 0.6, delay: 0.7 + index * 0.15 }, scale: { duration: 0.6, delay: 0.7 + index * 0.15 } }}
-                          >
-                            <Image src={device.src} alt={`Device ${index + 1}`} fill className="object-contain" />
-                          </motion.div>
-                        );
-                      })}
-
-                      {/* Foreground image */}
-                      {frontMatter.layeredImages.foreground && (
-                        <div className="absolute inset-0 flex items-center justify-center">
-                          <div className="relative w-[90%] aspect-video" style={{ filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.4))' }}>
-                            <Image src={frontMatter.layeredImages.foreground} alt={frontMatter.name} fill className="object-contain" />
-                          </div>
-                        </div>
-                      )}
-                    </>
-                  )
-                ) : frontMatter.image ? (
+                {/* Always use flat image — avoids JS-gated isMobile layout shift */}
+                {frontMatter.image ? (
                   <div className="relative w-full h-full">
-                    <Image src={frontMatter.image} alt={frontMatter.name} fill className="object-contain" priority />
+                    <Image
+                      src={frontMatter.image}
+                      alt={frontMatter.name}
+                      fill
+                      className="object-contain"
+                      priority
+                    />
                   </div>
                 ) : null}
 
@@ -1182,71 +1077,8 @@ export default function ProjectDetailClient({ params, markdownContent, frontMatt
                       {/* Hero Image - Right Side on Desktop, Top on Mobile */}
                       <div className="lg:w-1/2 w-full">
                         <div className="relative w-full aspect-square rounded-lg overflow-visible">
-                          {/* Mobile: always flat image */}
-                          {isMobile ? (
-                            nextProject.image ? (
-                              <Image src={nextProject.image} alt={nextProject.name} fill className="object-contain rounded-lg" />
-                            ) : (
-                              <div className="w-full h-full flex items-center justify-center text-gray-400 text-sm">{nextProject.imagePlaceholder}</div>
-                            )
-                          ) : nextProject.id === 'getmee' && nextProject.layeredImages?.floatingCards ? (
-                            <GetmeeHero
-                              background={nextProject.layeredImages.background}
-                              foreground={nextProject.layeredImages.foreground!}
-                              cards={nextProject.layeredImages.floatingCards}
-                              name={nextProject.name}
-                            />
-                          ) : nextProject.layeredImages ? (
-                            <div className="w-full h-full relative flex items-center justify-center">
-                              <div className="absolute inset-0 flex items-center justify-center">
-                                <div className="relative w-[140%] aspect-video">
-                                  <Image src={nextProject.layeredImages.background} alt={`${nextProject.name} background`} fill className="object-contain" />
-                                </div>
-                              </div>
-                              {nextProject.layeredImages.floatingIcons && nextProject.layeredImages.floatingIcons.map((icon: any, iconIndex: number) => {
-                                const getPosition = (position: string) => {
-                                  switch (position) {
-                                    case 'top-left': return { top: '20%', left: '2%' };
-                                    case 'top-right': return { top: '28%', right: '-3%' };
-                                    case 'middle-left': return { top: '60%', left: '-5%' };
-                                    case 'middle-right': return { top: '55%', right: '-4%' };
-                                    case 'bottom-center': return { bottom: '20%', left: '48%' };
-                                    case 'bottom-left': return { bottom: '15%', left: '8%' };
-                                    default: return { top: '50%', left: '50%', transform: 'translate(-50%, -50%)' };
-                                  }
-                                };
-                                return (
-                                  <div key={iconIndex} className="absolute w-5 h-5 sm:w-6 sm:h-6" style={getPosition(icon.position)}>
-                                    <Image src={icon.src} alt={`Icon ${iconIndex + 1}`} fill className="object-contain" />
-                                  </div>
-                                );
-                              })}
-                              {nextProject.layeredImages.floatingDevices && nextProject.layeredImages.floatingDevices.map((device: any, deviceIndex: number) => {
-                                const isLeftDevice = device.position === 'left';
-                                const isRightDevice = device.position === 'right';
-                                return (
-                                  <div key={`next-device-${deviceIndex}`} className="absolute w-[16%] aspect-[9/19]"
-                                    style={{
-                                      top: '20%',
-                                      ...(isLeftDevice && { left: '-8%' }),
-                                      ...(isRightDevice && { right: '-8%' }),
-                                      ...(!isLeftDevice && !isRightDevice && { top: '50%', left: '50%' }),
-                                      transform: isLeftDevice || isRightDevice ? 'translateY(-50%)' : 'translate(-50%, -50%)',
-                                      filter: 'drop-shadow(0 15px 30px rgba(0,0,0,0.2))'
-                                    }}>
-                                    <Image src={device.src} alt={`Device ${deviceIndex + 1}`} fill className="object-contain" />
-                                  </div>
-                                );
-                              })}
-                              {nextProject.layeredImages.foreground && (
-                                <div className="absolute inset-0 flex items-center justify-center">
-                                  <div className="relative w-[65%] aspect-video" style={{ filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.4))' }}>
-                                    <Image src={nextProject.layeredImages.foreground} alt={nextProject.name} fill className="object-contain" />
-                                  </div>
-                                </div>
-                              )}
-                            </div>
-                          ) : nextProject.image ? (
+                          {/* Always flat image — avoids isMobile layout shift */}
+                          {nextProject.image ? (
                             <Image src={nextProject.image} alt={nextProject.name} fill className="object-contain rounded-lg" />
                           ) : (
                             <div className="w-full h-full flex items-center justify-center text-gray-400 dark:text-gray-500 text-sm">

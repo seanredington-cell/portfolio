@@ -378,14 +378,12 @@ export default function Projects() {
   const [isMounted, setIsMounted] = React.useState(false);
   React.useEffect(() => { setIsMounted(true); }, []);
 
-  // Dark mode detection — read synchronously on first paint, then track changes
-  const [isDark, setIsDark] = React.useState<boolean>(() => {
-    if (typeof window === 'undefined') return false;
-    return document.documentElement.classList.contains('dark');
-  });
+  // Dark mode detection — updates reactively when theme is toggled
+  const [isDark, setIsDark] = React.useState(false);
   React.useEffect(() => {
     const root = document.documentElement;
     const check = () => setIsDark(root.classList.contains("dark"));
+    check();
     const observer = new MutationObserver(check);
     observer.observe(root, { attributes: true, attributeFilter: ["class"] });
     return () => observer.disconnect();
