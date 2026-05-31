@@ -222,8 +222,6 @@ const _allProjectData: Project[] = [
     },
     readTime: 7,
     detailContent: [
-      { type: 'heading', content: '📺 If you just want to watch the demo, here you go!', level: 2 },
-      { type: 'paragraph', content: 'See the app in action: https://www.loom.com/share/5859ca8ec35a4ba19bb856ac5d773071' },
       { type: 'heading', content: '⏮️ Some background:', level: 2 },
       { type: 'paragraph', content: 'Each weekend, it\'s estimated that there are over 3,000 competitive GAA (sporting) matches across Ireland.' },
       { type: 'paragraph', content: 'At the highest levels, teams have expensive game monitoring tools which record information from the matches, allowing management teams to review and gather insights.' },

@@ -24,10 +24,6 @@ quickRead:
   skills: "End-to-end product design · iOS development · User research · AI-assisted development · Prototyping"
 ---
 
-## [Watch the demo here](https://www.loom.com/share/5859ca8ec35a4ba19bb856ac5d773071)
-
----
-
 ## Some background
 
 Each weekend, it's estimated that there are over 3,000 competitive GAA (sporting) matches across Ireland.
@@ -169,8 +165,6 @@ Through research, my prompting improved, along with my technical proficiency. I 
 The finished app is now being tested on pitches around Ireland. Looking back on the goals and the initial user problem, this app is creating a novel, useful, impactful solution to a real person's problem.
 
 The user can create teams and players, record information on their matches, and then get insights to their performance, relative to their peers.
-
-### [Watch the demo if you haven't already](https://www.loom.com/share/5859ca8ec35a4ba19bb856ac5d773071)
 
 ![Bua home page showing recent matches](/projects/bua/Bua-Home-Page.webp)
 
