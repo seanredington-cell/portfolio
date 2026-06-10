@@ -1,9 +1,9 @@
 ---
 id: "bua"
-name: "Enabling Informed Match Day Decisions"
-company: "BUA"
-description: "Designed and built by me - this iOS app allows field sport coaches to easily track game data, enabling them to be more informed when picking their team."
-tldr: "Designed and built by me - this iOS app allows field sport coaches to easily track game data, enabling them to be more informed when picking their team."
+name: "A personal problem became a shipped iOS app used on pitches across Ireland"
+company: "Bua · Match tracking app for GAA coaches"
+description: "Designed and built by me, this iOS app allows field sport coaches to easily track game data, enabling them to be more informed when picking their team."
+tldr: "Designed and built by me, this iOS app allows field sport coaches to easily track game data, enabling them to be more informed when picking their team."
 logo: "/projects/bua/bua-icon.webp"
 logoPlaceholder: "⚽"
 logoColor: "#177272"
@@ -17,7 +17,7 @@ tags:
   role: "Development, UX Design"
   timeline: "3 months"
 quickRead:
-  role: "Solo designer and developer — took a personal problem from idea to shipped iOS app in 3 months."
+  role: "Solo designer and developer. Took a personal problem from idea to shipped iOS app in 3 months."
   problem: "Amateur GAA coaches track match stats on paper that gets lost, making it impossible to review player performance over time or make data-informed decisions."
   approach: "Ran user research with the target user (my dad, a 40-year coach), validated the core flow through testing, designed the UI in Figma, then built and shipped the app using Cursor, Claude Code, and Supabase."
   outcome: "A working iOS app in active use on pitches across Ireland. Coaches can now track stats in real time, view player performance trends, and make team decisions backed by data rather than memory."
@@ -46,7 +46,7 @@ For this project, I wanted to better understand the problems of one specific use
 
 - Being involved with multiple teams within the same club makes it tricky to remember details of matches, especially ones that happened some time ago.
 - Helping players improve is incredibly difficult, especially if you don't know where their strengths and weaknesses really lie.
-- It's hard to know how you're comparing to previous matches - how do you know who's playing well and who isn't?
+- It's hard to know how you're comparing to previous matches. How do you know who's playing well and who isn't?
 - Having numbers help to take emotion out of decisions on the sideline. They can be crucial in determining what needs to be adjusted on the pitch.
 
 ### So, he wants to be able to track information over time…
@@ -178,11 +178,11 @@ The user can create teams and players, record information on their matches, and 
 
 ## Conclusion
 
-### The question on everyone's lips - has it made me a billionaire yet?
+### The question on everyone's lips: has it made me a billionaire yet?
 
 As of yet, no it has not, however, I am immensely proud of the outcome: my dad loves and is currently using it (and reporting bugs) almost every weekend.
 
-The next steps are hard to tell, I've reached a place where I've created a useful tool, however, I have lots of ideas for improvements, along with an abundance of problems that still need solving - remember that rain?
+The next steps are hard to tell, I've reached a place where I've created a useful tool, however, I have lots of ideas for improvements, along with an abundance of problems that still need solving. Remember that rain?
 
 ### What can I take away from my experience?
 

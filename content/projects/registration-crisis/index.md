@@ -1,7 +1,7 @@
 ---
 id: "registration-crisis"
-name: "Registration in the Time of a Crisis"
-company: "CYGNVS"
+name: "Cutting registration errors from 50% to under 2% during a cyber crisis"
+company: "CYGNVS · Cybersecurity incident response platform"
 description: "Reducing the error rate of registration from 50% to less than 2% during cyber incidents, solving over 60 registration paths to ensure users can quickly access their colleagues in CYGNVS."
 tldr: "Reducing the error rate of registration from 50% to less than 2% during cyber incidents, solving over 60 registration paths to ensure users can quickly access their colleagues in CYGNVS."
 logo: "/icon-cygnvs-2.webp"
@@ -27,7 +27,7 @@ tags:
   timeline: "6 months"
 quickRead:
   role: "Lead UX Designer on a fast-tracked, cross-functional project across web and mobile teams."
-  problem: "During a live cyber incident, only 12 of 25 invited users could complete registration — a 50% failure rate at the worst possible moment. The platform had 65 registration paths, many leading to dead ends."
+  problem: "During a live cyber incident, only 12 of 25 invited users could complete registration, a 50% failure rate at the worst possible moment. The platform had 65 registration paths, many leading to dead ends."
   approach: "Mapped all 65 flows with a PM, defined task flows with cross-functional stakeholders, and ran usability testing on 11 participants. Iterated heavily on copy (not just UI) based on findings, then fast-tracked a secondary 'quick access' flow to address an urgent gap discovered during live use."
   outcome: "Error rate dropped from 50% to under 2%. In a subsequent incident, 66 of 67 newly invited users registered without issue. Platform saw a 300% increase in new company sign-ups post-launch."
   skills: "UX design · Task flow mapping · Usability testing · Cross-functional collaboration · Copy writing · Mobile & web design"

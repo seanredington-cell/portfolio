@@ -1,7 +1,7 @@
 ---
 id: "regulatory-reporting"
-name: "Regulatory Reporting"
-company: "CYGNVS"
+name: "Turning a compliance nightmare into a patented AI reporting tool"
+company: "CYGNVS · Cybersecurity incident response platform"
 description: "Patented product that uses LLMs to empower users impacted by a cyber security incident to stay compliant with government regulations through collaboration and reporting."
 tldr: "Patented product that uses LLMs to empower users impacted by a cyber security incident to stay compliant with government regulations through collaboration and reporting."
 logo: "/icon-cygnvs-2.webp"
@@ -31,7 +31,7 @@ tags:
 quickRead:
   role: "Lead UX Designer across 6 phased releases, working with lawyers, engineers, and C-suite stakeholders."
   problem: "New SEC regulations required companies to file cyber incident reports under tight deadlines. No existing tool supported secure, collaborative, multi-party report filing — lawyers were coordinating via email and phone calls."
-  approach: "Took a phased approach — each month shipped a meaningful increment. Started by repurposing existing platform modules, then progressively added a report library, PDF export, an AI co-pilot for surfacing relevant incident data, field-level comments, and smart report suggestions using a universal sentence encoder."
+  approach: "Took a phased approach, shipping a meaningful increment each month. Started by repurposing existing platform modules, then progressively added a report library, PDF export, an AI co-pilot for surfacing relevant incident data, field-level comments, and smart report suggestions using a universal sentence encoder."
   outcome: "Patent-pending product. Sales pitch shifted to lead with this feature. The team grew from a skeleton crew to a full dedicated squad of developers, a PM, and a designer based on customer interest."
   skills: "Complex UX design · Phased product delivery · Stakeholder management · AI-assisted features · Legal domain research · Systems thinking"
 ---
@@ -79,7 +79,7 @@ We met with our key users; lawyers, and discussed their current ways of working.
 
 We **released this product in phases**, each of which could be grouped under a general "How might we (HMW)…" statement. Each **phase lasted roughly a month** from start of design to release of development.
 
-### Phase 1 - How might we use what we have to solve the user's problems
+### Phase 1: How might we use what we have to solve the user's problems
 
 We needed to explore if solving the user problems was something that we could even do well within CYGNVS.
 
@@ -97,9 +97,9 @@ This meant that the Workstream would be the foundation on which we built this fe
 
 Once designs were shared with stakeholders including our CEO, CTO and VP of engineering, we had the green light to explore what the future of reporting might look like.
 
-### Phase 2 - HMW enable users to fill out entire reports in CYGNVS
+### Phase 2: HMW enable users to fill out entire reports in CYGNVS
 
-It was clear we were missing two major components of the reporting journey - selecting a report and submitting the report.
+It was clear we were missing two major components of the reporting journey, selecting a report and submitting the report.
 
 A library of all reports was created which allowed users to search and filter. Upon selecting a report users were provided with additional information on the report before creating it.
 
@@ -113,7 +113,7 @@ From speaking with the law firms, we recognised that reports may need multiple r
 
 Once completed, we looked at how we could improve the experience of filling out the report itself.
 
-### Phase 3 - HMW leverage the rest of the data in a room
+### Phase 3: HMW leverage the rest of the data in a room
 
 Within a Room, lots of information was being captured in different workstreams. We wanted to be able to surface relevant information within a report to assist users.
 
@@ -129,7 +129,7 @@ To develop trust in this feature, it was given a name; *CYGNVS Co-Pilot* (later 
 
 Being able to add this information to reports was very well received, however, it did bring with itself a new set of challenges.
 
-### Phase 4 - HMW ensure that the information in a report is up to date
+### Phase 4: HMW ensure that the information in a report is up to date
 
 Linking information from outside of the report, to fields within the report created quite a few complex scenarios that needed to be accounted for. To map all of these out, I created a task flow that included all of the possible actions that could take place when a user selected a field.
 
@@ -143,7 +143,7 @@ As one of the key problems we were trying to solve for was related to compliance
 
 ![Activity log](/projects/regulatory-reporting/rep-image-10.webp)
 
-### Phase 5 - HMW enable more efficient collaboration within a report
+### Phase 5: HMW enable more efficient collaboration within a report
 
 Lots of different people were collaborating on filling out reports so ensuring that they could communicate effectively was paramount.
 
@@ -151,7 +151,7 @@ Reports had a comment section which was at the bottom of the page. Moving this c
 
 ![Field-level updates and comments](/projects/regulatory-reporting/rep-image-11.webp)
 
-### Phase 6 - HMW guide users to complete reports correctly
+### Phase 6: HMW guide users to complete reports correctly
 
 I wanted to further explore the idea of the CYGNVS Co-Pilot and where it could be used throughout the reporting process. It wasn't AI, but I wanted to show that it was smart.
 

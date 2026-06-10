@@ -1,9 +1,9 @@
 ---
 id: "getmee"
-name: "AI-Powered Job Readiness Platform"
-company: "GETMEE AI"
-description: "How systems thinking turned a collection of isolated features into a connected product — doubling the userbase across 15+ white-label apps"
-tldr: "How systems thinking turned a collection of isolated features into a connected product — doubling the userbase across 15+ white-label apps"
+name: "Designing how AI thinks, not just how it looks"
+company: "Getmee · AI-powered English learning platform"
+description: "How systems thinking turned a collection of isolated features into a connected product, doubling the userbase across 15+ white label apps."
+tldr: "How systems thinking turned a collection of isolated features into a connected product, doubling the userbase across 15+ white label apps."
 logo: "/projects/getmee/logo.svg"
 logoColor: "#E17033"
 accentColor: "225, 112, 51"
@@ -25,7 +25,7 @@ tags:
 quickRead:
   role: "Head of Product & Design at an AI EdTech startup. Sole designer on a team with 12 developers."
   problem: "A fragmented product across 15+ white-label apps, a reactive dev team, and no infrastructure to scale. Features existed but didn't connect into a coherent experience for students or teachers."
-  approach: "Built the foundation before the features — design system, QA process, product council, and team rituals. Then reframed a teacher request for 'more tasks' into a personalised AI learning journey that removed the burden from teachers entirely."
+  approach: "Built the foundation before the features: design system, QA process, product council, and team rituals. Then reframed a teacher request for 'more tasks' into a personalised AI learning journey that removed the burden from teachers entirely."
   outcome: "White-label deployment time dropped from weeks to 2 hours. Userbase doubled to 40k across 15+ apps. Pilot data across 1,100+ students in 3 countries showed strong satisfaction and measurable improvement in English confidence."
   skills: "Systems thinking · Design leadership · AI product design · Design systems · User research · Stakeholder management"
 ---

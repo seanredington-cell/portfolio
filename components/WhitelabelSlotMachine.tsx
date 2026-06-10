@@ -58,7 +58,7 @@ export default function WhitelabelSlotMachine({ brandColor }: WhitelabelSlotMach
     <div className="my-16 sm:my-20" style={{ contain: 'layout' }}>
       {/* Window is exactly one SLIDE_H tall so one image fills it perfectly */}
       <div
-        className="relative mx-auto overflow-hidden rounded-3xl shadow-xl bg-white dark:bg-gray-800"
+        className="relative mx-auto overflow-hidden"
         style={{ width: DISPLAY_W, height: SLIDE_H, contain: 'layout' }}
       >
         <motion.div style={{ y }}>
@@ -95,12 +95,12 @@ export default function WhitelabelSlotMachine({ brandColor }: WhitelabelSlotMach
         <motion.button
           onClick={handleSpin}
           disabled={isSpinning}
-          className="px-8 py-3 rounded-full font-semibold text-white shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
-          style={{ background: `linear-gradient(135deg, ${brandColor}, ${brandColor}dd)` }}
+          className="px-8 py-3 rounded-full font-semibold text-gray-800 dark:text-gray-200 bg-white/10 dark:bg-gray-800/30 border border-white/60 dark:border-gray-700 shadow-lg hover:bg-white/20 dark:hover:bg-gray-800/50 disabled:opacity-50 disabled:cursor-not-allowed"
+          style={{ boxShadow: '0 8px 32px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.5)' }}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
-          {isSpinning ? "Shuffling..." : "Shuffle"}
+          {isSpinning ? "Shuffling..." : "Shuffle colourway"}
         </motion.button>
       </div>
     </div>

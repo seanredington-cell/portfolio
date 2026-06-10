@@ -1,9 +1,9 @@
 ---
 id: "workday-help"
-name: "Workday Help"
-company: "WORKDAY"
-description: "Optimising Workday's fastest selling product for web and mobile apps."
-tldr: "Optimising Workday's fastest selling product for web and mobile apps."
+name: "Optimising Workday's fastest-selling product for web and mobile"
+company: "Workday · Enterprise HR software"
+description: "As part of a senior design team, I owned key areas of the web and mobile experience, helping deliver a product used by millions of HR users worldwide."
+tldr: "As part of a senior design team, I owned key areas of the web and mobile experience, helping deliver a product used by millions of HR users worldwide."
 logo: "/wday-logo.webp"
 logoPlaceholder: "💼"
 logoColor: "#E65100"
@@ -23,7 +23,7 @@ tags:
   role: "Sr. Associate Product Designer"
   timeline: "18 months"
 quickRead:
-  role: "Sr. Associate Product Designer across two scrum teams at Workday — working on both web and native mobile."
+  role: "Sr. Associate Product Designer across two scrum teams at Workday, working on both web and native mobile."
   problem: "Workday Help had developer-built screens that fell well short of the UX bar. Employees had no central place to get HR help, couldn't raise cases on mobile, and had no good way to track their open cases."
   approach: "Worked alongside a senior designer across a Help Center redesign, a mobile case creation flow, and a case tracking experience. Ran extensive research through Dscout campaigns with 30+ participants, ran cross-functional sketching sessions, and iterated through multiple testing rounds before finalising."
   outcome: "Workday Help became one of Workday's fastest-selling products. The team scaled from 2 scrum teams to 5, with 10+ designers and researchers working on the product."
@@ -115,6 +115,6 @@ Once a case had been created, users needed a way to track the progress of that c
 
 ## Learnings
 
-Aside from learning in the areas of research, interaction design and visual design - I really valued the interpersonal skills which I gained by working in a team.
+Aside from learning in the areas of research, interaction design and visual design, I really valued the interpersonal skills which I gained by working in a team.
 
 I now had confidence in my ability and thoroughly enjoyed when we tested our assumptions to find issues with our work and users told us that we solved a real pain point for them.

@@ -25,7 +25,7 @@ interface ClientPageProps {
 export default function ProjectDetailClient({ params, markdownContent, frontMatter, headings, readTime }: ClientPageProps) {
   const router = useRouter();
   const [showBackToTop, setShowBackToTop] = React.useState(false);
-  const [activeTab, setActiveTab] = React.useState<'full' | 'quick'>('full');
+  const [activeTab, setActiveTab] = React.useState<'full' | 'quick'>('quick');
   const [expandedImage, setExpandedImage] = React.useState<string | null>(null);
   const contentRef = React.useRef<HTMLDivElement>(null);
 
@@ -659,6 +659,20 @@ export default function ProjectDetailClient({ params, markdownContent, frontMatt
                     <p className="text-base text-gray-700 dark:text-gray-300 leading-relaxed">{value}</p>
                   </div>
                 ))}
+
+                {/* CTA to full case study — inside the card */}
+                <div className="pt-2">
+                  <button
+                    onClick={() => setActiveTab('full')}
+                    className="inline-flex items-center gap-2 bg-white/10 dark:bg-gray-800/30 border border-white/60 dark:border-gray-700 text-gray-800 dark:text-gray-200 font-semibold px-5 py-2.5 rounded-full shadow-lg hover:shadow-xl hover:scale-105 hover:bg-white/20 dark:hover:bg-gray-800/50 transition-all duration-300 text-sm"
+                    style={{ boxShadow: '0 8px 32px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.5)' }}
+                  >
+                    Read the full case study
+                    <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                    </svg>
+                  </button>
+                </div>
               </div>
             ) : (
               <p className="text-sm text-gray-500 dark:text-gray-400 italic">AI Summary not available for this project.</p>
@@ -794,7 +808,7 @@ export default function ProjectDetailClient({ params, markdownContent, frontMatt
             className="space-y-6"
           >
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold">
-              <span className="text-gray-900 dark:text-gray-100">Get in touch</span>
+              <span className="text-gray-900 dark:text-gray-100">Contact</span>
             </h2>
 
             <div className="pt-6">

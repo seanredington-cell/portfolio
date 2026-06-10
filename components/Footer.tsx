@@ -23,7 +23,7 @@ export default function Footer() {
           className="space-y-6"
         >
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold">
-            <span className="text-gray-900 dark:text-gray-100">Get in touch</span>
+            <span className="text-gray-900 dark:text-gray-100">Contact</span>
           </h2>
 
           <div className="pt-8">
