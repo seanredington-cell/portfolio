@@ -148,6 +148,7 @@ export default function About() {
                     <span>Introduced product processes including a Product Council, UX office hours and Notion documentation that shifted the team from reactive to roadmap-driven, growing the userbase from 20,000 to 40,000.</span>
                   </li>
                 </ul>
+
               </div>
 
               {/* Marlin Communications */}
@@ -199,6 +200,26 @@ export default function About() {
                     <span>Involved in interviewing, hiring, onboarding and up-skilling a team of designers both on and off-site.</span>
                   </li>
                 </ul>
+
+                {/* Testimonials — CYGNVS */}
+                <div className="mt-6 space-y-3">
+                  {[
+                    { initials: 'EH', color: '#1E3A8A', name: 'Eoghan Hickey', role: 'Design Lead · CYGNVS & Workday', quote: 'Seán is an exceptional product designer who is thoughtful, pragmatic, and clever. He takes feedback like a champ, cares about UX, and is able to get up to speed with technical conversations that could spin your head around.' },
+                    { initials: 'KR', color: '#3B82F6', name: 'Karen Reilly', role: 'Director of Product · CYGNVS & Workday', quote: "Seán is a natural leader who cares deeply about the people he works with, our users and our customers. When I moved to CYGNVS, he was the first person I wanted to bring with me and I'm glad I did because his influence on the product was invaluable." },
+                    { initials: 'DF', color: '#0EA5E9', name: 'David Fox', role: 'Engineering Lead · CYGNVS', quote: 'Seán was a pleasure to work with at CYGNVS where he solved complex problems with engineering in mind always. He was a great collaborator on a number of big initiatives, and always made sure to listen to the room for ideas — not just taking orders from senior stakeholders.' },
+                  ].map((t) => (
+                    <div key={t.initials} className="rounded-2xl bg-gray-50/80 dark:bg-gray-700/40 border border-gray-200/60 dark:border-gray-600/40 p-5">
+                      <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">"{t.quote}"</p>
+                      <div className="flex items-center gap-2.5 mt-4">
+                        <div className="w-8 h-8 rounded-full flex items-center justify-center text-white text-xs font-bold flex-shrink-0" style={{ background: t.color }}>{t.initials}</div>
+                        <div>
+                          <div className="text-sm font-semibold text-gray-900 dark:text-gray-100 leading-tight">{t.name}</div>
+                          <div className="text-xs text-gray-500 dark:text-gray-400">{t.role}</div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
 
               {/* Workday */}
@@ -222,6 +243,25 @@ export default function About() {
                     <span>Designed and carried out research studies, built wireframes, prototypes and high fidelity product features within scrum teams that worked in an agile way delivering quality features to users.</span>
                   </li>
                 </ul>
+
+                {/* Testimonials — Workday */}
+                <div className="mt-6 space-y-3">
+                  {[
+                    { initials: 'EH', color: '#1E3A8A', name: 'Eoghan Hickey', role: 'Design Lead · CYGNVS & Workday', quote: 'Seán is an exceptional product designer who is thoughtful, pragmatic, and clever. He takes feedback like a champ, cares about UX, and is able to get up to speed with technical conversations that could spin your head around.' },
+                    { initials: 'RC', color: '#E65100', name: 'Robert Clarke', role: 'Senior Designer · Workday', quote: "Seán is a multi-talented designer — as adept at honing in on the details of an interaction design problem as he is at polishing high fidelity designs. A champion of research-informed design, I can't stress enough how having Seán on your team is a major step towards getting your product moving in the right direction." },
+                  ].map((t) => (
+                    <div key={t.initials} className="rounded-2xl bg-gray-50/80 dark:bg-gray-700/40 border border-gray-200/60 dark:border-gray-600/40 p-5">
+                      <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">"{t.quote}"</p>
+                      <div className="flex items-center gap-2.5 mt-4">
+                        <div className="w-8 h-8 rounded-full flex items-center justify-center text-white text-xs font-bold flex-shrink-0" style={{ background: t.color }}>{t.initials}</div>
+                        <div>
+                          <div className="text-sm font-semibold text-gray-900 dark:text-gray-100 leading-tight">{t.name}</div>
+                          <div className="text-xs text-gray-500 dark:text-gray-400">{t.role}</div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </section>
@@ -258,7 +298,7 @@ export default function About() {
             className="space-y-8"
           >
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold">
-              <span className="text-gray-900 dark:text-gray-100">Get in touch</span>
+              <span className="text-gray-900 dark:text-gray-100">Contact</span>
             </h2>
 
             <div className="pt-2">
