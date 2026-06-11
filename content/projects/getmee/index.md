@@ -101,7 +101,7 @@ Following the user and customer conversations, I conducted competitor analysis u
 
 The platforms I looked at did a good job of solving English learner engagement, but none of them were built with employment at the core. For our users (immigrants, students and job seekers), that's the end goal. The opportunity for us was to combine employability-focused features with personalised CEFR-aligned learning journeys that required zero teacher management.
 
-![Competitive analysis findings](/projects/getmee/image.webp)
+![Competitive analysis findings](/projects/getmee/competitive-landscape.png)
 
 ## Designing the System, not just the feature
 
