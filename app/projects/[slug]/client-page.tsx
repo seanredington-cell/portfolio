@@ -225,12 +225,17 @@ export default function ProjectDetailClient({ params, markdownContent, frontMatt
 
   return (
     <div
-      className="min-h-screen bg-white dark:bg-gray-900"
+      className="min-h-screen relative"
       style={{
         ['--brand-color' as string]: brandColorLight,
         ['--brand-color-dark' as string]: brandColorDark,
       } as React.CSSProperties}
     >
+      {/* Dot grid — fades out below the hero */}
+      <div className="dot-grid-project absolute inset-0 pointer-events-none" style={{ zIndex: 0 }} />
+      {/* Dot grid — fades back in at the bottom */}
+      <div className="dot-grid-project-bottom absolute inset-0 pointer-events-none" style={{ zIndex: 0 }} />
+
       {/* Reading Progress Bar — desktop only */}
       <motion.div
         className="hidden lg:block fixed top-0 left-0 right-0 h-1 z-[60] origin-left pointer-events-none"
@@ -256,7 +261,7 @@ export default function ProjectDetailClient({ params, markdownContent, frontMatt
           <svg width="16" height="16" viewBox="0 0 20 20" fill="none">
             <path d="M12.5 5L7.5 10L12.5 15" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
-          Back to home
+          Back to my work
         </button>
       </div>
 
@@ -340,7 +345,7 @@ export default function ProjectDetailClient({ params, markdownContent, frontMatt
       </motion.button>
 
       {/* Hero Section */}
-      <section className="relative overflow-hidden pt-24 pb-16 px-4 sm:px-8 lg:px-[168px]">
+      <section className="relative z-10 overflow-hidden pt-24 pb-16 px-4 sm:px-8 lg:px-[168px]">
         <div className="max-w-2xl mx-auto">
           {/* Back Button */}
           <motion.div
@@ -365,7 +370,7 @@ export default function ProjectDetailClient({ params, markdownContent, frontMatt
                   strokeLinejoin="round"
                 />
               </svg>
-              Back to home
+              Back to my work
             </button>
           </motion.div>
 
@@ -600,83 +605,86 @@ export default function ProjectDetailClient({ params, markdownContent, frontMatt
         </section>
       )}
 
-      {/* Tab bar — below hero image, above content */}
+      {/* Tabbed panel — tabs sit on top of the card they open into */}
       {(!isProtected || isUnlocked) && (
-        <div className="px-4 sm:px-8 lg:px-[168px] pb-8">
+        <div className={`px-4 sm:px-8 lg:px-[168px] relative z-10 ${activeTab === 'quick' ? 'pb-24' : 'pb-8'}`}>
           <div className="max-w-2xl mx-auto">
-            <div className="flex items-center gap-2">
+
+            {/* Tab row */}
+            <div className="flex items-end gap-0">
               <button
                 onClick={() => setActiveTab('full')}
-                className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 border ${
+                className={`flex items-center gap-1.5 px-4 py-2.5 text-sm font-semibold transition-all duration-200 rounded-t-xl border-t border-l border-r -mb-px ${
                   activeTab === 'full'
-                    ? 'bg-white/80 dark:bg-gray-800/80 border-white/60 dark:border-gray-600 shadow-md text-gray-900 dark:text-gray-100'
-                    : 'bg-white/20 dark:bg-gray-800/20 border-white/30 dark:border-gray-700/50 text-gray-500 dark:text-gray-400 hover:bg-white/40 dark:hover:bg-gray-800/40'
+                    ? 'bg-white/80 dark:bg-gray-800/80 border-gray-200/80 dark:border-gray-600 text-gray-900 dark:text-gray-100 z-10 relative'
+                    : 'bg-white/20 dark:bg-gray-800/20 border-transparent text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300'
                 }`}
               >
-                {/* Book icon */}
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" className="flex-shrink-0 opacity-80">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" className="flex-shrink-0">
                   <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                   <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
                 Full case study
-                {readTime && <span className="hidden sm:inline opacity-50 font-normal">{readTime} min</span>}
+                {readTime && <span className={`hidden sm:inline font-normal ${activeTab === 'full' ? 'opacity-60' : 'opacity-40'}`}>{readTime} min</span>}
               </button>
               <button
                 onClick={() => setActiveTab('quick')}
-                className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 border ${
+                className={`flex items-center gap-1.5 px-4 py-2.5 text-sm font-semibold transition-all duration-200 rounded-t-xl border-t border-l border-r -mb-px ${
                   activeTab === 'quick'
-                    ? 'bg-white/80 dark:bg-gray-800/80 border-white/60 dark:border-gray-600 shadow-md text-gray-900 dark:text-gray-100'
-                    : 'bg-white/20 dark:bg-gray-800/20 border-white/30 dark:border-gray-700/50 text-gray-500 dark:text-gray-400 hover:bg-white/40 dark:hover:bg-gray-800/40'
+                    ? 'bg-white/80 dark:bg-gray-800/80 border-gray-200/80 dark:border-gray-600 text-gray-900 dark:text-gray-100 z-10 relative'
+                    : 'bg-white/20 dark:bg-gray-800/20 border-transparent text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300'
                 }`}
               >
-                {/* Sparkle/AI icon */}
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" className="flex-shrink-0 opacity-80">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" className="flex-shrink-0" style={{ color: activeTab === 'quick' ? brandColor : 'currentColor' }}>
                   <path d="M12 2C12 2 13 7 16 10C19 13 24 12 24 12C24 12 19 13 16 16C13 19 12 24 12 24C12 24 11 19 8 16C5 13 0 12 0 12C0 12 5 13 8 10C11 7 12 2 12 2Z"/>
                 </svg>
                 AI Summary
-                <span className="hidden sm:inline opacity-50 font-normal">2 min</span>
+                <span className={`hidden sm:inline font-normal ${activeTab === 'quick' ? 'opacity-60' : 'opacity-40'}`}>2 min</span>
               </button>
             </div>
-          </div>
-        </div>
-      )}
 
-      {/* AI Summary Content */}
-      {activeTab === 'quick' && (!isProtected || isUnlocked) && (
-        <div className="px-4 sm:px-8 lg:px-[168px] pb-24">
-          <div className="max-w-2xl mx-auto">
-            {frontMatter.quickRead ? (
-              <div className="bg-white/80 dark:bg-gray-800/80 border border-white/50 dark:border-gray-700/60 rounded-2xl p-8 space-y-6 shadow-sm">
-                {[
-                  { label: 'My role', value: frontMatter.quickRead.role },
-                  { label: 'The problem', value: frontMatter.quickRead.problem },
-                  { label: 'My approach', value: frontMatter.quickRead.approach },
-                  { label: 'Outcome', value: frontMatter.quickRead.outcome },
-                  { label: 'Skills', value: frontMatter.quickRead.skills },
-                ].map(({ label, value }) => value && (
-                  <div key={label}>
-                    <p className="text-[11px] font-semibold uppercase tracking-widest mb-1.5" style={{ color: brandColor }}>{label}</p>
-                    <p className="text-base text-gray-700 dark:text-gray-300 leading-relaxed">{value}</p>
-                  </div>
-                ))}
-
-                {/* CTA to full case study — inside the card */}
-                <div className="pt-2">
-                  <button
-                    onClick={() => setActiveTab('full')}
-                    className="inline-flex items-center gap-2 bg-white/10 dark:bg-gray-800/30 border border-white/60 dark:border-gray-700 text-gray-800 dark:text-gray-200 font-semibold px-5 py-2.5 rounded-full shadow-lg hover:shadow-xl hover:scale-105 hover:bg-white/20 dark:hover:bg-gray-800/50 transition-all duration-300 text-sm"
-                    style={{ boxShadow: '0 8px 32px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.5)' }}
-                  >
-                    Read the full case study
-                    <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                    </svg>
-                  </button>
+            {/* Card — only shown when AI Summary tab is active */}
+            {activeTab === 'quick' && (
+              <div
+                className="relative rounded-2xl overflow-hidden border border-gray-200/80 dark:border-gray-600"
+                style={{ backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)', boxShadow: '0 8px 32px rgba(0,0,0,0.08)' }}
+              >
+                <div className="absolute inset-0 bg-white/80 dark:bg-gray-800/80 pointer-events-none" />
+                <div className="relative z-10 p-8 space-y-6">
+                  {frontMatter.quickRead ? (
+                    <>
+                      {[
+                        { label: 'My role', value: frontMatter.quickRead.role },
+                        { label: 'The problem', value: frontMatter.quickRead.problem },
+                        { label: 'My approach', value: frontMatter.quickRead.approach },
+                        { label: 'Outcome', value: frontMatter.quickRead.outcome },
+                        { label: 'Skills', value: frontMatter.quickRead.skills },
+                      ].map(({ label, value }) => value && (
+                        <div key={label}>
+                          <p className="text-[11px] font-semibold uppercase tracking-widest mb-1.5" style={{ color: brandColor }}>{label}</p>
+                          <p className="text-base text-gray-700 dark:text-gray-300 leading-relaxed">{value}</p>
+                        </div>
+                      ))}
+                      <div className="pt-2 border-t border-gray-200/60 dark:border-gray-700/60">
+                        <button
+                          onClick={() => setActiveTab('full')}
+                          className="inline-flex items-center gap-2 font-semibold px-5 py-2.5 rounded-full text-sm text-white transition-all duration-200 hover:scale-105 hover:shadow-lg"
+                          style={{ backgroundColor: brandColor }}
+                        >
+                          Read the full case study
+                          <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                          </svg>
+                        </button>
+                      </div>
+                    </>
+                  ) : (
+                    <p className="text-sm text-gray-500 dark:text-gray-400 italic">AI Summary not available for this project.</p>
+                  )}
                 </div>
               </div>
-            ) : (
-              <p className="text-sm text-gray-500 dark:text-gray-400 italic">AI Summary not available for this project.</p>
             )}
+
           </div>
         </div>
       )}
@@ -684,7 +692,7 @@ export default function ProjectDetailClient({ params, markdownContent, frontMatt
       {/* Markdown Content */}
       <section
         ref={contentRef}
-        className="px-4 sm:px-8 lg:px-[168px] pb-16"
+        className="px-4 sm:px-8 lg:px-[168px] pb-16 relative z-10"
         style={{
           display: (isProtected && !isUnlocked) || activeTab === 'quick' ? 'none' : 'block',
           opacity: contentVisible ? 1 : 0,
@@ -712,6 +720,13 @@ export default function ProjectDetailClient({ params, markdownContent, frontMatt
         </div>
       </section>
 
+      {/* End of case study divider */}
+      <div className="px-4 sm:px-8 lg:px-[168px] relative z-10 pt-4 pb-16">
+        <div className="max-w-2xl mx-auto">
+          <div className="h-px bg-gray-200 dark:bg-gray-700" />
+        </div>
+      </div>
+
       {/* Next Project Card — always shown, even on locked projects */}
       {(() => {
         // Filter out hero project and find current project index
@@ -726,7 +741,7 @@ export default function ProjectDetailClient({ params, markdownContent, frontMatt
         if (!nextProject || nextProject.id === params.slug) return null;
 
         return (
-          <section className="px-4 sm:px-8 lg:px-[168px] pb-24">
+          <section className="px-4 sm:px-8 lg:px-[168px] pb-24 relative z-10">
             <div className="max-w-2xl mx-auto">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -738,13 +753,16 @@ export default function ProjectDetailClient({ params, markdownContent, frontMatt
 
                 <Link href={`/projects/${nextProject.id}`} className="group block">
                   <motion.div
-                    className="bg-white/60 dark:bg-gray-800/60 border border-white/60 dark:border-gray-700/60 rounded-2xl p-4 sm:p-6 shadow-lg hover:shadow-xl transition-all duration-300"
+                    className="relative rounded-2xl overflow-hidden border border-gray-200/80 dark:border-gray-600 p-4 sm:p-6 hover:shadow-xl transition-all duration-300"
                     style={{
-                      boxShadow: '0 8px 32px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.5)',
+                      backdropFilter: 'blur(20px)',
+                      WebkitBackdropFilter: 'blur(20px)',
+                      boxShadow: '0 8px 32px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.5)',
                     }}
                     whileHover={{ y: -4 }}
                   >
-                    <div className="flex flex-col-reverse lg:flex-row gap-4 sm:gap-6">
+                    <div className="absolute inset-0 bg-white/80 dark:bg-gray-800/80 pointer-events-none" />
+                    <div className="relative z-10 flex flex-col-reverse lg:flex-row gap-4 sm:gap-6">
                       {/* Text Content - Left Side on Desktop, Bottom on Mobile */}
                       <div className="lg:w-1/2 w-full flex flex-col justify-center space-y-3.5">
                         <div className="flex items-center gap-2.5">

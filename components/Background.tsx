@@ -97,21 +97,8 @@ export default function Background() {
         </div>
       )}
 
-      {/* Grid pattern — desktop only */}
-      {!isMobile && (
-        <motion.div
-          className="fixed inset-0 -z-10 overflow-hidden pointer-events-none opacity-20 dark:opacity-5"
-          style={{
-            backgroundImage: `
-              linear-gradient(to right, rgba(99,102,241,0.05) 1px, transparent 1px),
-              linear-gradient(to bottom, rgba(99,102,241,0.05) 1px, transparent 1px)
-            `,
-            backgroundSize: '60px 60px',
-            y: gridY,
-            scale: gridScale,
-          }}
-        />
-      )}
+      {/* Dot grid pattern — light and dark handled via CSS */}
+      <div className="dot-grid fixed inset-0 -z-10 pointer-events-none" />
     </>
   );
 }

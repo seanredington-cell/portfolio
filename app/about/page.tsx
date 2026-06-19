@@ -19,14 +19,7 @@ export default function About() {
 
   return (
     <main className="min-h-screen pt-24 sm:pt-28 relative z-0">
-      {/* Background Elements */}
-      <motion.div
-        initial={{ opacity: 0, scale: 1.05 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-      >
-        <Background />
-      </motion.div>
+      <Background />
 
       {/* Cards Container */}
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">

@@ -71,6 +71,38 @@ body {
   background: #d1d5db;
 }
 
+/* Dot grid background texture */
+.dot-grid {
+  background-image: radial-gradient(circle, rgba(0, 0, 0, 0.13) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+.dark .dot-grid {
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.12) 1px, transparent 1px);
+}
+
+/* Project page dot grid — fades in at the bottom (reversed) */
+.dot-grid-project-bottom {
+  background-image: radial-gradient(circle, rgba(0, 0, 0, 0.13) 1px, transparent 1px);
+  background-size: 24px 24px;
+  /* Anchor mask to the bottom so the fade-in always starts ~500px from the bottom */
+  -webkit-mask-image: linear-gradient(to top, black 0px, black 900px, transparent 1100px);
+  mask-image: linear-gradient(to top, black 0px, black 900px, transparent 1100px);
+}
+.dark .dot-grid-project-bottom {
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.12) 1px, transparent 1px);
+}
+
+/* Project page dot grid — fades out before the tabs */
+.dot-grid-project {
+  background-image: radial-gradient(circle, rgba(0, 0, 0, 0.13) 1px, transparent 1px);
+  background-size: 24px 24px;
+  -webkit-mask-image: linear-gradient(to bottom, black 0px, black 400px, transparent 680px);
+  mask-image: linear-gradient(to bottom, black 0px, black 400px, transparent 680px);
+}
+.dark .dot-grid-project {
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.12) 1px, transparent 1px);
+}
+
 /* Markdown Content Styles */
 .markdown-content h2 {
   font-size: 1.5rem;

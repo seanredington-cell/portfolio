@@ -26,9 +26,11 @@ const iconClass = (isActive: boolean) =>
       : 'text-gray-400 dark:text-white/50'
   }`;
 
-const HomeIcon = ({ isActive }: { isActive: boolean }) => (
+const WorkIcon = ({ isActive }: { isActive: boolean }) => (
   <svg width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" className={iconClass(isActive)}>
-    <path d="M10 2L3 7V17H8V12H12V17H17V7L10 2Z" fill="currentColor" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    <rect x="2" y="6" width="16" height="11" rx="1.5" stroke="currentColor" strokeWidth="1.5" fill="none" />
+    <path d="M7 6V5C7 3.89543 7.89543 3 9 3H11C12.1046 3 13 3.89543 13 5V6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+    <path d="M2 10H18" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
   </svg>
 );
 
@@ -55,7 +57,7 @@ export default function Navigation() {
   }, []);
 
   const navItems = [
-    { name: "Home", href: "/", icon: HomeIcon },
+    { name: "My Work", href: "/", icon: WorkIcon },
     { name: "About", href: "/about", icon: AboutIcon },
     { name: "Contact", href: "/contact", icon: ContactIcon },
   ];
@@ -80,7 +82,7 @@ export default function Navigation() {
         {/* Navigation items */}
         <div className="relative flex items-center gap-1 sm:gap-6">
           {navItems.map((item) => {
-            const isActive = pathname === item.href;
+            const isActive = item.href === "/" ? (pathname === "/" || pathname.startsWith("/projects/")) : pathname === item.href;
             const Icon = item.icon;
 
             return (

@@ -4,6 +4,7 @@ import Projects from "@/components/Projects";
 import Footer from "@/components/Footer";
 import Background from "@/components/Background";
 import TestimonialCarousel from "@/components/TestimonialCarousel";
+import DarkModeHint from "@/components/DarkModeHint";
 import { useEffect, useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -105,6 +106,8 @@ export default function Home() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      <DarkModeHint />
 
       <main
         ref={containerRef}
