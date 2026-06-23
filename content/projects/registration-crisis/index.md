@@ -33,13 +33,13 @@ quickRead:
   skills: "UX design · Task flow mapping · Usability testing · Cross-functional collaboration · Copy writing · Mobile & web design"
 ---
 
-## Background
+## Some background
 
 CYGNVS is a collaborative out-of-band incident response platform. Users need to be able to be connected with their colleagues on the platform in the event that they lose access to their work email.
 
 As a result there are a large number of ways a user can get access to the platform, many of which had been neglected for some time, leading to registration dead ends and significant user and customer dissatisfaction.
 
-## Problem
+## The problem
 
 During an incident experienced by one of our customers, only **12 out of 25** invited users were able to complete registration. This dramatically delayed their incident response plan at a moment when time is most critical.
 
@@ -49,13 +49,13 @@ We realised that their issues were varied and not unique and would need to be fi
 
 - **Users need to connect with their colleagues quickly during an incident.** When an incident occurs and users no longer have access to their work accounts, users need to be able to be invited and register quickly and securely for CYGNVS. They need to be associated with their colleagues so that they can begin to work together to resolve the incident as easily as possible.
 
-## Goal
+## Our goal
 
 - Reduce the 50% error rate of registration during an incident
 - Reduce the proportion of support cases created related to registration and sign in
 - Identify and solve for all possible registration and sign in paths
 
-## Process
+## The approach we took
 
 ### Understanding the scale of the problem
 
@@ -93,7 +93,7 @@ After discussing the findings and iterations with the wider team, I worked on de
 
 ![Final mobile designs](/projects/registration-crisis/reg-image-5.webp)
 
-### Quickly addressing new requirements
+### An urgent fix mid-launch
 
 This project was fast-tracked due to its importance and was being built by the development teams as the design continued to iterate. Due to this, we were fortunate to have users get access to our updated flows, and after some usage we learnt there was a key problem area that we needed to address urgently:
 
@@ -103,12 +103,12 @@ Based on this, we kicked off a secondary project which allowed users quick acces
 
 ![Quick access flow](/projects/registration-crisis/reg-image-6.webp)
 
-## Impact
+## The impact
 
 - 2000+ new companies and over 5000 new unique users have registered for the platform, a 300% increase compared to before this release
 - Reduction in error rate from 50% to less than 2%. In a recent incident, 67 new members were invited to CYGNVS and 66 of them registered successfully without issue
 - We solved for over 50 of the 65 flows in registration. The cases which weren't addressed were related to users that were already invited to the platform before the changes were made, but hadn't registered. We worked with our support team to ensure they had the knowledge to solve these cases when they arose for users
 
-## Learnings
+## What I learned
 
 This project required lots of work across teams and geographies. At the beginning it was difficult to co-ordinate and communicate effectively across different timezones and teams meaning decisions were often miscommunicated or not shared out properly. To combat this, we only had the key decision makers in each meeting, and then had a document which was our source of truth and tracked all of the key decisions. This greatly helped with the speed of delivery and the reduction of meetings.

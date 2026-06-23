@@ -30,7 +30,7 @@ quickRead:
   skills: "Enterprise UX · Mobile design · Usability testing · Cross-functional collaboration · Design systems · Research synthesis"
 ---
 
-## Background
+## Some background
 
 Workday is a Fortune 500 company and one of the world's leading HR management software companies. The product that I worked on; Workday Help, provides HR knowledge base and case management solutions that help employees find the information they need faster.
 
@@ -42,7 +42,7 @@ There were some basic screens built out by the developers using Workday's propri
 
 ![Initial screens for Help prior to any major design investment](/projects/workday-help/wday-image-1.webp)
 
-## Problem
+## The problem
 
 There were three main problems that we were looking to solve, all of which were related to Workday users that were trying to get assistance from HR professionals.
 
@@ -52,15 +52,15 @@ There were three main problems that we were looking to solve, all of which were 
 
 - **Users need a better way to view their old and in-progress cases.** Workday users that have created cases before need a way to be able to view and track their cases so that they can ensure that they have a record of all of the cases that they have created.
 
-## Goal
+## Our goal
 
 Within the help product, Workday users would need to have the ability to **view and manage knowledge base articles**, **raise cases** related to any HR queries they might have, and have a **central place to find answers** on any of their HR needs both on web and on mobile.
 
-## Process
+## The approach we took
 
 As I was working with a large, design-forward team, I often ran sketching sessions in order to get a large amount of input which I could then narrow down into finished designs. These sessions allowed us to go from low-fidelity sketches all the way to high fidelity screens, getting input all the while.
 
-### User Testing
+### User testing
 
 Along with the help of a senior designer, and with the support of a researcher, we ran a number of testing campaigns using a tool called Dscout. This allowed large amounts of users to use and provide feedback on the designs.
 
@@ -70,15 +70,15 @@ In one case, we ran an express Dscout mission with over 30 participants to gain 
 
 ![Miro board for usability testing](/projects/workday-help/wday-image-3.webp)
 
-## Finalising design work
+## Finalising the design work
 
-### Help Center
+### Help center
 
 Help Center is the central point of entry for Workday users that wish to have their query answered. Users can find answers based on categories or trending knowledge base articles, view their recently created cases, or create a case to get assistance from a HR professional.
 
 ![Help Center final designs on both web and native mobile apps](/projects/workday-help/wday-image-4.webp)
 
-### Create Case on Mobile
+### Create case on mobile
 
 To ensure that users were able to easily create cases using their mobile devices we tested a number of iterations of these flows in order to get it right.
 
@@ -90,18 +90,18 @@ When we tested this, users' were delighted that they could find answers themselv
 
 ![Create Case on mobile. Multiple iterations of this were tested extensively before finalising the design](/projects/workday-help/wday-image-5.webp)
 
-### Your Cases
+### Your cases
 
 Once a case had been created, users needed a way to track the progress of that case on both web and mobile, and easily reply to case solvers to enable them to solve their cases as swiftly as possible.
 
 ![Your Cases view on web and mobile](/projects/workday-help/wday-image-6.webp)
 
-## Impact
+## The impact
 
 - Workday Help now exists as one of Workday's key products
 - The team has been extended greatly, at my last check had five scrum teams and more than 10 designers and researchers working directly on the product
 
-## Learnings
+## What I learned
 
 Aside from learning in the areas of research, interaction design and visual design, I really valued the interpersonal skills which I gained by working in a team.
 

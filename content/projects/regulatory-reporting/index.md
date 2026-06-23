@@ -36,7 +36,7 @@ quickRead:
   skills: "Complex UX design · Phased product delivery · Stakeholder management · AI-assisted features · Legal domain research · Systems thinking"
 ---
 
-## Background
+## Some background
 
 New laws introduced by the U.S. Securities and Exchange Commission (SEC) require companies to report if a cyber incident has occurred.
 
@@ -46,7 +46,7 @@ Due to the functionality of CYGNVS, it was decided that we would explore if the 
 
 ![Notes on V1 of Reporting](/projects/regulatory-reporting/rep-image-1.webp)
 
-## Problem
+## The problem
 
 The new laws require companies to report on various factors to both federal and state governments within a short timeframe in the event of an incident. Failure to comply with these can lead to severe consequences including large fines and jail time.
 
@@ -54,13 +54,13 @@ The new laws require companies to report on various factors to both federal and 
 
 > **CISOs need to be compliant so that they are not held responsible in court.** As the Chief Information Security Officer (CISO) of a publicly trading company that has experienced an incident, I need to ensure that I am fully compliant with the law so that if my company is brought to court I am not liable for any wrongdoing.
 
-## Goal
+## Our goal
 
 - Use the existing functionality of the platform as the foundation for this feature. Within CYGNVS, we already had a number of modules that could be repurposed for Reporting.
 - Build the feature on a scalable foundation that could be re-used and iterated on across the platform.
 - Create a 'Kick-ass demo' that could be used by sales to generate leads and revenue for the company.
 
-## Process
+## The approach we took
 
 ### Understanding the current problems
 
@@ -157,14 +157,14 @@ The load time and accuracy of the recommendations were also improved. By using a
 
 In the future, it was also planned to use this to assist users in completing complicated fields by collating different data sources.
 
-## Impact
+## The impact
 
 - The unique way which this feature allows users to collaborate on filling out reports is patent pending
 - Subsequent to the release of the phases, our sales pitch completely shifted to have this feature at the forefront (as of now, I don't have access to sales numbers)
 - Modules that were built are being re-used across the platform to improve the overall UX of the platform
 - Having started as a skeleton team working on this, an entire development team, PM and designer are now working to iterate on it based on interest from users and customers
 
-## Learnings
+## What I learned
 
 This was an interesting project due to some of the conflicting goals that different stakeholders had.
 

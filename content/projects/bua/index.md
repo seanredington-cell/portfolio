@@ -59,7 +59,7 @@ There are some options out there, but they were generally either expensive or di
 
 ![Competitor analysis showing existing solutions and their limitations](/projects/bua/competitor-analysis.webp)
 
-## What Now?
+## What now?
 
 It was at this point, that a couple of rough conversations turned into a real project. I quickly got to work and described a rough sketch of what this project's end goal might look like.
 

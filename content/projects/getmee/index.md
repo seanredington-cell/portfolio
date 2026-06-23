@@ -58,7 +58,7 @@ The outcome of this system was that new white label apps now took only 2 hours t
 
 These processes ushered the team away from being reactive and created space to build new features that actually moved the product forward.
 
-## Tightening the Product
+## Tightening the product
 
 With a solid foundation in place, I shifted focus to tightening the product itself, turning what was a broad set of isolated features into a cohesive experience.
 
@@ -78,7 +78,7 @@ The AI English Tutor is an example of where this systems thinking came together 
 
 <div class="feature-deep-dive"><div class="feature-deep-dive-line"></div><span class="feature-deep-dive-label">Feature deep dive: AI English Tutor</span><div class="feature-deep-dive-line"></div></div>
 
-## The Problem Teachers Couldn't Articulate
+## The problem teachers couldn't articulate
 
 When speaking to our users, in this case, teachers, they often requested we add more and more task assignment features. This seemed like a straightforward request, and one that in the past would have been followed to a 't'.
 
@@ -103,7 +103,7 @@ The platforms I looked at did a good job of solving English learner engagement, 
 
 ![Competitive analysis findings](/projects/getmee/competitive-landscape.png)
 
-## Designing the System, not just the feature
+## Designing the system, not just the feature
 
 My first version generated tasks one day at a time, in isolation. It worked in my own testing, but it broke down once I realised every learner's journey is different. A single daily guess couldn't build a coherent week or structure learning in a way that made sense at scale.
 
@@ -241,7 +241,7 @@ The AI English Tutor is the strategic evolution of infrastructure that's already
 
 All of the foundational work, product tightening, and AI English Tutor helped scale Getmee from 20,000 to 40,000 active users across 15+ white-label apps while significantly reducing support burden, increasing product trust and improving the team's release velocity.
 
-## What I learned about Product Leadership
+## What I learned about product leadership
 
 - **Designing AI behaviour, not just interfaces.** As the UI is becoming an increasingly easier output for product teams, the systems behind them are where true designer value lies. I learned to write system prompts, design QA rubrics, and set confidence thresholds, making sure to serve real user needs.
 - **A product is only as good as the team building it.** At Getmee, it was clear from the start that many processes didn't exist, and wouldn't unless someone took control. By setting up UX office hours, weekly leadership calls and by engaging with feedback, I helped the team to become more cohesive and engaged in the product.
