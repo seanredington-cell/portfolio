@@ -36,8 +36,6 @@ My Dad is one of those people on the sideline. He's been coaching teams for almo
 
 ![Map of Ireland overlayed with logos and primary colors of the county level teams. All counties have both Gaelic Football and Hurling teams.](/projects/bua/Irish-gaa-map.webp)
 
----
-
 ## Research
 
 ### A conversation with the user
@@ -70,8 +68,6 @@ It was at this point, that a couple of rough conversations turned into a real pr
 - Users are able to keep a record of the games that a number of different teams have played.
 - Users can view key information about players and teams from within some interface.
 - This tool is better than a piece of paper for tracking stats over time.
-
----
 
 ## Design
 
@@ -128,8 +124,6 @@ After creating some wireframes for the main screens and key flows, higher fideli
 
 ![High fidelity UI designs for the app](/projects/bua/bua-ui.webp)
 
----
-
 ## Build baby build!
 
 ### Moving from Figma to Cursor and Claude Code
@@ -174,8 +168,6 @@ The user can create teams and players, record information on their matches, and 
 
 ![Player profile with performance stats](/projects/bua/bua-Player-Profiles.webp)
 
----
-
 ## Conclusion
 
 ### The question on everyone's lips: has it made me a billionaire yet?
@@ -187,5 +179,3 @@ The next steps are hard to tell, I've reached a place where I've created a usefu
 ### What can I take away from my experience?
 
 I had a lot of fun with this project. Due to its scale, I could have a play around with lots of different things, and I forced myself to learn so much about building. In the future, I'm interested in seeing what the new generation of 'maker' might be, and how I could embrace the process of building in my role going forward.
-
----

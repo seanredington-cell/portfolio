@@ -42,8 +42,6 @@ There were some basic screens built out by the developers using Workday's propri
 
 ![Initial screens for Help prior to any major design investment](/projects/workday-help/wday-image-1.webp)
 
----
-
 ## Problem
 
 There were three main problems that we were looking to solve, all of which were related to Workday users that were trying to get assistance from HR professionals.
@@ -54,13 +52,9 @@ There were three main problems that we were looking to solve, all of which were 
 
 - **Users need a better way to view their old and in-progress cases.** Workday users that have created cases before need a way to be able to view and track their cases so that they can ensure that they have a record of all of the cases that they have created.
 
----
-
 ## Goal
 
 Within the help product, Workday users would need to have the ability to **view and manage knowledge base articles**, **raise cases** related to any HR queries they might have, and have a **central place to find answers** on any of their HR needs both on web and on mobile.
-
----
 
 ## Process
 
@@ -75,8 +69,6 @@ In one case, we ran an express Dscout mission with over 30 participants to gain 
 ![MIRO was used to capture information during the usability testing](/projects/workday-help/wday-image-2.webp)
 
 ![Miro board for usability testing](/projects/workday-help/wday-image-3.webp)
-
----
 
 ## Finalising design work
 
@@ -104,14 +96,10 @@ Once a case had been created, users needed a way to track the progress of that c
 
 ![Your Cases view on web and mobile](/projects/workday-help/wday-image-6.webp)
 
----
-
 ## Impact
 
 - Workday Help now exists as one of Workday's key products
 - The team has been extended greatly, at my last check had five scrum teams and more than 10 designers and researchers working directly on the product
-
----
 
 ## Learnings
 
