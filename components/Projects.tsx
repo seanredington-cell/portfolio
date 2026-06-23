@@ -114,7 +114,7 @@ function HeroSection() {
         {/* Text */}
         <div className="px-2 pb-6 space-y-5 w-full">
           <div className="flex flex-col items-center gap-2">
-            <p className="text-xs font-medium tracking-widest uppercase text-gray-400 dark:text-gray-400">{p.name}</p>
+            <p className="text-xs font-semibold tracking-widest uppercase text-gray-400 dark:text-gray-400 font-lora">{p.name}</p>
             <div className="flex items-center justify-center gap-1.5">
               <span className="relative flex h-2 w-2 flex-shrink-0">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75" />
@@ -129,7 +129,7 @@ function HeroSection() {
             </p>
           )}
           {p.tagline && p.tagline.split('\n')[1] && (
-            <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">{p.tagline.split('\n')[1]}</p>
+            <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed font-lora">{p.tagline.split('\n')[1]}</p>
           )}
           {p.tags && <HeroTags tags={p.tags} center />}
           {/* Currently shelf — full width on mobile */}
@@ -173,7 +173,7 @@ function HeroSection() {
           {/* Text — 66% */}
           <div className="w-[66%] flex flex-col justify-center px-10 py-8 space-y-4">
             <div className="flex items-center gap-3">
-              <p className="text-xs font-medium tracking-widest uppercase text-gray-400 dark:text-gray-400">{p.name}</p>
+              <p className="text-xs font-semibold tracking-widest uppercase text-gray-400 dark:text-gray-400 font-lora">{p.name}</p>
               <div className="flex items-center gap-1.5">
                 <span className="relative flex h-2 w-2 flex-shrink-0">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75" />
@@ -188,7 +188,7 @@ function HeroSection() {
                   {p.tagline.split('\n')[0]}
                 </p>
                 {p.tagline.split('\n')[1] && (
-                  <p className="text-base xl:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+                  <p className="text-base xl:text-lg text-gray-600 dark:text-gray-300 leading-relaxed font-lora">
                     {p.tagline.split('\n')[1]}
                   </p>
                 )}
@@ -308,7 +308,7 @@ function MobileProjectsList({ isDark }: { isDark: boolean }) {
                   )}
                 </div>
               )}
-              <p className="text-xs font-medium tracking-widest uppercase text-gray-500 dark:text-gray-400">
+              <p className="text-xs font-semibold tracking-widest uppercase text-gray-500 dark:text-gray-400 font-lora">
                 {project.company ?? project.name}
               </p>
             </div>
@@ -337,7 +337,7 @@ function MobileProjectsList({ isDark }: { isDark: boolean }) {
             )}
 
             {/* Description */}
-            <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
+            <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed font-lora">
               {project.description}
             </p>
 
@@ -1084,7 +1084,7 @@ function ProjectCard({
                   )}
                 </div>
               )}
-              <p className="text-xs font-medium tracking-widest uppercase text-gray-500 dark:text-gray-300">
+              <p className="text-xs font-semibold tracking-widest uppercase text-gray-500 dark:text-gray-300 font-lora">
                 {project.company ?? project.name}
               </p>
             </div>
@@ -1537,7 +1537,7 @@ function ProjectCard({
                     )}
                   </div>
                 )}
-                <p className="text-xs font-medium tracking-widest uppercase text-gray-500 dark:text-gray-300">
+                <p className="text-xs font-semibold tracking-widest uppercase text-gray-500 dark:text-gray-300 font-lora">
                   {project.company ?? project.name}
                 </p>
               </div>

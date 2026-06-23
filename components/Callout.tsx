@@ -13,7 +13,7 @@ interface CalloutProps {
 export default function Callout({ children, className = "", brandColor }: CalloutProps) {
   return (
     <div
-      className={`text-base sm:text-base text-gray-700 dark:text-gray-300 leading-relaxed ${className}`}
+      className={`text-base sm:text-base text-gray-700 dark:text-gray-300 leading-relaxed font-lora ${className}`}
     >
       {children}
     </div>

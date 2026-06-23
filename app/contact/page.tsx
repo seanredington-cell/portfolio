@@ -27,7 +27,7 @@ export default function Contact() {
             <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold text-gray-900 dark:text-gray-100">
               Contact
             </h1>
-            <p className="text-base sm:text-xl text-[#4a4a4a] dark:text-gray-400 leading-relaxed max-w-2xl mx-auto">
+            <p className="text-base sm:text-xl text-[#4a4a4a] dark:text-gray-400 leading-relaxed max-w-2xl mx-auto font-lora">
               Feel free to reach out for collaborations, opportunities, or just to say hello.
             </p>
           </div>

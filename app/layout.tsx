@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Poppins, Caveat } from "next/font/google";
+import { Poppins, Caveat, Lora } from "next/font/google";
 import Navigation from "@/components/Navigation";
 import DarkModeToggle from "@/components/DarkModeToggle";
 import { DarkModeProvider } from "@/contexts/DarkModeContext";
@@ -16,6 +16,13 @@ const caveat = Caveat({
   weight: ["400", "700"],
   variable: "--font-caveat",
 });
+
+const lora = Lora({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-lora",
+});
+
 
 export const metadata: Metadata = {
   title: "Seán Redington - UX Portfolio",
@@ -47,7 +54,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${poppins.variable} ${caveat.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${poppins.variable} ${caveat.variable} ${lora.variable}`} suppressHydrationWarning>
       <head>
         <script
           dangerouslySetInnerHTML={{

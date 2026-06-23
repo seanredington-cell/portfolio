@@ -55,7 +55,7 @@ export default function About() {
             </div>
 
             {/* Bio Text */}
-            <div className="space-y-3 text-base text-gray-700 dark:text-gray-300 leading-relaxed">
+            <div className="space-y-3 text-base text-gray-700 dark:text-gray-100 leading-relaxed font-lora">
                 <p>I'm Seán, a designer who's spent over six years building digital products across Fortune 500 companies and startups. My most recent role was as Head of Product & Design at Getmee AI, an AI-powered platform helping migrants and non-English speakers build the skills they need to get hired.</p>
                 <p>Having studied Industrial Design in university, I was fortunate enough to get a UX internship at Workday. This introduced me to some incredible people and opened my eyes to the world of UX design. After returning to Workday as a grad and earning a promotion, I moved to CYGNVS, a cybersecurity startup. There, I led design work across web and native mobile apps.</p>
                 <p>I moved to Australia in 2024, and freelanced as a web designer within the charity space before accepting an offer for a full-time role at Getmee AI, a startup with a genuine mission, and the space to shape both the product and the team. At Getmee, I led product strategy, and built the systems that scaled the platform from 20,000 to 40,000 users across 15+ white-label apps.</p>
@@ -121,13 +121,13 @@ export default function About() {
                   <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100">Head of Product & Design</h3>
                   <div className="flex items-center gap-2 flex-shrink-0">
                     <span className="text-xs font-semibold px-3 py-1 rounded-md bg-blue-100 dark:bg-blue-900/40 text-blue-800 dark:text-blue-300">CONTRACT</span>
-                    <span className="text-sm text-gray-600 dark:text-gray-300 whitespace-nowrap">May 2025 – Aug 2026</span>
+                    <span className="text-sm text-gray-600 dark:text-gray-100 whitespace-nowrap font-lora">May 2025 – Aug 2026</span>
                   </div>
                 </div>
-                <p className="text-base text-gray-700 dark:text-gray-200 leading-relaxed">
+                <p className="text-base text-gray-700 dark:text-gray-100 leading-relaxed font-lora">
                   Led the product strategy and design across 15+ white-label apps, doubling the userbase to 40,000 users as the sole designer with a 12-person engineering team.
                 </p>
-                <ul className="space-y-3 text-base text-gray-600 dark:text-gray-300">
+                <ul className="space-y-3 text-base text-gray-600 dark:text-gray-100 font-lora">
                   <li className="flex items-start gap-3">
                     <span className="text-blue-500 mt-1.5 flex-shrink-0">•</span>
                     <span>Applied systems thinking to deliver AI-powered learning experiences, validated through pilots in varying geographies, with 89% of 1,100+ students wanting it to continue in their curriculum.</span>
@@ -156,10 +156,10 @@ export default function About() {
                   <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100">UX/UI Designer</h3>
                   <div className="flex items-center gap-2 flex-shrink-0">
                     <span className="text-xs font-semibold px-3 py-1 rounded-md bg-blue-100 dark:bg-blue-900/40 text-blue-800 dark:text-blue-300">CONTRACT</span>
-                    <span className="text-sm text-gray-600 dark:text-gray-300 whitespace-nowrap">Jan 2025 – Jun 2025</span>
+                    <span className="text-sm text-gray-600 dark:text-gray-100 whitespace-nowrap font-lora">Jan 2025 – Jun 2025</span>
                   </div>
                 </div>
-                <p className="text-base text-gray-700 dark:text-gray-200 leading-relaxed">
+                <p className="text-base text-gray-700 dark:text-gray-100 leading-relaxed font-lora">
                   Led UX research and design of a number of high traffic websites within the charity space, ensuring user goals were at the heart of all decision making.
                 </p>
               </div>
@@ -174,12 +174,12 @@ export default function About() {
                 </div>
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 sm:gap-4">
                   <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100">UX Designer</h3>
-                  <span className="text-sm text-gray-600 dark:text-gray-300 whitespace-nowrap flex-shrink-0">Mar 2022 – May 2024</span>
+                  <span className="text-sm text-gray-600 dark:text-gray-100 whitespace-nowrap flex-shrink-0 font-lora">Mar 2022 – May 2024</span>
                 </div>
-                <p className="text-base text-gray-700 dark:text-gray-200 leading-relaxed">
+                <p className="text-base text-gray-700 dark:text-gray-100 leading-relaxed font-lora">
                   As a Lead Designer across multiple teams I played a key role in growing the user base by over 300%, creating high quality, security conscious features in a start-up within the Cyber Security space.
                 </p>
-                <ul className="space-y-3 text-base text-gray-600 dark:text-gray-300">
+                <ul className="space-y-3 text-base text-gray-600 dark:text-gray-100 font-lora">
                   <li className="flex items-start gap-3">
                     <span className="text-indigo-500 mt-1.5 flex-shrink-0">•</span>
                     <span>Designed patented features that use large language models (LLMs) to solve core user problems.</span>
@@ -202,7 +202,7 @@ export default function About() {
                     { initials: 'DF', color: '#0EA5E9', name: 'David Fox', role: 'Engineering Lead · CYGNVS', quote: 'Seán was a pleasure to work with at CYGNVS where he solved complex problems with engineering in mind always. He was a great collaborator on a number of big initiatives, and always made sure to listen to the room for ideas — not just taking orders from senior stakeholders.' },
                   ].map((t) => (
                     <div key={t.initials} className="rounded-2xl bg-gray-50/80 dark:bg-gray-700/40 border border-gray-200/60 dark:border-gray-600/40 p-5">
-                      <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">"{t.quote}"</p>
+                      <p className="text-sm sm:text-base text-gray-700 dark:text-gray-100 leading-relaxed font-lora font-medium">"{t.quote}"</p>
                       <div className="flex items-center gap-2.5 mt-4">
                         <div className="w-8 h-8 rounded-full flex items-center justify-center text-white text-xs font-bold flex-shrink-0" style={{ background: t.color }}>{t.initials}</div>
                         <div>
@@ -225,12 +225,12 @@ export default function About() {
                 </div>
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 sm:gap-4">
                   <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100">Sr Associate UX Designer</h3>
-                  <span className="text-sm text-gray-600 dark:text-gray-300 whitespace-nowrap flex-shrink-0">2019 – 2022</span>
+                  <span className="text-sm text-gray-600 dark:text-gray-100 whitespace-nowrap flex-shrink-0 font-lora">2019 – 2022</span>
                 </div>
-                <p className="text-base text-gray-700 dark:text-gray-200 leading-relaxed">
+                <p className="text-base text-gray-700 dark:text-gray-100 leading-relaxed font-lora">
                   Hired as an intern, rehired as a graduate and then promoted to Senior Associate UX Designer. I led a scrum team across web and mobile on Workday's fastest selling product ever.
                 </p>
-                <ul className="space-y-3 text-base text-gray-600 dark:text-gray-300">
+                <ul className="space-y-3 text-base text-gray-600 dark:text-gray-100 font-lora">
                   <li className="flex items-start gap-3">
                     <span className="text-orange-500 mt-1.5 flex-shrink-0">•</span>
                     <span>Designed and carried out research studies, built wireframes, prototypes and high fidelity product features within scrum teams that worked in an agile way delivering quality features to users.</span>
@@ -244,7 +244,7 @@ export default function About() {
                     { initials: 'RC', color: '#E65100', name: 'Robert Clarke', role: 'Senior Designer · Workday', quote: "Seán is a multi-talented designer — as adept at honing in on the details of an interaction design problem as he is at polishing high fidelity designs. A champion of research-informed design, I can't stress enough how having Seán on your team is a major step towards getting your product moving in the right direction." },
                   ].map((t) => (
                     <div key={t.initials} className="rounded-2xl bg-gray-50/80 dark:bg-gray-700/40 border border-gray-200/60 dark:border-gray-600/40 p-5">
-                      <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">"{t.quote}"</p>
+                      <p className="text-sm sm:text-base text-gray-700 dark:text-gray-100 leading-relaxed font-lora font-medium">"{t.quote}"</p>
                       <div className="flex items-center gap-2.5 mt-4">
                         <div className="w-8 h-8 rounded-full flex items-center justify-center text-white text-xs font-bold flex-shrink-0" style={{ background: t.color }}>{t.initials}</div>
                         <div>
@@ -267,9 +267,9 @@ export default function About() {
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 sm:gap-4">
                   <div>
                     <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100">BSc Product Design & Technology</h3>
-                    <p className="text-base text-gray-600 dark:text-gray-300">University of Limerick, Limerick</p>
+                    <p className="text-base text-gray-600 dark:text-gray-100 font-lora">University of Limerick, Limerick</p>
                   </div>
-                  <span className="text-sm text-gray-600 dark:text-gray-300 whitespace-nowrap flex-shrink-0">2016 – 2020</span>
+                  <span className="text-sm text-gray-600 dark:text-gray-100 whitespace-nowrap flex-shrink-0 font-lora">2016 – 2020</span>
                 </div>
             </div>
           </section>
@@ -299,7 +299,7 @@ export default function About() {
             </div>
 
             {/* Copyright */}
-            <div className="pt-12 text-sm text-gray-700 dark:text-gray-300">
+            <div className="pt-12 text-sm text-gray-700 dark:text-gray-100 font-lora">
               © {new Date().getFullYear()} Seán Redington. All rights reserved.
             </div>
 

@@ -227,7 +227,7 @@ export default function ProjectDetailClient({ params, markdownContent, frontMatt
     <div
       className="min-h-screen relative"
       style={{
-        ['--brand-color' as string]: brandColorLight,
+        ['--brand-color' as string]: brandColor,
         ['--brand-color-dark' as string]: brandColorDark,
       } as React.CSSProperties}
     >
@@ -401,7 +401,7 @@ export default function ProjectDetailClient({ params, markdownContent, frontMatt
                     )}
                   </div>
                 )}
-                <p className="text-xs font-medium tracking-widest uppercase text-gray-500 dark:text-gray-300">
+                <p className="text-xs font-semibold tracking-widest uppercase text-gray-500 dark:text-gray-300 font-lora">
                   {frontMatter.company ?? frontMatter.name}
                 </p>
               </div>
@@ -463,7 +463,7 @@ export default function ProjectDetailClient({ params, markdownContent, frontMatt
               transition={{ duration: 0.5, delay: 0.4 }}
             >
               <p
-                className="text-base sm:text-lg text-gray-700 dark:text-gray-300 leading-relaxed"
+                className="text-base sm:text-lg text-gray-700 dark:text-gray-300 leading-relaxed font-lora"
                 dangerouslySetInnerHTML={{
                   __html: (frontMatter.tldr || frontMatter.description).replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
                 }}
@@ -620,7 +620,7 @@ export default function ProjectDetailClient({ params, markdownContent, frontMatt
                     : 'bg-white/20 dark:bg-gray-800/20 border-transparent text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300'
                 }`}
               >
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" className="flex-shrink-0">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" className="flex-shrink-0" style={{ color: activeTab === 'full' ? brandColor : 'currentColor' }}>
                   <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                   <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
@@ -661,8 +661,8 @@ export default function ProjectDetailClient({ params, markdownContent, frontMatt
                         { label: 'Skills', value: frontMatter.quickRead.skills },
                       ].map(({ label, value }) => value && (
                         <div key={label}>
-                          <p className="text-[11px] font-semibold uppercase tracking-widest mb-1.5" style={{ color: brandColor }}>{label}</p>
-                          <p className="text-base text-gray-700 dark:text-gray-300 leading-relaxed">{value}</p>
+                          <p className="text-xs font-bold uppercase tracking-widest mb-2" style={{ color: brandColor }}>{label}</p>
+                          <p className="text-base text-gray-700 dark:text-gray-300 leading-relaxed font-lora">{value}</p>
                         </div>
                       ))}
                       <div className="pt-2 border-t border-gray-200/60 dark:border-gray-700/60">
@@ -773,7 +773,7 @@ export default function ProjectDetailClient({ params, markdownContent, frontMatt
                           </h3>
                         </div>
 
-                        <p className="text-xs sm:text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
+                        <p className="text-xs sm:text-sm text-gray-700 dark:text-gray-300 leading-relaxed font-lora">
                           {nextProject.description}
                         </p>
 

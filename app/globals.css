@@ -103,6 +103,11 @@ body {
   background-image: radial-gradient(circle, rgba(255, 255, 255, 0.12) 1px, transparent 1px);
 }
 
+/* Lora serif utility */
+.font-lora {
+  font-family: var(--font-lora), Georgia, serif;
+}
+
 /* Markdown Content Styles */
 .markdown-content h2 {
   font-size: 1.5rem;
@@ -149,6 +154,7 @@ body {
 
 .markdown-content p {
   color: #374151;
+  font-family: var(--font-lora), Georgia, serif;
   font-size: 1rem;
   line-height: 1.75;
   margin-top: 0;
@@ -179,6 +185,7 @@ body {
 
 .markdown-content strong {
   color: #111827;
+  font-family: var(--font-poppins), system-ui, sans-serif;
   font-weight: 600;
 }
 
@@ -204,6 +211,7 @@ body {
 
 .markdown-content ul li {
   color: #374151;
+  font-family: var(--font-lora), Georgia, serif;
   font-size: 1rem;
   line-height: 1.75;
   margin-top: 0.5rem;
@@ -242,6 +250,7 @@ body {
 
 .markdown-content ol li {
   color: #374151;
+  font-family: var(--font-lora), Georgia, serif;
   font-size: 1rem;
   line-height: 1.75;
   margin-top: 0.5rem;

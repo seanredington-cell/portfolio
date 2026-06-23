@@ -61,7 +61,7 @@ function CardInner({ t }: { t: typeof testimonials[0] }) {
     >
       {/* Quote — vertically centred in remaining space */}
       <div className="flex-1 flex flex-col justify-center">
-        <p className="text-base sm:text-lg leading-relaxed text-gray-700 dark:text-gray-200">{t.quote}</p>
+        <p className="text-base sm:text-lg leading-relaxed text-gray-700 dark:text-gray-200 font-lora font-medium">{t.quote}</p>
       </div>
 
       {/* Person — always at the bottom */}
