@@ -119,10 +119,7 @@ export default function About() {
                 </div>
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 sm:gap-4">
                   <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100">Head of Product & Design</h3>
-                  <div className="flex items-center gap-2 flex-shrink-0">
-                    <span className="text-xs font-semibold px-3 py-1 rounded-md bg-blue-100 dark:bg-blue-900/40 text-blue-800 dark:text-blue-300">CONTRACT</span>
-                    <span className="text-sm text-gray-600 dark:text-gray-100 whitespace-nowrap font-lora">May 2025 – Aug 2026</span>
-                  </div>
+                  <span className="text-sm text-gray-600 dark:text-gray-100 whitespace-nowrap font-lora flex-shrink-0">May 2025 – Present</span>
                 </div>
                 <p className="text-base text-gray-700 dark:text-gray-100 leading-relaxed font-lora">
                   Led the product strategy and design across 15+ white-label apps, doubling the userbase to 40,000 users as the sole designer with a 12-person engineering team.

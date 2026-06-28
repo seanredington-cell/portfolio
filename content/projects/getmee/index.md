@@ -90,18 +90,15 @@ Meanwhile, students using the app faced the other side of that problem; **if tea
 
 ## Identifying Opportunities
 
-Following the user and customer conversations, I conducted competitor analysis using (and proofreading) AI. Looking at 7 major language learning platforms (Duolingo, Babbel, ELSA Speak, Busuu, Rosetta Stone, Coursera, Lingoda) in order to understand their offerings and identify what opportunities we might have over them.
+Following the user and customer conversations, I conducted competitor analysis using (and proofreading) AI, looking at 7 major language learning platforms to understand their offerings and identify what opportunities we might have over them.
 
-**Key insights:**
-
-- **Competitors nail habit mechanics, but not meaningful progression.** Duolingo and Babbel have mastered streaks, push notifications, and daily engagement. However, this daily activity rarely maps to measurable skill growth. Students stay active without knowing if they're actually improving.
-- **Feature sets are rich; learning journeys are not.** Platforms like Busuu and Rosetta Stone offer pronunciation tools, flashcards, and AI tutoring but these exist as disconnected modules. There's no coherent path that ties daily practice to a longer-term goal.
-- **"5 minutes a day" undersells the real commitment.** Almost every competitor markets low-effort promises that set unrealistic expectations. They didn't acknowledge the sustained, structured effort language learning actually requires.
-- **Career motivation is universal; employability framing is absent.** Despite many adult learners studying English for career reasons, no platform structures its learning path around job readiness. This was the clearest gap and our biggest opportunity.
+![Competitive analysis findings](/projects/getmee/competitive-landscape.png)
 
 The platforms I looked at did a good job of solving English learner engagement, but none of them were built with employment at the core. For our users (immigrants, students and job seekers), that's the end goal. The opportunity for us was to combine employability-focused features with personalised CEFR-aligned learning journeys that required zero teacher management.
 
-![Competitive analysis findings](/projects/getmee/competitive-landscape.png)
+This was further backed by a Harvard study done in 2024 which found that students learn more than twice as much in less time with an AI tutor compared to an active learning class, noting that they feel more engaged and motivated doing it.
+
+This external validation coupled with our competitor analysis gave us enough confidence to move forward with a focus on personalised, AI-generated tasks.
 
 ## Designing the system, not just the feature
 
