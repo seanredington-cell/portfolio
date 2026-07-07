@@ -67,8 +67,8 @@ const _allProjectData: Project[] = [
   {
     id: "hero",
     name: "Seán Redington",
-    tagline: "I'm a practical problem solver that does more than push pixels.\nI drive real user impact for Fortune 500 companies, startups and agencies.",
-    description: "I'm a practical problem solver that does more than push pixels. I drive real user impact for Fortune 500 companies, startups and agencies.",
+    tagline: "Turning ambiguous problems into measurable growth.\nI'm a product design leader with 6+ years across Fortune 500 companies, startups and agencies, balancing user needs with business impact.",
+    description: "Turning ambiguous problems into measurable growth. I'm a product design leader with 6+ years across Fortune 500 companies, startups and agencies, balancing user needs with business impact.",
     heroLayers: {
       background: "/about-hero/background colour.webp",
       headshot: "/about-hero/headshot-image.webp",

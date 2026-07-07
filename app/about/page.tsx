@@ -118,7 +118,7 @@ export default function About() {
                   <p className="text-xs font-medium tracking-widest uppercase text-gray-500 dark:text-gray-400">Getmee AI, Melbourne</p>
                 </div>
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 sm:gap-4">
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100">Head of Product & Design</h3>
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100">Head of Product Design</h3>
                   <span className="text-sm text-gray-600 dark:text-gray-100 whitespace-nowrap font-lora flex-shrink-0">May 2025 – Present</span>
                 </div>
                 <p className="text-base text-gray-700 dark:text-gray-100 leading-relaxed font-lora">
@@ -157,7 +157,7 @@ export default function About() {
                   </div>
                 </div>
                 <p className="text-base text-gray-700 dark:text-gray-100 leading-relaxed font-lora">
-                  Led UX research and design of a number of high traffic websites within the charity space, ensuring user goals were at the heart of all decision making.
+                  Led UX research and design of 3 high traffic websites in 6 months within the charity space, mentoring a junior designer while ensuring users' goals were at the heart of all decision making.
                 </p>
               </div>
 
@@ -174,20 +174,20 @@ export default function About() {
                   <span className="text-sm text-gray-600 dark:text-gray-100 whitespace-nowrap flex-shrink-0 font-lora">Mar 2022 – May 2024</span>
                 </div>
                 <p className="text-base text-gray-700 dark:text-gray-100 leading-relaxed font-lora">
-                  As a Lead Designer across multiple teams I played a key role in growing the user base by over 300%, creating high quality, security conscious features in a start-up within the Cyber Security space.
+                  As a Lead Designer across multiple teams I played a key role in growing the user base by over 300%, creating high-quality, security-conscious features in a start-up within the Cyber Security space.
                 </p>
                 <ul className="space-y-3 text-base text-gray-600 dark:text-gray-100 font-lora">
                   <li className="flex items-start gap-3">
                     <span className="text-indigo-500 mt-1.5 flex-shrink-0">•</span>
-                    <span>Designed patented features that use large language models (LLMs) to solve core user problems.</span>
+                    <span>Played a critical role in roadmap planning and execution for teams across multiple geographies, aligning design and engineering priorities as the product scaled.</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <span className="text-indigo-500 mt-1.5 flex-shrink-0">•</span>
-                    <span>Played a critical role in roadmap planning and execution for teams across multiple geographies and devices which expanded the user base by over 300%.</span>
+                    <span>Spearheaded the design of a patented feature that uses an LLM to solve core customer problems.</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <span className="text-indigo-500 mt-1.5 flex-shrink-0">•</span>
-                    <span>Involved in interviewing, hiring, onboarding and up-skilling a team of designers both on and off-site.</span>
+                    <span>Interviewed, onboarded and upskilled a team of designers, both on and off-site.</span>
                   </li>
                 </ul>
 
@@ -222,7 +222,7 @@ export default function About() {
                 </div>
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 sm:gap-4">
                   <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100">Sr Associate UX Designer</h3>
-                  <span className="text-sm text-gray-600 dark:text-gray-100 whitespace-nowrap flex-shrink-0 font-lora">2019 – 2022</span>
+                  <span className="text-sm text-gray-600 dark:text-gray-100 whitespace-nowrap flex-shrink-0 font-lora">Jan 2019 – Aug 2019 & Sep 2020 – Mar 2022</span>
                 </div>
                 <p className="text-base text-gray-700 dark:text-gray-100 leading-relaxed font-lora">
                   Hired as an intern, rehired as a graduate and then promoted to Senior Associate UX Designer. I led a scrum team across web and mobile on Workday's fastest selling product ever.
@@ -230,7 +230,11 @@ export default function About() {
                 <ul className="space-y-3 text-base text-gray-600 dark:text-gray-100 font-lora">
                   <li className="flex items-start gap-3">
                     <span className="text-orange-500 mt-1.5 flex-shrink-0">•</span>
-                    <span>Designed and carried out research studies, built wireframes, prototypes and high fidelity product features within scrum teams that worked in an agile way delivering quality features to users.</span>
+                    <span>Designed a profitable help desk feature within a large-scale enterprise platform.</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="text-orange-500 mt-1.5 flex-shrink-0">•</span>
+                    <span>Ran usability studies and research to ensure impactful, user-backed features made it into the product.</span>
                   </li>
                 </ul>
 
