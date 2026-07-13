@@ -29,7 +29,7 @@ const testimonials = [
     company: "Workday",
     initials: "RC",
     color: "#E65100",
-    quote: "Seán is a multi-talented designer — as adept at honing in on the details of an interaction design problem as he is at polishing high fidelity designs. A champion of research-informed design, I can't stress enough how having Seán on your team is a major step towards getting your product moving in the right direction.",
+    quote: "Seán is a multi-talented designer, as adept at honing in on the details of an interaction design problem as he is at polishing high fidelity designs. A champion of research-informed design, I can't stress enough how having Seán on your team is a major step towards getting your product moving in the right direction.",
   },
   {
     id: 3,
@@ -38,7 +38,7 @@ const testimonials = [
     company: "CYGNVS",
     initials: "DF",
     color: "#0EA5E9",
-    quote: "Seán was a pleasure to work with at CYGNVS where he solved complex problems with engineering in mind always. He was a great collaborator on a number of big initiatives, and always made sure to listen to the room for ideas — not just taking orders from senior stakeholders.",
+    quote: "Sean brought a level of technical understanding to his work that regularly impressed me. He took the effort to fully understand the engineering work behind each feature, and this enabled him to design state of the art abstractions that could distill a complex architecture into a clean user interface.",
   },
   {
     id: 4,
@@ -47,7 +47,7 @@ const testimonials = [
     company: "Getmee",
     initials: "BT",
     color: "#E17033",
-    quote: "Placeholder — testimonial coming soon.",
+    quote: "Sean came in and immediately had a massive impact on the product team, modernising how we worked, and setting us up for success. He was thoughtful in the features he designed, and led the team to build the right things. His work has had an immense impact on the product and business.",
   },
 ];
 
@@ -61,7 +61,7 @@ function CardInner({ t }: { t: typeof testimonials[0] }) {
     >
       {/* Quote — vertically centred in remaining space */}
       <div className="flex-1 flex flex-col justify-center">
-        <p className="text-base sm:text-lg leading-relaxed text-gray-700 dark:text-gray-200 font-lora font-medium">{t.quote}</p>
+        <p className="text-base sm:text-lg leading-relaxed text-gray-700 dark:text-gray-200 font-lora font-medium italic">{t.quote}</p>
       </div>
 
       {/* Person — always at the bottom */}

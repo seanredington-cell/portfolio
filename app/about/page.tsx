@@ -13,6 +13,8 @@ import ContactCards from "@/components/ContactCards";
  */
 export default function About() {
   const [dismissed, setDismissed] = React.useState(false);
+  const [expanded, setExpanded] = React.useState<Record<string, boolean>>({});
+  const toggleExpanded = (id: string) => setExpanded(prev => ({ ...prev, [id]: !prev[id] }));
   const { scrollYProgress } = useScroll();
   const scrollCTAOpacity = useTransform(scrollYProgress, [0, 0.05, 0.12], [1, 0.5, 0]);
   const scrollCTAPointerEvents = useTransform(scrollYProgress, (v) => v < 0.12 ? 'auto' : 'none');
@@ -24,46 +26,41 @@ export default function About() {
       {/* Cards Container */}
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
 
-        {/* Bio Card */}
+        {/* Bio — no card, just content */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className="bg-white/90 dark:bg-gray-800/90 rounded-3xl shadow-2xl border border-white/40 dark:border-gray-700 p-6 sm:p-12"
-          style={{ boxShadow: '0 20px 60px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.8)' }}
+          className="px-2 sm:px-4 py-4 space-y-5"
         >
-          <div className="space-y-4">
-            {/* Name + Image inline */}
-            <div className="flex items-center gap-3">
-              <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-                className="flex-shrink-0"
-              >
-                <div className="w-10 h-10 rounded-full overflow-hidden">
-                  <Image
-                    src="/about-hero/headshot-image.webp"
-                    alt="Seán Redington"
-                    width={40}
-                    height={40}
-                    className="object-cover w-full h-full"
-                  />
-                </div>
-              </motion.div>
-              <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Seán Redington</h1>
-            </div>
+          {/* Photo + all paragraphs side by side, heights matched */}
+          <div className="flex flex-col sm:flex-row gap-7 sm:gap-10">
+            {/* Photo */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+              className="flex-shrink-0 mx-auto sm:mx-0 sm:self-stretch"
+            >
+              <div className="w-56 sm:w-64 h-72 sm:h-full rounded-2xl overflow-hidden shadow-xl">
+                <Image
+                  src="/about-hero/hike.jpg"
+                  alt="Seán Redington"
+                  width={256}
+                  height={400}
+                  className="object-cover w-full h-full object-center"
+                />
+              </div>
+            </motion.div>
 
-            {/* Bio Text */}
-            <div className="space-y-3 text-base text-gray-700 dark:text-gray-100 leading-relaxed font-lora">
-                <p>I'm Seán, a designer who's spent over six years building digital products across Fortune 500 companies and startups. My most recent role was as Head of Product & Design at Getmee AI, an AI-powered platform helping migrants and non-English speakers build the skills they need to get hired.</p>
-                <p>Having studied Industrial Design in university, I was fortunate enough to get a UX internship at Workday. This introduced me to some incredible people and opened my eyes to the world of UX design. After returning to Workday as a grad and earning a promotion, I moved to CYGNVS, a cybersecurity startup. There, I led design work across web and native mobile apps.</p>
-                <p>I moved to Australia in 2024, and freelanced as a web designer within the charity space before accepting an offer for a full-time role at Getmee AI, a startup with a genuine mission, and the space to shape both the product and the team. At Getmee, I led product strategy, and built the systems that scaled the platform from 20,000 to 40,000 users across 15+ white-label apps.</p>
-                <p>I work best when I'm close to the problem, talking to users, sitting with the engineering team, or challenging assumptions with stakeholders.</p>
-                <p>I'm looking for my next role in a product team that's passionate about solving user problems and doesn't view design as a silo that churns out screens, but instead as a core backbone to a successful product and team.</p>
+            {/* All four paragraphs */}
+            <div className="space-y-3 flex flex-col justify-center font-lora">
+              <p className="text-sm sm:text-[15px] font-medium text-gray-800 dark:text-gray-100 leading-relaxed">I'm a product person that cares deeply about users, but I also know that the business has to keep moving to continue solving their problems. The best design serves both.</p>
+              <p className="text-sm sm:text-[15px] text-gray-600 dark:text-gray-300 leading-relaxed">Messy, system-wide problems are the ones I enjoy most, though I'm just as happy slowing down to obsess over the small details that bring a product to life.</p>
+              <p className="text-sm sm:text-[15px] text-gray-600 dark:text-gray-300 leading-relaxed">I make sure every voice in the room is heard, and I welcome a healthy disagreement. I believe in 'strong ideas, loosely held'. When a whole team shares that mindset, passionate but open-minded discussion tends to produce the best ideas.</p>
+              <p className="text-sm sm:text-[15px] text-gray-600 dark:text-gray-300 leading-relaxed">Outside of work, you'll find me travelling, playing sport, or eating popcorn at the cinema.</p>
             </div>
           </div>
-
         </motion.div>
 
         {/* CV Card */}
@@ -124,20 +121,51 @@ export default function About() {
                 <p className="text-base text-gray-700 dark:text-gray-100 leading-relaxed font-lora">
                   Led the product strategy and design across 15+ white-label apps, doubling the userbase to 40,000 users as the sole designer with a 12-person engineering team.
                 </p>
-                <ul className="space-y-3 text-base text-gray-600 dark:text-gray-100 font-lora">
-                  <li className="flex items-start gap-3">
-                    <span className="text-blue-500 mt-1.5 flex-shrink-0">•</span>
-                    <span>Applied systems thinking to deliver AI-powered learning experiences, validated through pilots in varying geographies, with 89% of 1,100+ students wanting it to continue in their curriculum.</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <span className="text-blue-500 mt-1.5 flex-shrink-0">•</span>
-                    <span>Built a scalable design system and white-label infrastructure that cut new app deployment from weeks to 2 hours, enabling simultaneous feature releases across all apps.</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <span className="text-blue-500 mt-1.5 flex-shrink-0">•</span>
-                    <span>Introduced product processes including a Product Council, UX office hours and Notion documentation that shifted the team from reactive to roadmap-driven, growing the userbase from 20,000 to 40,000.</span>
-                  </li>
-                </ul>
+                <button
+                  onClick={() => toggleExpanded('getmee')}
+                  className="inline-flex items-center justify-between gap-3 bg-white/10 dark:bg-gray-800/30 border border-white/60 dark:border-gray-700 text-gray-700 dark:text-gray-200 font-semibold px-4 py-2 rounded-full shadow-lg hover:shadow-xl hover:scale-105 hover:bg-white/20 dark:hover:bg-gray-800/50 transition-all duration-300 text-sm active:scale-95"
+                >
+                  {expanded['getmee'] ? 'Show less' : 'Show more'}
+                  <svg className={`w-3.5 h-3.5 transition-transform duration-200 ${expanded['getmee'] ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 16 16" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M4 6l4 4 4-4" /></svg>
+                </button>
+                {expanded['getmee'] && (
+                  <ul className="space-y-3 text-base text-gray-600 dark:text-gray-100 font-lora">
+                    <li className="flex items-start gap-3">
+                      <span className="text-blue-500 mt-1.5 flex-shrink-0">•</span>
+                      <span>Applied systems thinking to deliver AI-powered learning experiences, validated through pilots in varying geographies, with 89% of 1,100+ students wanting it to continue in their curriculum.</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="text-blue-500 mt-1.5 flex-shrink-0">•</span>
+                      <span>Built a scalable design system and white-label infrastructure that cut new app deployment from weeks to 2 hours, enabling simultaneous feature releases across all apps.</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="text-blue-500 mt-1.5 flex-shrink-0">•</span>
+                      <span>Introduced product processes including a Product Council, UX office hours and Notion documentation that shifted the team from reactive to roadmap-driven, growing the userbase from 20,000 to 40,000.</span>
+                    </li>
+                  </ul>
+                )}
+
+                {/* Testimonials — Getmee */}
+                <div className="mt-6 space-y-3">
+                  {[
+                    { initials: 'BT', color: '#E17033', name: 'Balendran Thavarajah', role: 'CEO · Getmee', quote: "Sean came in and immediately had a massive impact on the product team, modernising how we worked, and setting us up for success. He was thoughtful in the features he designed, and led the team to build the right things. His work has had an immense impact on the product and business." },
+                  ].map((t) => (
+                    <div key={t.initials} className="rounded-2xl bg-gray-50/80 dark:bg-gray-700/40 border border-gray-200/60 dark:border-gray-600/40 p-5">
+                      <div className="text-sm sm:text-base text-gray-700 dark:text-gray-100 leading-relaxed font-lora font-medium italic space-y-3">
+                        {t.quote.split('\n\n').map((para, i, arr) => (
+                          <p key={i}>{i === 0 ? '"' : ''}{para}{i === arr.length - 1 ? '"' : ''}</p>
+                        ))}
+                      </div>
+                      <div className="flex items-center gap-2.5 mt-4">
+                        <div className="w-8 h-8 rounded-full flex items-center justify-center text-white text-xs font-bold flex-shrink-0" style={{ background: t.color }}>{t.initials}</div>
+                        <div>
+                          <div className="text-sm font-semibold text-gray-900 dark:text-gray-100 leading-tight">{t.name}</div>
+                          <div className="text-xs text-gray-500 dark:text-gray-400">{t.role}</div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
 
               </div>
 
@@ -176,30 +204,43 @@ export default function About() {
                 <p className="text-base text-gray-700 dark:text-gray-100 leading-relaxed font-lora">
                   As a Lead Designer across multiple teams I played a key role in growing the user base by over 300%, creating high-quality, security-conscious features in a start-up within the Cyber Security space.
                 </p>
-                <ul className="space-y-3 text-base text-gray-600 dark:text-gray-100 font-lora">
-                  <li className="flex items-start gap-3">
-                    <span className="text-indigo-500 mt-1.5 flex-shrink-0">•</span>
-                    <span>Played a critical role in roadmap planning and execution for teams across multiple geographies, aligning design and engineering priorities as the product scaled.</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <span className="text-indigo-500 mt-1.5 flex-shrink-0">•</span>
-                    <span>Spearheaded the design of a patented feature that uses an LLM to solve core customer problems.</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <span className="text-indigo-500 mt-1.5 flex-shrink-0">•</span>
-                    <span>Interviewed, onboarded and upskilled a team of designers, both on and off-site.</span>
-                  </li>
-                </ul>
+                <button
+                  onClick={() => toggleExpanded('cygnvs')}
+                  className="inline-flex items-center justify-between gap-3 bg-white/10 dark:bg-gray-800/30 border border-white/60 dark:border-gray-700 text-gray-700 dark:text-gray-200 font-semibold px-4 py-2 rounded-full shadow-lg hover:shadow-xl hover:scale-105 hover:bg-white/20 dark:hover:bg-gray-800/50 transition-all duration-300 text-sm active:scale-95"
+                >
+                  {expanded['cygnvs'] ? 'Show less' : 'Show more'}
+                  <svg className={`w-3.5 h-3.5 transition-transform duration-200 ${expanded['cygnvs'] ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 16 16" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M4 6l4 4 4-4" /></svg>
+                </button>
+                {expanded['cygnvs'] && (
+                  <ul className="space-y-3 text-base text-gray-600 dark:text-gray-100 font-lora">
+                    <li className="flex items-start gap-3">
+                      <span className="text-indigo-500 mt-1.5 flex-shrink-0">•</span>
+                      <span>Played a critical role in roadmap planning and execution for teams across multiple geographies, aligning design and engineering priorities as the product scaled.</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="text-indigo-500 mt-1.5 flex-shrink-0">•</span>
+                      <span>Spearheaded the design of a patented feature that uses an LLM to solve core customer problems.</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="text-indigo-500 mt-1.5 flex-shrink-0">•</span>
+                      <span>Interviewed, onboarded and upskilled a team of designers, both on and off-site.</span>
+                    </li>
+                  </ul>
+                )}
 
                 {/* Testimonials — CYGNVS */}
                 <div className="mt-6 space-y-3">
                   {[
                     { initials: 'EH', color: '#1E3A8A', name: 'Eoghan Hickey', role: 'Design Lead · CYGNVS & Workday', quote: 'Seán is an exceptional product designer who is thoughtful, pragmatic, and clever. He takes feedback like a champ, cares about UX, and is able to get up to speed with technical conversations that could spin your head around.' },
                     { initials: 'KR', color: '#3B82F6', name: 'Karen Reilly', role: 'Director of Product · CYGNVS & Workday', quote: "Seán is a natural leader who cares deeply about the people he works with, our users and our customers. When I moved to CYGNVS, he was the first person I wanted to bring with me and I'm glad I did because his influence on the product was invaluable." },
-                    { initials: 'DF', color: '#0EA5E9', name: 'David Fox', role: 'Engineering Lead · CYGNVS', quote: 'Seán was a pleasure to work with at CYGNVS where he solved complex problems with engineering in mind always. He was a great collaborator on a number of big initiatives, and always made sure to listen to the room for ideas — not just taking orders from senior stakeholders.' },
+                    { initials: 'DF', color: '#0EA5E9', name: 'David Fox', role: 'Engineering Lead · CYGNVS', quote: 'Sean brought a level of technical understanding to his work that regularly impressed me. He took the effort to fully understand the engineering work behind each feature, and this enabled him to design state of the art abstractions that could distill a complex architecture into a clean user interface.\n\nSean also has a passion for everything he does that is genuinely infectious. This trait no doubt spills into his work as well, and has led to some great debates in our time working together. He added a healthy amount of friction to our team that resulted in all of us reaching for higher standards, and making decisions we could stand by. The product would not have been the same without Sean\'s technical and creative input.' },
                   ].map((t) => (
                     <div key={t.initials} className="rounded-2xl bg-gray-50/80 dark:bg-gray-700/40 border border-gray-200/60 dark:border-gray-600/40 p-5">
-                      <p className="text-sm sm:text-base text-gray-700 dark:text-gray-100 leading-relaxed font-lora font-medium">"{t.quote}"</p>
+                      <div className="text-sm sm:text-base text-gray-700 dark:text-gray-100 leading-relaxed font-lora font-medium italic space-y-3">
+                        {t.quote.split('\n\n').map((para, i, arr) => (
+                          <p key={i}>{i === 0 ? '“' : ''}{para}{i === arr.length - 1 ? '”' : ''}</p>
+                        ))}
+                      </div>
                       <div className="flex items-center gap-2.5 mt-4">
                         <div className="w-8 h-8 rounded-full flex items-center justify-center text-white text-xs font-bold flex-shrink-0" style={{ background: t.color }}>{t.initials}</div>
                         <div>
@@ -227,25 +268,38 @@ export default function About() {
                 <p className="text-base text-gray-700 dark:text-gray-100 leading-relaxed font-lora">
                   Hired as an intern, rehired as a graduate and then promoted to Senior Associate UX Designer. I led a scrum team across web and mobile on Workday's fastest selling product ever.
                 </p>
-                <ul className="space-y-3 text-base text-gray-600 dark:text-gray-100 font-lora">
-                  <li className="flex items-start gap-3">
-                    <span className="text-orange-500 mt-1.5 flex-shrink-0">•</span>
-                    <span>Designed a profitable help desk feature within a large-scale enterprise platform.</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <span className="text-orange-500 mt-1.5 flex-shrink-0">•</span>
-                    <span>Ran usability studies and research to ensure impactful, user-backed features made it into the product.</span>
-                  </li>
-                </ul>
+                <button
+                  onClick={() => toggleExpanded('workday')}
+                  className="inline-flex items-center justify-between gap-3 bg-white/10 dark:bg-gray-800/30 border border-white/60 dark:border-gray-700 text-gray-700 dark:text-gray-200 font-semibold px-4 py-2 rounded-full shadow-lg hover:shadow-xl hover:scale-105 hover:bg-white/20 dark:hover:bg-gray-800/50 transition-all duration-300 text-sm active:scale-95"
+                >
+                  {expanded['workday'] ? 'Show less' : 'Show more'}
+                  <svg className={`w-3.5 h-3.5 transition-transform duration-200 ${expanded['workday'] ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 16 16" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M4 6l4 4 4-4" /></svg>
+                </button>
+                {expanded['workday'] && (
+                  <ul className="space-y-3 text-base text-gray-600 dark:text-gray-100 font-lora">
+                    <li className="flex items-start gap-3">
+                      <span className="text-orange-500 mt-1.5 flex-shrink-0">•</span>
+                      <span>Designed a profitable help desk feature within a large-scale enterprise platform.</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="text-orange-500 mt-1.5 flex-shrink-0">•</span>
+                      <span>Ran usability studies and research to ensure impactful, user-backed features made it into the product.</span>
+                    </li>
+                  </ul>
+                )}
 
                 {/* Testimonials — Workday */}
                 <div className="mt-6 space-y-3">
                   {[
                     { initials: 'EH', color: '#1E3A8A', name: 'Eoghan Hickey', role: 'Design Lead · CYGNVS & Workday', quote: 'Seán is an exceptional product designer who is thoughtful, pragmatic, and clever. He takes feedback like a champ, cares about UX, and is able to get up to speed with technical conversations that could spin your head around.' },
-                    { initials: 'RC', color: '#E65100', name: 'Robert Clarke', role: 'Senior Designer · Workday', quote: "Seán is a multi-talented designer — as adept at honing in on the details of an interaction design problem as he is at polishing high fidelity designs. A champion of research-informed design, I can't stress enough how having Seán on your team is a major step towards getting your product moving in the right direction." },
+                    { initials: 'RC', color: '#E65100', name: 'Robert Clarke', role: 'Senior Designer · Workday', quote: "Seán is a multi-talented designer, as adept at honing in on the details of an interaction design problem as he is at polishing high fidelity designs. A champion of research-informed design, I can't stress enough how having Seán on your team is a major step towards getting your product moving in the right direction." },
                   ].map((t) => (
                     <div key={t.initials} className="rounded-2xl bg-gray-50/80 dark:bg-gray-700/40 border border-gray-200/60 dark:border-gray-600/40 p-5">
-                      <p className="text-sm sm:text-base text-gray-700 dark:text-gray-100 leading-relaxed font-lora font-medium">"{t.quote}"</p>
+                      <div className="text-sm sm:text-base text-gray-700 dark:text-gray-100 leading-relaxed font-lora font-medium italic space-y-3">
+                        {t.quote.split('\n\n').map((para, i, arr) => (
+                          <p key={i}>{i === 0 ? '“' : ''}{para}{i === arr.length - 1 ? '”' : ''}</p>
+                        ))}
+                      </div>
                       <div className="flex items-center gap-2.5 mt-4">
                         <div className="w-8 h-8 rounded-full flex items-center justify-center text-white text-xs font-bold flex-shrink-0" style={{ background: t.color }}>{t.initials}</div>
                         <div>
