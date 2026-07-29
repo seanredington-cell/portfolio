@@ -67,8 +67,8 @@ const _allProjectData: Project[] = [
   {
     id: "hero",
     name: "Seán Redington",
-    tagline: "I'm a Product Designer turning ambiguous problems into lovable experiences.\nI'm a hands-on product designer with 6+ years experience balancing user needs with business impact for Fortune 500 companies, startups and agencies.",
-    description: "I'm a Product Designer turning ambiguous problems into lovable experiences. I'm a hands-on product designer with 6+ years experience balancing user needs with business impact for Fortune 500 companies, startups and agencies.",
+    tagline: "Product Designer that thinks in systems, constraints and outcomes to create lovable experiences.\nI'm a hands-on product designer with 6+ years experience balancing user needs with business impact for Fortune 500 companies, startups and agencies.",
+    description: "Product Designer that thinks in systems, constraints and outcomes to create lovable experiences. I'm a hands-on product designer with 6+ years experience balancing user needs with business impact for Fortune 500 companies, startups and agencies.",
     heroLayers: {
       background: "/about-hero/background colour.webp",
       headshot: "/about-hero/headshot-image.webp",
